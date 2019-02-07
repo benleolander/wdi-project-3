@@ -2,3 +2,5 @@
 WDI Project 3
 
 Ben Lander
+Beth Swingler
+DexTom

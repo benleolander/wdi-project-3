@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "webpack-dev-server --mode=development",
     "build": "webpack -p",
-    "seed": "node db/seeds"
+    "seed": "node db/seeds",
+    "start": "node index"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

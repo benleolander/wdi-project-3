@@ -15,6 +15,7 @@ function showRoute(req, res){
 }
 
 function createRoute(req, res){
+  req.body.creator = req.currentUser
   Item
     .create(req.body)
     .then(item => res.status(200).json(item))

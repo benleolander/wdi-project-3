@@ -31,4 +31,8 @@ creatorSchema.pre('save', function hashPassword(next) {
   next()
 })
 
+creatorSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.password)
+}
+
 module.exports = mongoose.model('Creator', creatorSchema)

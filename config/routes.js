@@ -2,6 +2,8 @@
 // /items/:id/contact POST *.nodemailer
 
 const router = require('express').Router()
+const secureRoute = require('../lib/secureRoute')
+
 
 const authController = require('../controllers/auth')
 const itemsController = require('../controllers/items')
@@ -12,9 +14,9 @@ router.post('/login', authController.login)
 
 router.get('/', itemsController.index)
 router.get('/items/:id', itemsController.show)
-router.post('items/new', itemsController.create)
-router.put('items/:id', itemsController.update)
-router.delete('/items/:id', itemsController.delete)
+router.post('/items/new', secureRoute, itemsController.create)
+router.put('/items/:id', itemsController.update)
+router.delete('/items/:id', secureRoute, itemsController.delete)
 
 router.post('/creators', creatorsController.create)
 router.get('/creators/:id', creatorsController.show)

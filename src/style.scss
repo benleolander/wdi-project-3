@@ -6,11 +6,32 @@ body {
   margin: 0;
 }
 
-.itemDiv:after {
-  content: '';
-  display: block;
-  padding-bottom: 100%;
+.itemDiv{
+
+  .itemDescription{
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    position: relative;
+    top: -100%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+
+    .itemDescription{
+      opacity: 1;
+    }
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
 }
+
 
 .itemDiv .image {
   width: 100%;

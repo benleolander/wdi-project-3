@@ -28,6 +28,10 @@ class ItemsIndex extends React.Component {
                 className="image"
                 style={ {backgroundImage: `url(${item.image})`} }
               ></div>
+              <div className="itemDescription">
+                <h3>{item.name}</h3>
+                <h4>by {item.creator}</h4>
+              </div>
             </div>
           )
         }

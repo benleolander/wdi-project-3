@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const itemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   image: { type: String, required: true },
-  creator: { type: mongoose.Schema.ObjectId, ref: 'creator', required: true },
+  creator: { type: mongoose.Schema.ObjectId, ref: 'Creator', required: true },
   description: { type: String, required: true },
   categories: { type: Array, required: true }
 })

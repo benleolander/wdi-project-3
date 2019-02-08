@@ -29,7 +29,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { username, email, password, passwordConfirmation } = this.state.data
+    const { username, email, password, passwordConfirmation, image } = this.state.data
     return (
       <main className="section">
         <div className="container">
@@ -37,25 +37,32 @@ class Register extends React.Component {
             <h2 className="title">Register</h2>
             <div className="field">
               <label className="label">Username</label>
-              <input
-                name="username"
-                placeholder="Username"
-                value={username}
-                onChange={this.handleChange}
-              />
+              <div className="control">
+                <input
+                  className="input is-warning"
+                  name="username"
+                  placeholder="Username"
+                  value={username}
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
             <div className="field">
               <label className="label">Email</label>
-              <input
-                name="email"
-                placeholder="email"
-                value={email}
-                onChange={this.handleChange}
-              />
+              <div className="control">
+                <input
+                  className="input is-warning"
+                  name="email"
+                  placeholder="email"
+                  value={email}
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
             <div className="field">
               <label className="label">Password</label>
               <input
+                className="input is-warning"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -66,10 +73,21 @@ class Register extends React.Component {
             <div className="field">
               <label className="label">Password Confirmation</label>
               <input
+                className="input is-warning"
                 type="password"
                 name="passwordConfirmation"
                 placeholder="Password Confirmation"
                 value={passwordConfirmation}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="field">
+              <label className="label">Profile picture (public)</label>
+              <input
+                className="input is-warning"
+                name="image"
+                placeholder="Image url"
+                value={image}
                 onChange={this.handleChange}
               />
             </div>

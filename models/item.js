@@ -1,12 +1,14 @@
-const Item = {
+const mongoose = require('mongoose')
+
+const itemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   image: { type: String, required: true },
-  creator: { type: mongoose.Schema.ObjectId, ref: 'creator', required: true },
+  creator: { type: mongoose.Schema.ObjectId, ref: 'Creator', required: true },
   description: { type: String, required: true },
   categories: { type: Array, required: true }
-}
+})
 
-
+//Dummy data, can be deleted once API is up and running
 const dummyData = [
   {
     creator: {
@@ -34,3 +36,5 @@ const dummyData = [
     }
   ]
 ]
+
+module.exports = mongoose.model('Item', itemSchema)

@@ -8,7 +8,7 @@ const itemSchema = new mongoose.Schema({
   categories: { type: Array, required: true }
 })
 
-
+//Dummy data, can be deleted once API is up and running
 const dummyData = [
   {
     creator: {

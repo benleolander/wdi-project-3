@@ -7,7 +7,7 @@ const routes = require('./config/routes')
 
 const app = express()
 
-mongoose.connect(process.env.MONGOD_URI)
+mongoose.connect(process.env.MONGODB_URI)
 
 app.use(bodyParser.json())
 

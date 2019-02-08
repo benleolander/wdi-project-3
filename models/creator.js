@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const creatorSchema = new mongoose.Schema({
   username: { type: String, required: true},
@@ -19,6 +20,13 @@ creatorSchema.pre('validate', function checkPasswordsMath(next) {
     this._passwordConfirmation !== this.password
   ) {
     this.invalidate('passwordConfirmation', 'Passwords do not match')
+  }
+  next()
+})
+
+creatorSchema.pre('save', function hashPassword(next) {
+  if(this.isModified('password')) {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8))
   }
   next()
 })

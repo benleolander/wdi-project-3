@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+mongoose.plugin(require('mongoose-unique-validator'))
 const bodyParser = require('body-parser')
 const routes = require('./config/routes')
 

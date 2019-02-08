@@ -24,13 +24,10 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-<<<<<<< HEAD
     "bluebird": "^3.5.3",
-=======
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
->>>>>>> development
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",

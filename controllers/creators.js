@@ -1,33 +1,33 @@
 const Creator = require('../models/creator')
 
-function showRoute(req, res){
+function showRoute(req, res, next){
   Creator
     .findById(req.params.id)
     .then(creator => res.json(creator))
-    .catch(err => console.log(err.message))
+    .catch(next)
 }
 
-function createRoute(req, res){
+function createRoute(req, res, next){
   Creator
     .create(req.body)
     .then(creator => res.status(200).json(creator))
-    .catch(err => console.log(err.message))
+    .catch(next)
 }
 
-function updateRoute(req, res) {
+function updateRoute(req, res, next) {
   Creator
     .findById(req.params.id)
     .then(creator => creator.set(req.body))
     .then(creator => creator.save())
     .then(creator => res.status(200).json(creator))
-    .catch(err => res.status(422).json(err.errors))
+    .catch(next)
 }
 
-function deleteRoute(req, res){
+function deleteRoute(req, res, next){
   Creator
     .deleteOne({ _id: req.params.id })
     .then(() => res.status(204).send())
-    .catch( err => console.log(err.message))
+    .catch(next)
 }
 
 module.exports ={

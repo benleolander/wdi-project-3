@@ -12,7 +12,7 @@ router.post('/login', authController.login)
 
 router.get('/', itemsController.index)
 router.get('/items/:id', itemsController.show)
-router.post('items/:id', itemsController.create)
+router.post('items/new', itemsController.create)
 router.put('items/:id', itemsController.update)
 router.delete('/items/:id', itemsController.delete)
 

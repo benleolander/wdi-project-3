@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import 'bulma'
 import './style.scss'
 
+import Home from './components/Home'
 import Navbar from './components/common/Navbar'
 
 const data = [
@@ -35,7 +36,7 @@ class App extends React.Component {
             <Navbar />
 
             <Switch>
-              <Route path="/" />
+              <Route path="/" component={Home} />
             </Switch>
 
           </div>

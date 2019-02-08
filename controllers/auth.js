@@ -15,7 +15,7 @@ function loginRoute(req, res){
         return res.status(401).json({ message: 'unauthorized'})
       }
       const payload = {sub: creator._id}
-      const token = jwt.sign(payload, process.env.SECRET, { expires: '12h' })
+      const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '12h' })
       res.json({
         token,
         message: `Welcome back ${creator.username}`

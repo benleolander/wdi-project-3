@@ -1,0 +1,8 @@
+{
+  "name": "wdi-project-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:benleolander/wdi-project-3.git",
+  "author": "laceswingybethler <beth.swingler@gmail.com>",
+  "license": "MIT"
+}

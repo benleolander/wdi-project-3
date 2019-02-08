@@ -1,14 +1,5 @@
-// '/' GET *.index -----> Done
-// /register POST *.register ------> Done
-// /login POST *.login --------> Done
-// /items/ POST *.create --------> DONE
-// /items/:id GET *.show ------> DONE
-// /items/:id PUT *.edit -----> Done
-// /items/:id DELETE *.DELETE ----> DONE
+
 // /items/:id/contact POST *.nodemailer
-// /creators/ POST *.create
-// /creators/:id GET *.show
-// /creators/:id PUT *.edit
 
 const router = require('express').Router()
 
@@ -25,9 +16,10 @@ router.post('items/:id', itemsController.create)
 router.put('items/:id', itemsController.update)
 router.delete('/items/:id', itemsController.delete)
 
-
+router.post('/creators', creatorsController.create)
+router.get('/creators/:id', creatorsController.show)
+router.put('/creators/:id', creatorsController.edit)
+router.delete('/creators/:id', creatorsController.delete)
 
 
 module.exports = router
-
-//TOM TO CONTINUE

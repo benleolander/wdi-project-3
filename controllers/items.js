@@ -10,7 +10,7 @@ function indexRoute(req, res){
 function showRoute(req, res){
   Item
     .findById(req.params.id)
-    .then(items => res.json(items))
+    .then(item => res.json(item))
     .catch(err => console.log(err.message))
 }
 

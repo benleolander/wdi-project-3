@@ -10,14 +10,21 @@ function registerRoute(req, res){
 
 function loginRoute(req, res){
   Creator.findOne({ email: req.body.email })
-    .then(user => {
-      if(!user || !user.validatePassword(req.body.password)) {
+    .then(creator => {
+      if(!creator || !creator.validatePassword(req.body.password)) {
         return res.status(401).json({ message: 'unauthorized'})
       }
-      const payload = {sub: user._id}
+      const payload = {sub: creator._id}
+      const token = jwt.sign(payload, process.env.SECRET, { expires: '12h' })
+      res.json({
+        token,
+        message: `Welcome back ${creator.username}`
+      })
     })
+    .catch(err => console.log(err.message))
 }
 
 module.exports = {
-  register: registerRoute
+  register: registerRoute,
+  login: loginRoute
 }

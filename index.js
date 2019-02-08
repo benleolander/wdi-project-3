@@ -16,4 +16,4 @@ app.use('/api', routes)
 
 app.use(errorHandling)
 
-app.listen(4000, () => console.log('Express is running on Port 4000'))
+app.listen(process.env.PORT, () => console.log(`Express is running on Port ${process.env.PORT}`))

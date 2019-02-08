@@ -7,34 +7,34 @@ function indexRoute(req, res){
     .catch(err => console.log(err.message))
 }
 
-function showRoute(req, res){
+function showRoute(req, res, next){
   Item
     .findById(req.params.id)
     .then(item => res.json(item))
-    .catch(err => console.log(err.message))
+    .catch(next)
 }
 
-function createRoute(req, res){
+function createRoute(req, res, next){
   Item
     .create(req.body)
     .then(item => res.status(200).json(item))
-    .catch(err => console.log(err.message))
+    .catch(next)
 }
 
-function deleteRoute(req, res){
+function deleteRoute(req, res, next){
   Item
     .deleteOne({ _id: req.params.id })
     .then(() => res.status(204).send())
-    .catch( err => console.log(err.message))
+    .catch(next)
 }
 
-function updateRoute(req, res) {
+function updateRoute(req, res, next) {
   Item
     .findById(req.params.id)
     .then(item => item.set(req.body))
     .then(item => item.save())
     .then(item => res.status(200).json(item))
-    .catch(err => res.status(422).json(err.errors))
+    .catch(next)
 }
 
 module.exports = {

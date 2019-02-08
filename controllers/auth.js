@@ -1,14 +1,14 @@
 const Creator = require('../models/creator')
 const jwt = require('jsonwebtoken')
 
-function registerRoute(req, res){
+function registerRoute(req, res, next){
   Creator.create(req.body)
     .then(() => res.status(200).json( { message: 'Registration successful'}))
-    .catch(err => console.log(err.message))
+    .catch(next)
 }
 
 
-function loginRoute(req, res){
+function loginRoute(req, res, next){
   Creator.findOne({ email: req.body.email })
     .then(creator => {
       if(!creator || !creator.validatePassword(req.body.password)) {
@@ -21,7 +21,7 @@ function loginRoute(req, res){
         message: `Welcome back ${creator.username}`
       })
     })
-    .catch(err => console.log(err.message))
+    .catch(next)
 }
 
 module.exports = {

@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const creatorSchema = new mongoose.Schema({
-  username: { type: String, required: true},
-  email: { type: String, required: true},
-  password: { type: String, required: true},
+  username: { type: String, required: true, unique: 'Username taken, please choose another'},
+  email: { type: String, required: true, unique: 'Email taken, please choose another'},
+  password: { type: String, required: 'Password required'},
   image: { type: String },
-  items: { type: Array } //array of references
+  items: { type: Array }
 })
 
 creatorSchema.virtual('passwordConfirmation')
@@ -35,4 +35,4 @@ creatorSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-module.exports = mongoose.model('Creator', creatorSchema)
+module.export = mongoose.model('Creator', creatorSchema)

@@ -1,36 +1,31 @@
 import React from 'react'
-
-const data = [
-  {
-    _id: 2,
-    name: 'Elven table',
-    image: 'http://www.spencerfieldlarcombe.com/images/_cached/400/1809434.jpg',
-    creator: 'John Doe',
-    description: 'Table for any Gandalf out in the West',
-    categories: ['Carpentry', 'Tables']
-  }
-]
+import axios from 'axios'
 
 class ItemsIndex extends React.Component {
 
   componentDidMount(){
-    this.setState({ data })
+    axios.get('/api')
+      .then(res => this.setState({ data: res.data }))
   }
 
   render(){
     return (
-      <div className="indexDiv columns">
+      <div className="indexDiv columns is-gapless is-mobile is-multiline">
         {
           !this.state ||
           this.state.data.map(item =>
-            <div key={item._id} className="itemDiv column is-one-fifth">
+            <div
+              key={item._id}
+              className="itemDiv column is-one-fifth-desktop is-one-quarter-tablet is-one-third-mobile"
+            >
               <div
-                className="image"
+                className="image is-square"
                 style={ {backgroundImage: `url(${item.image})`} }
-              ></div>
-              <div className="itemDescription">
-                <h3>{item.name}</h3>
-                <h4>by {item.creator}</h4>
+              >
+                <div className="itemDescription is-square">
+                  <h3 className="title is-4">{item.name}</h3>
+                  <h4 className="subtitle is-5">by {item.creator.username}</h4>
+                </div>
               </div>
             </div>
           )

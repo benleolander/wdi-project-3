@@ -35,4 +35,4 @@ creatorSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-module.export = mongoose.model('Creator', creatorSchema)
+module.exports = mongoose.model('Creator', creatorSchema)

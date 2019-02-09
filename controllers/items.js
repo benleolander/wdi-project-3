@@ -3,6 +3,7 @@ const Item = require('../models/item')
 function indexRoute(req, res){
   Item
     .find()
+    .populate('creator')
     .then(items => res.json(items))
     .catch(err => console.log(err.message))
 }

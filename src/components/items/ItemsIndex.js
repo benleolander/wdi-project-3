@@ -23,8 +23,8 @@ class ItemsIndex extends React.Component {
                 style={ {backgroundImage: `url(${item.image})`} }
               >
                 <div className="itemDescription is-square">
-                  <h3>{item.name}</h3>
-                  <h4>by {item.creator}</h4>
+                  <h3 className="title is-4">{item.name}</h3>
+                  <h4 className="subtitle is-5">by {item.creator.username}</h4>
                 </div>
               </div>
             </div>

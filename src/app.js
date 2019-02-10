@@ -7,6 +7,7 @@ import './style.scss'
 import Home from './components/Home'
 import Navbar from './components/common/Navbar'
 import Register from './components/auth/Register'
+import Login from './components/auth/Login'
 
 class App extends React.Component {
 
@@ -18,6 +19,7 @@ class App extends React.Component {
             <Navbar />
 
             <Switch>
+              <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/" component={Home} />
             </Switch>

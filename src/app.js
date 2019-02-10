@@ -5,6 +5,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 import './style.scss'
 
 import Home from './components/Home'
+import FlashMessages from './components/common/FlashMessages'
 import Navbar from './components/common/Navbar'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -19,6 +20,7 @@ class App extends React.Component {
         <HashRouter>
           <div>
             <Navbar />
+            <FlashMessages />
 
             <Switch>
               <Route path="/creators/:id" component={CreatorShow} />

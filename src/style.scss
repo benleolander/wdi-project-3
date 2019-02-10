@@ -52,10 +52,47 @@ body {
 }
 
 // ITEMS SHOW ******************************************************************
-.creator-profile {
-  height: 25vh;
 
-  .image {
-    background-size: contain;
+.card.creatorProfile {
+  transition: all 0.5s ease;
+  background: #fff;
+  box-shadow: inset 0px 0px 0px 0px #fff;
+
+  .card-image {
+    margin: 5%;
+    border-radius: 100%;
+    border: 2px solid #ccc;
+    overflow: hidden;
+  }
+}
+
+.card.creatorProfile:hover {
+  background: #efefef;
+  box-shadow: inset 0px 0px 10px 3px #999;
+}
+
+// MEDIA QUERIES ***************************************************************
+
+@media only screen and (max-width: 1088px){
+  .navbar-menu {
+    display: block;
+    box-shadow: 0 0 0 #fff;
+    transition: box-shadow 0.5s ease;
+
+    .navbar-end {
+      display: block;
+      height: 0;
+      overflow: hidden;
+      transition: height 1s ease;
+    }
+
+    &.is-active {
+      box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
+
+      .navbar-end {
+        display: block;
+        height: 5rem;
+      }
+    }
   }
 }

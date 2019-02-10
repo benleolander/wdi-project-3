@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class ItemsIndex extends React.Component {
 
@@ -14,7 +15,8 @@ class ItemsIndex extends React.Component {
         {
           !this.state ||
           this.state.data.map(item =>
-            <div
+            <Link
+              to={`/items/${item._id}`}
               key={item._id}
               className="itemDiv column is-one-fifth-desktop is-one-quarter-tablet is-one-third-mobile"
             >
@@ -27,7 +29,7 @@ class ItemsIndex extends React.Component {
                   <h4 className="subtitle is-5">by {item.creator.username}</h4>
                 </div>
               </div>
-            </div>
+            </Link>
           )
         }
       </div>

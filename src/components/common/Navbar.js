@@ -16,6 +16,11 @@ class Navbar extends React.Component {
     e.preventDefault()
     this.setState({navbarOpen: !this.state.navbarOpen})
   }
+  //
+  // logout() {
+  //   Auth.removeToken()
+  //   this.props.history.push('/')
+  // }
 
 
 
@@ -36,7 +41,8 @@ class Navbar extends React.Component {
 
         <div id="navbarBasicExample" className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''}`}>
           <div className="navbar-end">
-            <Link to="/login" className="navbar-item" >Login</Link>
+            {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
+            {Auth.isAuthenticated() && <Link className="navbar-item" to="/items/new">Add an item</Link>}
             <Link to="/register" className="navbar-item" >Register</Link>
           </div>
         </div>

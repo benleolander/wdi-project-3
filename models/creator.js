@@ -6,7 +6,7 @@ const creatorSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: 'Email taken, please choose another'},
   password: { type: String, required: 'Password required'},
   image: { type: String },
-  items: { type: Array }
+  items: [{ type: mongoose.Schema.ObjectId, ref: 'Item', required: true }]
 })
 
 creatorSchema.virtual('passwordConfirmation')

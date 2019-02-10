@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import './style.scss'
 
@@ -17,7 +17,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
-        <HashRouter>
+        <BrowserRouter>
           <div>
             <Navbar />
             <FlashMessages />
@@ -31,7 +31,7 @@ class App extends React.Component {
             </Switch>
 
           </div>
-        </HashRouter>
+        </BrowserRouter>
       </div>
     )
   }

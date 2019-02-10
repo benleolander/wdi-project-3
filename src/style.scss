@@ -1,6 +1,8 @@
 @charset "utf-8";
 @import "~bulma/bulma";
 
+
+// GENERAL *********************************************************************
 * {
   box-sizing: border-box;
 }
@@ -9,6 +11,13 @@ body {
   margin: 0;
 }
 
+.image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// ITEMS INDEX *****************************************************************
 .itemDiv {
 
   border: 2px solid #fff;
@@ -17,9 +26,6 @@ body {
   text-align: center;
 
   .image {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     transition: background 0.5s ease;
   }
 
@@ -42,5 +48,14 @@ body {
     .itemDescription {
       opacity: 1;
     }
+  }
+}
+
+// ITEMS SHOW ******************************************************************
+.creator-profile {
+  height: 25vh;
+
+  .image {
+    background-size: contain;
   }
 }

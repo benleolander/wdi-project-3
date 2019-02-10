@@ -1,6 +1,7 @@
 @charset "utf-8";
-@import "~bulma/bulma"; // GENERAL *********************************************************************
+@import "~bulma/bulma";
 
+// GENERAL *********************************************************************
 * {
   box-sizing: border-box;
 }
@@ -83,7 +84,7 @@ body {
       display: block;
       height: 0;
       overflow: hidden;
-      transition: height 1s ease;
+      transition: height 0.7s ease;
     }
 
     &.is-active {

@@ -1,13 +1,16 @@
 import React from 'react'
 import axios from 'axios'
 
+import Auth from '../../lib/Auth'
+import Flash from '../../lib/Flash'
+
 class Login extends React.Component {
   constructor() {
     super()
 
     this.state = {
       data: {
-        username: '',
+        email: '',
         password: ''
       }
     }
@@ -18,15 +21,18 @@ class Login extends React.Component {
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
     this.setState({ data })
-    console.log( data )
+    //console.log( data )
   }
 
   handleSubmit(e) {
-    e.preventDefault
+    e.preventDefault()
     console.log(this.state.data)
     axios
       .post('/api/login', this.state.data)
-      .then(res => console.log(res.data))
+      .then((res) => {
+        Auth.setToken(res.data.token)
+        this.props.history.push('/api/items')
+      })
       .catch(err => alert(err.message))
 
 

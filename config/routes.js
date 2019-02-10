@@ -8,11 +8,13 @@ const secureRoute = require('../lib/secureRoute')
 const authController = require('../controllers/auth')
 const itemsController = require('../controllers/items')
 const creatorsController = require('../controllers/creators')
+const formsController = require('../controllers/forms')
 
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
 router.get('/', itemsController.index)
+// router.post('/items/:id/contact', formsController.create)
 router.get('/items/:id', itemsController.show)
 router.post('/items/new', secureRoute, itemsController.create)
 router.put('/items/:id', itemsController.update)

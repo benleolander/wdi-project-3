@@ -7,11 +7,16 @@ function createRoute(req, res) {
   Item.findOne({ _id: req.params.id })
     .then(item => {
       Creator.findOne({ _id: item.creator })
-        .then(creator => console.log(creator.username, creator.email))
+        .then(creator => {
+          Form
+            .create(req.body)
+            .then(formData => {
+              mailer.sendContactMail(creator, formData)
+              res.status(200).json(req.body)
+            })
+        })
     })
-  Form
-    .create(req.body)
-    .then(() => res.status(200).json(req.body))
+
 }
 
 module.exports = {

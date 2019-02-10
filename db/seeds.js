@@ -8,7 +8,7 @@ mongoose.Promise = Promise
 const Creator = require('../models/creator')
 const Item = require('../models/item')
 
-mongoose.connect(process.env.MONGODB_URI, (err, db) => {
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) => {
   db.dropDatabase()
     .then(() => {
       return Promise.props({

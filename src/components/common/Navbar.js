@@ -25,16 +25,17 @@ class Navbar extends React.Component {
             <h1 className="title is-2">Created.</h1>
           </Link>
 
-          <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" >
+          <a role="button" className={`navbar-burger burger ${this.state.navbarOpen ? 'is-active': ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  onClick={this.handleClick}>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div id="navbarBasicExample" className='navbar-menu'>
+        <div id="navbarBasicExample" className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''}`}>
           <div className="navbar-end">
             <Link to="/register" className="navbar-item" >Register</Link>
+            <Link to="/login" className="navbar-item" >Login</Link>
           </div>
         </div>
 

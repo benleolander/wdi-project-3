@@ -11,6 +11,7 @@ function indexRoute(req, res){
 function showRoute(req, res, next){
   Item
     .findById(req.params.id)
+    .populate('creator')
     .then(item => res.json(item))
     .catch(next)
 }

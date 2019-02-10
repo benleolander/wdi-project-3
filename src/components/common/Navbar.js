@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Auth from '../../lib/Auth'
 
 class Navbar extends React.Component {
   constructor(){
@@ -8,6 +9,7 @@ class Navbar extends React.Component {
       navbarOpen: false
     }
     this.handleClick = this.handleClick.bind(this)
+
   }
 
   handleClick(e){

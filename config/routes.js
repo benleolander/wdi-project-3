@@ -14,7 +14,7 @@ router.post('/register', authController.register)
 router.post('/login', authController.login)
 
 router.get('/', itemsController.index)
-// router.post('/items/:id/contact', formsController.create)
+router.post('/items/:id/contact', formsController.create)
 router.get('/items/:id', itemsController.show)
 router.post('/items/new', secureRoute, itemsController.create)
 router.put('/items/:id', itemsController.update)

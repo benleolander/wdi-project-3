@@ -33,6 +33,26 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
     .then(() => {
       return Promise.props({
         creator: Creator.create({
+          username: 'PaperMonkey',
+          email: 'monkey@paper.com',
+          password: 'password',
+          passwordConfirmation: 'password',
+          image: 'https://origami.me/wp-content/uploads/2016/12/origami-animals-featured.jpg'
+        })
+      })
+    })
+    .then(data => {
+      return Item.create({
+        name: 'Nut box',
+        image: 'https://i.pinimg.com/736x/cb/fa/22/cbfa22fbf262aa4854b112203c513493--rainbow-origami-fancy-tops.jpg',
+        creator: data.creator,
+        description: 'Excellent for storing nuts and seeds.',
+        categories: ['box', 'paper', 'seeded']
+      })
+    })
+    .then(() => {
+      return Promise.props({
+        creator: Creator.create({
           username: 'Gandalf',
           email: 'the@grey.com',
           password: 'password',
@@ -45,30 +65,59 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
       return Item.create({
         name: 'Tree Stump',
         image: 'https://www.elitetreecare.com/wp-content/uploads/2018/06/tree-stump-540x540.jpg',
-        creator: data.creator[1],
+        creator: data.creator,
         description: 'Just a stump of wood in the trees.',
+        categories: ['table', 'stump', 'seeded']
+      }),
+      Item.create({
+        name: 'Elven table',
+        image: 'http://www.spencerfieldlarcombe.com/images/_cached/400/1809434.jpg',
+        creator: data.creator,
+        description: 'Perfect for dinner with friends.',
         categories: ['table', 'wood', 'seeded']
+      })
+    })
+    .then(() => {
+      return Promise.props({
+        creator: Creator.create({
+          username: 'Billy',
+          email: 'billy@goat.com',
+          password: 'password',
+          passwordConfirmation: 'password',
+          image: 'https://images.unsplash.com/photo-1533318087102-b3ad366ed041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+        })
+      })
+    })
+    .then(data => {
+      return Item.create({
+        name: 'Antler chair',
+        image: 'https://i.pinimg.com/236x/f9/a8/17/f9a817dcfbe2e6e01e09e5a4f96a02cd--children-furniture-rustic-furniture.jpg',
+        creator: data.creator,
+        description: 'In memory of Fred.',
+        categories: ['chair', 'seeded']
+      })
+    })
+    .then(() => {
+      return Promise.props({
+        creator: Creator.create({
+          username: 'Mongoose',
+          email: 'u@me.com',
+          password: 'password',
+          passwordConfirmation: 'password',
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Yellow_Mongoose_1_%286964624854%29.jpg/170px-Yellow_Mongoose_1_%286964624854%29.jpg'
+        })
+      })
+    })
+    .then(data => {
+      return Item.create({
+        name: 'Capsule table',
+        image: 'https://i.ytimg.com/vi/Xs03zi79GBA/hqdefault.jpg',
+        creator: data.creator,
+        description: 'This handy pocket-sized capsule expands into a full-sized modern dining table.',
+        categories: ['table', 'capsule', 'seeded']
       })
     })
     .then(() => console.log('Database Seeded'))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 })
-
-
-
-
-// creator: Creator.create({
-//   username: 'mongoose',
-//   email: 'u@me.com',
-//   password: 'password',
-//   passwordConfirmation: 'password',
-//   image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Yellow_Mongoose_1_%286964624854%29.jpg/170px-Yellow_Mongoose_1_%286964624854%29.jpg'
-// }),
-// creator: Creator.create({
-//   username: 'goat',
-//   email: 'goat@goat.com',
-//   password: 'password',
-//   passwordConfirmation: 'password',
-//   image: 'https://images.unsplash.com/photo-1533318087102-b3ad366ed041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-// })

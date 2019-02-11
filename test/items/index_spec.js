@@ -1,14 +1,12 @@
 /* global api, describe, it, expect, beforeEach */
 
 const Item = require('../../models/item')
-const Creator = require('../../models/creator')
 
 const { itemData } = require('../mock_data')
 
 describe('GET /items', () => {
   beforeEach(done => {
     Promise.all([
-      Creator.remove({}),
       Item.remove({})
     ])
       .then(() => Item.create(itemData))

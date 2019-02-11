@@ -113,41 +113,26 @@ nav {
 // LOGIN FORM ******************************************************************
 
 #loginFormSection {
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  transition: all 0.4s ease;
-  z-index: 30;
-  pointer-events: none;
+  height: 0;
+  padding: 0;
+  transition: height 0.4s ease;
+  background: rgba(20, 20, 20, 0.9);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 
   &.displayed {
-    opacity: 1;
-    pointer-events: auto;
+    height: 30vh;
   }
 
   .container {
-    top: 6rem;
-    border-radius: 20px;
-    background: rgba(20, 20, 21, 0.9);
-    padding: 5rem;
-    width: 80%;
+    width: 90%;
+  }
 
-    span.X-button {
-      top: -4rem;
-      position: relative;
+  form {
+    h2,
+    label {
       color: #fff;
-      left: 40rem;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
-    form {
-      h2,
-      label {
-        color: #fff;
-      }
     }
   }
 }

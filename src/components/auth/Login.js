@@ -47,12 +47,7 @@ class Login extends React.Component {
         id="loginFormSection"
       >
         <div className="container">
-          <span
-            className="X-button"
-            onClick={(e) => this.props.handleClick(e, 'loginActive')}
-          >X</span>
           <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Login</h2>
             <div className="field">
               <label className="label">Email</label>
               <input

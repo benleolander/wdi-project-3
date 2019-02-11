@@ -13,7 +13,6 @@ class Register extends React.Component {
         password: '',
         passwordConfirmation: '',
         image: '',
-        items: [],
         bio: ''
       },
       error: null
@@ -34,7 +33,6 @@ class Register extends React.Component {
     axios
       .post('/api/register', this.state.data)
       .then(()=> this.props.history.push('/login'))
-      .then(()=> console.log(this.state.data + 'sent to /api/register'))
       .catch(err => this.setState({ error: err.message}))
   }
 

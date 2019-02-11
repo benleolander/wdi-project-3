@@ -13,7 +13,7 @@ class FlashMessages extends React.Component {
     if(!messages) return false
 
     this.setState({ messages })
-    console.log(messages)
+    console.log(`Flash will display: ${messages}`)
     Flash.clearMessages()
     setTimeout(()=> this.setState({ messages: null }), 5000)
   }
@@ -33,8 +33,5 @@ class FlashMessages extends React.Component {
     )
   }
 }
-
-
-
 
 export default FlashMessages

@@ -4,7 +4,10 @@ const Promise = require('bluebird')
 mongoose.Promise = Promise
 const Creator = require('../models/creator')
 const Item = require('../models/item')
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) => {
+
+const { dbURI } = require('../config/environment')
+
+mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
   db.dropDatabase()
     .then(() => {
       return Promise.props({
@@ -15,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
           passwordConfirmation: 'password',
           image: 'http://pronksiapartments.ee/wp-content/uploads/2015/10/placeholder-face-big.png',
           bio: 'Seeeeeeeeeeed seeeeed seeeeed seeeeed'
-        
+
         })
       })
     })

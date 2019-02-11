@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import "~bulma/bulma";
-// GENERAL *********************************************************************
+@import "~bulma/bulma"; // GENERAL *********************************************************************
+
 * {
   box-sizing: border-box;
 }
@@ -84,6 +84,7 @@ body {
   .image {
     background-size: cover;
     background-position: top;
+    border-radius: 100%;
   }
 }
 // MEDIA QUERIES ***************************************************************

@@ -1,13 +1,9 @@
 require('dotenv').config()
-
 const mongoose = require('mongoose')
 const Promise = require('bluebird')
-
 mongoose.Promise = Promise
-
 const Creator = require('../models/creator')
 const Item = require('../models/item')
-
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) => {
   db.dropDatabase()
     .then(() => {
@@ -48,6 +44,13 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
         creator: data.creator,
         description: 'Excellent for storing nuts and seeds.',
         categories: ['box', 'paper', 'seeded']
+      }),
+      Item.create({
+        name: 'Jungle bookshelf',
+        image: 'https://i.ebayimg.com/images/i/233019335717-0-1/s-l1000.jpg',
+        creator: data.creator,
+        description: 'In the jungle the mighty jungle',
+        categories: ['box', 'wood', 'banana']
       })
     })
     .then(() => {
@@ -75,6 +78,13 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
         creator: data.creator,
         description: 'Perfect for dinner with friends.',
         categories: ['table', 'wood', 'seeded']
+      }),
+      Item.create({
+        name: 'Dwarf bench',
+        image: 'https://png.pngtree.com/element_origin_min_pic/17/07/02/ebcc86968cb21438af0ee9675321f39c.jpg',
+        creator: data.creator,
+        description: 'Perfect for sitting with dwarfs.',
+        categories: ['bench', 'wood', 'seeded']
       })
     })
     .then(() => {

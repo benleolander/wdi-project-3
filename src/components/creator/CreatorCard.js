@@ -9,8 +9,10 @@ const CreatorCard = ({ creator }) => {
           <h3 className="card-header-title">More about {creator.username}</h3>
         </header>
         <div className="card-image">
-          <figure className="image is-square">
-            <img src={creator.image} alt={`${creator.username}'s Profile Image`} />
+          <figure
+            className="image is-square"
+            style={{ backgroundImage: `url(${creator.image})` }}
+          >
           </figure>
         </div>
         <div className="card-content">

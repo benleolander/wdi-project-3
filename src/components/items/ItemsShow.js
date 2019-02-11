@@ -33,7 +33,7 @@ class ItemsShow extends React.Component {
               >
               </div>
             </div>
-            <div className="column">
+            <div className="column is-full-mobile">
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
               <p>{description}</p>
@@ -44,7 +44,7 @@ class ItemsShow extends React.Component {
                 Contact {creator.username}
               </Link>
             </div>
-            <div className="column is-one-fifth-tablet is-half-mobile">
+            <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard
                 creator={creator}
               />

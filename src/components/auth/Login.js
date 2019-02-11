@@ -42,8 +42,15 @@ class Login extends React.Component {
 
   render() {
     return (
-      <main className="section">
+      <main
+        className={ `section ${this.props.displayed}` }
+        id="loginFormSection"
+      >
         <div className="container">
+          <span
+            className="X-button"
+            onClick={(e) => this.props.handleClick(e, 'loginActive')}
+          >X</span>
           <form onSubmit={this.handleSubmit}>
             <h2 className="title">Login</h2>
             <div className="field">

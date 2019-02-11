@@ -5,10 +5,14 @@ const creatorSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: 'Username taken, please choose another'},
   email: { type: String, required: true, unique: 'Email taken, please choose another'},
   password: { type: String, required: 'Password required'},
-  image: { type: String },
-  items: [{ type: mongoose.Schema.ObjectId, ref: 'Item', required: true }]
+  image: { type: String }
 })
 
+creatorSchema.virtual('items', {
+  ref: 'Item',
+  localField: '_id',
+  foreignField: 'creator'
+})
 
 creatorSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
@@ -35,5 +39,7 @@ creatorSchema.pre('save', function hashPassword(next) {
 creatorSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
+
+creatorSchema.set('toJSON', { virtuals: true })
 
 module.exports = mongoose.model('Creator', creatorSchema)

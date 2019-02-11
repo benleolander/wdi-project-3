@@ -8,8 +8,8 @@ import Home from './components/Home'
 import FlashMessages from './components/common/FlashMessages'
 import Navbar from './components/common/Navbar'
 import Register from './components/auth/Register'
-import Login from './components/auth/Login'
 import ItemsShow from './components/items/ItemsShow'
+import ItemsNew from './components/items/ItemsNew'
 import ContactForm from './components/items/ContactForm'
 import CreatorShow from './components/creator/CreatorShow'
 
@@ -17,7 +17,7 @@ class App extends React.Component {
 
   render(){
     return(
-      
+
       <BrowserRouter>
 
         <main>
@@ -27,9 +27,9 @@ class App extends React.Component {
 
           <Switch>
             <Route path="/creators/:id" component={CreatorShow} />
+            <Route path="/items/new" component={ItemsNew} />
             <Route path="/items/:id" component={ItemsShow} />
             <Route path="/contact" component={ContactForm} />
-            <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/" component={Home} />
           </Switch>

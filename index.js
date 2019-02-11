@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const routes = require('./config/routes')
 const errorHandling = require('./lib/errorHandling')
 
-const { dbURI, port } = require('./config/environment')
+const { env, dbURI, port } = require('./config/environment')
 
 const app = express()
 
@@ -21,6 +21,6 @@ app.use(errorHandling)
 
 app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
-app.listen(port, () => console.log(`Express is running on Port ${port}`))
+app.listen(port, () => console.log(`Express is running on Port ${port}, in Environment ${env}`))
 
 module.exports = app

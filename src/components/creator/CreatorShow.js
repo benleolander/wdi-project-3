@@ -31,7 +31,7 @@ class CreatorShow extends React.Component{
       <section className="section">
         <div className="container">
           <div className="columns">
-            <div className="column">
+            <div className="column is-one-fifth">
               <div className="profilePicDiv">
                 <div
                   className="image is-square"

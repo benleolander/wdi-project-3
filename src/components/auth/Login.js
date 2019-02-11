@@ -33,9 +33,12 @@ class Login extends React.Component {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
         console.log(res.data.message)
-        this.props.history.push('/')
+        this.props.history.push('/creator/:id')
       })
-      .catch(err => Flash.setMessage('warning', err.message))
+      .catch(err => {
+        Flash.setMessage('warning', err.message)
+        this.props.history.push('/register')
+      })
 
 
   }

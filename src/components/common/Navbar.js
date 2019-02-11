@@ -23,7 +23,7 @@ class Navbar extends React.Component {
 
   logout() {
     Auth.removeToken()
-    this.props.history.push('/api/login')
+    this.props.history.push('/login')
   }
 
 

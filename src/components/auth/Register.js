@@ -30,9 +30,9 @@ class Register extends React.Component {
     e.preventDefault()
     //console.log('Submission being handled')
     axios
-      .post('/api/register', this.state.data)
+      .post('/register', this.state.data)
       .then(()=> this.props.history.push('/login'))
-      .then(()=> console.log(this.state.data + 'sent to /api/register'))
+      .then(()=> console.log(this.state.data + 'sent to /register'))
       .catch(err => alert(err.message))
   }
 

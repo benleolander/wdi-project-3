@@ -17,8 +17,7 @@ const CreatorCard = ({ creator }) => {
         </div>
         <div className="card-content">
           <div className="content">
-            Creator bio, optional? Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+            {creator.bio}.
           </div>
         </div>
       </div>

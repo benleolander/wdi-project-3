@@ -12,7 +12,8 @@ class Login extends React.Component {
       data: {
         email: '',
         password: ''
-      }
+      },
+      error: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,9 +36,7 @@ class Login extends React.Component {
         console.log(res.data.message)
         this.props.history.push('/')
       })
-      .catch(err => Flash.setMessage('warning', err.message))
-
-
+      .catch(() => this.setState({ error: 'Incorrect username/password' }))
   }
 
   render() {
@@ -47,6 +46,7 @@ class Login extends React.Component {
         id="loginFormSection"
       >
         <div className="container">
+          {this.state.error && <div className="notification is-warning">{this.state.error}</div>}
           <form onSubmit={this.handleSubmit}>
             <div className="field">
               <label className="label">Email</label>

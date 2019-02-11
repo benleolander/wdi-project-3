@@ -15,7 +15,8 @@ class Register extends React.Component {
         image: '',
         items: [],
         bio: ''
-      }
+      },
+      error: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,7 +35,7 @@ class Register extends React.Component {
       .post('/api/register', this.state.data)
       .then(()=> this.props.history.push('/login'))
       .then(()=> console.log(this.state.data + 'sent to /api/register'))
-      .catch(err => alert(err.message))
+      .catch(err => this.setState({ error: err.message}))
   }
 
   render() {

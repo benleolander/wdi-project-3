@@ -1,17 +1,15 @@
 import React from 'react'
 import axios from 'axios'
 
-import Auth from '../../lib/Auth'
-import Flash from '../../lib/Flash'
-
-class Login extends React.Component {
+class ContactForm extends React.Component {
   constructor() {
     super()
 
     this.state = {
       data: {
+        name: '',
         email: '',
-        password: ''
+        body: ''
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -21,23 +19,14 @@ class Login extends React.Component {
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
     this.setState({ data })
-    //console.log( data )
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.data)
     axios
-      .post('/api/login', this.state.data)
-      .then((res) => {
-        Auth.setToken(res.data.token)
-        Flash.setMessage('success', res.data.message)
-        console.log(res.data.message)
-        this.props.history.push('/')
-      })
-      .catch(err => Flash.setMessage('warning', err.message))
-
-
+      .post(`/api/items/${this.props.location.state.id}/contact`, this.state.data)
+      .then(res => console.log(res.data))
+      .catch(err => alert(err.message))
   }
 
   render() {
@@ -45,7 +34,17 @@ class Login extends React.Component {
       <main className="section">
         <div className="container">
           <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Login</h2>
+            <h2 className="title">Contact Creator</h2>
+            <div className="field">
+              <label className="label">Name</label>
+              <input
+                className="input"
+                name="name"
+                placeholder="Name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
             <div className="field">
               <label className="label">Email</label>
               <input
@@ -57,17 +56,16 @@ class Login extends React.Component {
               />
             </div>
             <div className="field">
-              <label className="label">Password</label>
-              <input
+              <label className="label">Body</label>
+              <textarea
                 className="input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
+                name="body"
+                placeholder="Message to the creator, e.g. 'I'm interested in purchasing this item'"
+                value={this.state.body}
                 onChange={this.handleChange}
               />
             </div>
-            <button className="button is-primary">Log in</button>
+            <button className="button is-primary">Submit</button>
           </form>
         </div>
       </main>
@@ -76,4 +74,4 @@ class Login extends React.Component {
 
 }
 
-export default Login
+export default ContactForm

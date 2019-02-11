@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import CreatorCard from '../creator/CreatorCard'
@@ -32,13 +33,18 @@ class ItemsShow extends React.Component {
               >
               </div>
             </div>
-            <div className="column">
+            <div className="column is-full-mobile">
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
               <p>{description}</p>
-              <a href="#">Contact {creator.username}</a>
+              <Link to={{
+                pathname: '/contact',
+                state: { id: this.props.match.params.id}
+              }}>
+                Contact {creator.username}
+              </Link>
             </div>
-            <div className="column is-one-fifth-tablet is-half-mobile">
+            <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard
                 creator={creator}
               />

@@ -56,9 +56,9 @@ class ContactForm extends React.Component {
               />
             </div>
             <div className="field">
-              <label className="label">Body</label>
+              <label className="label">Message</label>
               <textarea
-                className="input"
+                className="textarea"
                 name="body"
                 placeholder="Message to the creator, e.g. 'I'm interested in purchasing this item'"
                 value={this.state.body}

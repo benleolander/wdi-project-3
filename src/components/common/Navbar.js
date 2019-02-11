@@ -11,18 +11,18 @@ class Navbar extends React.Component {
       navbarOpen: false,
       loginActive: false
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.toggle = this.toggle.bind(this)
     this.logout = this.logout.bind(this)
 
   }
 
-  handleClick(e, key){
+  toggle(key){
     this.setState({[key]: !this.state[key]})
   }
 
   logout() {
     Auth.removeToken()
-    this.props.history.push('/api/login')
+    this.props.history.push('/')
   }
 
 
@@ -37,7 +37,7 @@ class Navbar extends React.Component {
                 <h1 className="title is-2">Created.</h1>
               </Link>
 
-              <a role="button" className={`navbar-burger burger ${this.state.navbarOpen ? 'is-active': ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  onClick={(e) => this.handleClick(e, 'navbarOpen')}>
+              <a role="button" className={`navbar-burger burger ${this.state.navbarOpen ? 'is-active': ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  onClick={() => this.toggle('navbarOpen')}>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -51,7 +51,7 @@ class Navbar extends React.Component {
                 {!Auth.isAuthenticated() &&
                   <a
                     className="navbar-item"
-                    onClick={(e) => this.handleClick(e, 'loginActive')}>Login</a>}
+                    onClick={() => this.toggle('loginActive')}>Login</a>}
                 {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
               </div>
             </div>
@@ -62,7 +62,7 @@ class Navbar extends React.Component {
         </Switch>
         <Login
           displayed={`${this.state.loginActive ? 'displayed' : ''}`}
-          handleClick={this.handleClick}
+          toggle={this.toggle}
         />
       </div>
     )

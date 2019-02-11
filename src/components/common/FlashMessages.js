@@ -34,7 +34,4 @@ class FlashMessages extends React.Component {
   }
 }
 
-
-
-
 export default FlashMessages

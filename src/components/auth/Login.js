@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
 import Flash from '../../lib/Flash'
@@ -21,7 +22,6 @@ class Login extends React.Component {
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
     this.setState({ data })
-    //console.log( data )
   }
 
   handleSubmit(e) {
@@ -37,7 +37,9 @@ class Login extends React.Component {
       })
       .catch(err => Flash.setMessage('warning', err.message))
 
-
+    const data = { email: '', password: '' }
+    this.setState({ data: data })
+    this.props.toggle('loginActive')
   }
 
   render() {
@@ -48,28 +50,36 @@ class Login extends React.Component {
       >
         <div className="container">
           <form onSubmit={this.handleSubmit}>
-            <div className="field">
-              <label className="label">Email</label>
-              <input
-                className="input"
-                name="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className="input"
+                      name="email"
+                      placeholder="Email"
+                      value={this.state.data.email}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="field has-addons">
+                  <div className="control is-expanded">
+                    <input
+                      className="input"
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      value={this.state.data.password}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="control">
+                  <button className="button is-primary">Log in</button>
+                </div>
+              </div>
             </div>
-            <div className="field">
-              <label className="label">Password</label>
-              <input
-                className="input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <button className="button is-primary">Log in</button>
           </form>
         </div>
       </main>
@@ -78,4 +88,4 @@ class Login extends React.Component {
 
 }
 
-export default Login
+export default withRouter(Login)

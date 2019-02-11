@@ -4,7 +4,7 @@ const Item = require('../../models/item')
 
 const { itemData } = require('../mock_data')
 
-describe('GET /items', () => {
+describe('GET /', () => {
   beforeEach(done => {
     Promise.all([
       Item.remove({})

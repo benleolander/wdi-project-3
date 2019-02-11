@@ -22,3 +22,5 @@ app.use(errorHandling)
 app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
 app.listen(port, () => console.log(`Express is running on Port ${port}`))
+
+module.exports = app

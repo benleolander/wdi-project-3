@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import "~bulma/bulma";
-// GENERAL *********************************************************************
+@import "~bulma/bulma"; // GENERAL *********************************************************************
+
 * {
   box-sizing: border-box;
 }
@@ -80,10 +80,22 @@ body {
 .profilePicDiv {
   width: 10%;
   height: 10%;
+  margin: 2px;
 
   .image {
     background-size: cover;
     background-position: top;
+    border-radius: 100%;
+  }
+}
+
+.profileImages {
+  width: 30%;
+  height: 30%;
+
+  .image {
+    background-size: cover;
+    background-position: center;
   }
 }
 // MEDIA QUERIES ***************************************************************

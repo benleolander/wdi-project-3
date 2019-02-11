@@ -13,6 +13,7 @@ class CreatorShow extends React.Component{
   componentDidMount(){
     axios.get(`/api/creators/${this.props.match.params.id}`)
       .then(res => this.setState({ creator: res.data }))
+      .catch(err => console.error(err.message))
   }
 
   render(){
@@ -29,7 +30,7 @@ class CreatorShow extends React.Component{
             }}
           >
           </div>
-          <h1 className="title is-3">{username}</h1>
+          <h1 className="title is-5">{username}</h1>
         </div>
       </section>
     )

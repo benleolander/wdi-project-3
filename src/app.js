@@ -17,24 +17,25 @@ class App extends React.Component {
 
   render(){
     return(
-      <div>
-        <BrowserRouter>
-          <div>
-            <Navbar />
-            <FlashMessages />
+      
+      <BrowserRouter>
 
-            <Switch>
-              <Route path="/creators/:id" component={CreatorShow} />
-              <Route path="/items/:id" component={ItemsShow} />
-              <Route path="/contact" component={ContactForm} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/" component={Home} />
-            </Switch>
+        <main>
 
-          </div>
-        </BrowserRouter>
-      </div>
+          <Navbar />
+          <FlashMessages />
+
+          <Switch>
+            <Route path="/creators/:id" component={CreatorShow} />
+            <Route path="/items/:id" component={ItemsShow} />
+            <Route path="/contact" component={ContactForm} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/" component={Home} />
+          </Switch>
+
+        </main>
+      </BrowserRouter>
     )
   }
 }

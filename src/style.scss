@@ -1,6 +1,5 @@
 @charset "utf-8";
 @import "~bulma/bulma";
-
 // GENERAL *********************************************************************
 * {
   box-sizing: border-box;
@@ -63,9 +62,7 @@ body {
 }
 
 .card.creatorProfile {
-
   .card-image {
-
     img {
       width: 100%;
       height: auto;
@@ -81,8 +78,8 @@ body {
 //***************************************************
 
 .profilePicDiv {
-  width: 15%;
-  height: 15%;
+  width: 10%;
+  height: 10%;
 
   .image {
     background-size: cover;

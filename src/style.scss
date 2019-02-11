@@ -89,9 +89,15 @@ body {
   }
 }
 
-.profileImages {
-  width: 30%;
-  height: 30%;
+.profileImageLarge {
+  height: 30rem;
+  width: 30rem;
+  margin: 0 auto 3rem;
+}
+
+.profileImagesSmall {
+  align-items: center;
+  justify-content: center;
 
   .image {
     background-size: cover;

@@ -9,6 +9,7 @@ const creatorSchema = new mongoose.Schema({
   items: [{ type: mongoose.Schema.ObjectId, ref: 'Item', required: true }]
 })
 
+
 creatorSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation

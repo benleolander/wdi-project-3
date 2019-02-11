@@ -5,7 +5,8 @@ const creatorSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: 'Username taken, please choose another'},
   email: { type: String, required: true, unique: 'Email taken, please choose another'},
   password: { type: String, required: 'Password required'},
-  image: { type: String }
+  image: { type: String },
+  bio: { type: String, required: true, maxlength: 300 }
 })
 
 creatorSchema.virtual('items', {

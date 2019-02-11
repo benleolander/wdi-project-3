@@ -13,7 +13,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
           email: 'noreply@email.com',
           password: 'password',
           passwordConfirmation: 'password',
-          image: 'http://pronksiapartments.ee/wp-content/uploads/2015/10/placeholder-face-big.png'
+          image: 'http://pronksiapartments.ee/wp-content/uploads/2015/10/placeholder-face-big.png',
+          bio: 'Seeeeeeeeeeed seeeeed seeeeed seeeeed'
+        
         })
       })
     })
@@ -33,7 +35,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
           email: 'monkey@paper.com',
           password: 'password',
           passwordConfirmation: 'password',
-          image: 'https://origami.me/wp-content/uploads/2016/12/origami-animals-featured.jpg'
+          image: 'https://origami.me/wp-content/uploads/2016/12/origami-animals-featured.jpg',
+          bio: 'Talking bout the big Monkey man'
         })
       })
     })
@@ -60,7 +63,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
           email: 'the@grey.com',
           password: 'password',
           passwordConfirmation: 'password',
-          image: 'https://media1.tenor.com/images/aedb1026190d33420c170c27ca96edd1/tenor.gif?itemid=3520584'
+          image: 'https://media1.tenor.com/images/aedb1026190d33420c170c27ca96edd1/tenor.gif?itemid=3520584',
+          bio: 'You shall not pass!! Without looking at my fabulous furniture.'
         })
       })
     })
@@ -94,7 +98,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
           email: 'billy@goat.com',
           password: 'password',
           passwordConfirmation: 'password',
-          image: 'https://images.unsplash.com/photo-1533318087102-b3ad366ed041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+          image: 'https://images.unsplash.com/photo-1533318087102-b3ad366ed041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+          bio: 'I am a little teaspout short and stout he is my furniture here is my spanner'
         })
       })
     })
@@ -114,7 +119,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err, db) =
           email: 'u@me.com',
           password: 'password',
           passwordConfirmation: 'password',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Yellow_Mongoose_1_%286964624854%29.jpg/170px-Yellow_Mongoose_1_%286964624854%29.jpg'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Yellow_Mongoose_1_%286964624854%29.jpg/170px-Yellow_Mongoose_1_%286964624854%29.jpg',
+          bio: 'I eat snakes and make chairs.'
         })
       })
     })

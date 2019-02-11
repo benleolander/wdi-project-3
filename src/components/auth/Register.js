@@ -13,7 +13,8 @@ class Register extends React.Component {
         password: '',
         passwordConfirmation: '',
         image: '',
-        items: []
+        items: [],
+        bio: ''
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -37,7 +38,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { username, email, password, passwordConfirmation, image } = this.state.data
+    const { username, email, password, passwordConfirmation, image, bio } = this.state.data
     return (
       <main className="section">
         <div className="container">
@@ -99,14 +100,22 @@ class Register extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
+            <div className="field">
+              <label className="label">Bio</label>
+              <textarea
+                className="textarea is-warning"
+                name="bio"
+                placeholder="Please add a bio"
+                value={bio}
+                onChange={this.handleChange}
+              />
+            </div>
             <button className="button is-info">Submit</button>
           </form>
         </div>
       </main>
     )
   }
-
-
 }
 
 export default Register

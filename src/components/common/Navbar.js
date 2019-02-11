@@ -32,30 +32,31 @@ class Navbar extends React.Component {
     return (
       <div>
         <nav className="navbar" role="navigation" aria-label="main navigation">
-          <div className="navbar-brand">
-            <Link to="/" className="navbar-item">
-              <h1 className="title is-2">Created.</h1>
-            </Link>
+          <div className="container">
+            <div className="navbar-brand">
+              <Link to="/" className="navbar-item">
+                <h1 className="title is-2">Created.</h1>
+              </Link>
 
-            <a role="button" className={`navbar-burger burger ${this.state.navbarOpen ? 'is-active': ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  onClick={(e) => this.handleClick(e, 'navbarOpen')}>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
-          </div>
+              <a role="button" className={`navbar-burger burger ${this.state.navbarOpen ? 'is-active': ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  onClick={(e) => this.handleClick(e, 'navbarOpen')}>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
 
-          <div id="navbarBasicExample" className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''}`}>
-            <div className="navbar-end">
-              {!Auth.isAuthenticated() && <Link to="/register" className="navbar-item" >Register</Link>}
-              {Auth.isAuthenticated() && <Link className="navbar-item" to="/items/new">Add an item</Link>}
-              {!Auth.isAuthenticated() &&
-                <a
-                  className="navbar-item"
-                  onClick={(e) => this.handleClick(e, 'loginActive')}>Login</a>}
-              {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
+            <div id="navbarBasicExample" className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''}`}>
+              <div className="navbar-end">
+                {!Auth.isAuthenticated() && <Link to="/register" className="navbar-item" >Register</Link>}
+                {Auth.isAuthenticated() && <Link className="navbar-item" to="/items/new">Add an item</Link>}
+                {!Auth.isAuthenticated() &&
+                  <a
+                    className="navbar-item"
+                    onClick={(e) => this.handleClick(e, 'loginActive')}>Login</a>}
+                {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
+              </div>
             </div>
           </div>
-
         </nav>
         <Login
           displayed={`${this.state.loginActive ? 'displayed' : ''}`}

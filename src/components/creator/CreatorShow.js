@@ -26,18 +26,27 @@ class CreatorShow extends React.Component{
   render(){
     if (!this.state.creator) return <p>Loading...</p>
     console.log(this.state.creator)
-    const { username, image, items } = this.state.creator
+    const { username, image, items, bio } = this.state.creator
     return(
       <section className="section">
-        <div className="profilePicDiv container">
-          <div
-            className="image is-square"
-            style={{
-              backgroundImage: `url(${image})`
-            }}
-          >
+        <div className="container">
+          <div className="columns">
+            <div className="column">
+              <div className="profilePicDiv">
+                <div
+                  className="image is-square"
+                  style={{
+                    backgroundImage: `url(${image})`
+                  }}
+                >
+                </div>
+              </div>
+            </div>
+            <div className="column">
+              <h1 className="title is-3">{username}</h1>
+              <p>{bio}</p>
+            </div>
           </div>
-          <h1 className="title is-5">{username}</h1>
         </div>
         <Link
           to={`/items/${this.state.creator.items[this.state.selected]._id}`}

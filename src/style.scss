@@ -80,11 +80,22 @@ body {
 .profilePicDiv {
   width: 10%;
   height: 10%;
+  margin: 2px;
 
   .image {
     background-size: cover;
     background-position: top;
     border-radius: 100%;
+  }
+}
+
+.profileImages {
+  width: 30%;
+  height: 30%;
+
+  .image {
+    background-size: cover;
+    background-position: center;
   }
 }
 // MEDIA QUERIES ***************************************************************

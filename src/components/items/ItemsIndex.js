@@ -25,17 +25,21 @@ class ItemsIndex extends React.Component {
     this.setState({ [name]: value })
   }
 
-  filterResults(){
-    if(this.state.search === '') return this.state.data
-    return this.state.data.filter(item =>
-      item.name
-        .toLowerCase()
-        .replace(/ /g , '')
-        .includes(this.state.search) ||
-      item.creator.username
+  uniformString(string){
+    return (
+      string
         .toLowerCase()
         .replace(/ /g, '')
-        .includes(this.state.search)
+    )
+  }
+
+  filterResults(){
+    if(this.state.search === '') return this.state.data
+    const search = this.uniformString(this.state.search)
+    return this.state.data.filter(item =>
+      this.uniformString(item.name).includes(search) ||
+      this.uniformString(item.creator.username).includes(search) ||
+      this.uniformString(item.categories.join(',')).includes(search)
     )
   }
 

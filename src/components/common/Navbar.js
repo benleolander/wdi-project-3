@@ -23,7 +23,7 @@ class Navbar extends React.Component {
 
   logout() {
     Auth.removeToken()
-    Flash.setMessage('danger', 'logged out')
+    Flash.setMessage('danger', 'You have logged out')
     this.props.history.push('/')
   }
 

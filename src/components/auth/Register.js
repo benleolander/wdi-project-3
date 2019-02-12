@@ -15,14 +15,13 @@ class Register extends React.Component {
         image: '',
         bio: ''
       },
-      error: null
+      errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange({target: { name, value }}) {
-    console.log('Change being handled')
     const data = { ...this.state.data, [name]: value }
     this.setState({ data })
   }
@@ -33,11 +32,12 @@ class Register extends React.Component {
     axios
       .post('/api/register', this.state.data)
       .then(()=> this.props.history.push('/login'))
-      .catch(err => this.setState({ error: err.message}))
+      .catch(err => this.setState({ errors: err.response.data}))
   }
 
   render() {
     const { username, email, password, passwordConfirmation, image, bio } = this.state.data
+    const errors = this.state.errors
     return (
       <main className="section">
         <div className="container">
@@ -53,6 +53,7 @@ class Register extends React.Component {
                   value={username}
                   onChange={this.handleChange}
                 />
+                {errors.username && <small>{errors.username}</small>}
               </div>
             </div>
             <div className="field">
@@ -65,6 +66,7 @@ class Register extends React.Component {
                   value={email}
                   onChange={this.handleChange}
                 />
+                {errors.email && <small>{errors.email}</small>}
               </div>
             </div>
             <div className="field">
@@ -77,6 +79,7 @@ class Register extends React.Component {
                 value={password}
                 onChange={this.handleChange}
               />
+              {errors.password && <small>{errors.password}</small>}
             </div>
             <div className="field">
               <label className="label">Password Confirmation</label>
@@ -108,6 +111,7 @@ class Register extends React.Component {
                 value={bio}
                 onChange={this.handleChange}
               />
+              {errors.bio && <small>{errors.bio}</small>}
             </div>
             <button className="button is-info">Submit</button>
           </form>

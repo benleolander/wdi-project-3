@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import ItemImage from './ItemImage'
+import SearchBar from '../common/SearchBar'
 
 class ItemsIndex extends React.Component {
 
@@ -12,13 +13,16 @@ class ItemsIndex extends React.Component {
 
   render(){
     return (
-      <div className="indexDiv columns is-gapless is-mobile is-multiline">
-        {
-          !this.state ||
-          this.state.data.map(item =>
-            <ItemImage key={item._id} item={item} />
-          )
-        }
+      <div>
+        <SearchBar />
+        <div className="indexDiv columns is-gapless is-mobile is-multiline">
+          {
+            !this.state ||
+            this.state.data.map(item =>
+              <ItemImage key={item._id} item={item} />
+            )
+          }
+        </div>
       </div>
     )
   }

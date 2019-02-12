@@ -26,7 +26,7 @@ class ItemsIndex extends React.Component {
               >
                 <div className="itemDescription is-square">
                   <h3 className="title is-4">{item.name}</h3>
-                  <h4 className="subtitle is-5">by {item.creator.username}</h4>
+                  <h3 className="subtitle is-5">by {item.creator.username}</h3>
                 </div>
               </div>
             </Link>

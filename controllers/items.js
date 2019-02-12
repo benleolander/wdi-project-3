@@ -28,7 +28,7 @@ function commentCreateRoute(req, res, next){
   Item
     .findById(req.params.id)
     .then(item => {
-      item.comments.push(req.body)
+      item.comments.unshift(req.body)
       return item.save()
     })
     .then(comment => res.status(201).json(comment))

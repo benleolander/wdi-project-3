@@ -5,15 +5,29 @@ import axios from 'axios'
 import CreatorCard from '../creator/CreatorCard'
 
 class ItemsShow extends React.Component {
+  constructor() {
+    super()
+
+
+    this.calculateAverageRating = this.calculateAverageRating.bind(this)
+  }
 
   componentDidMount(){
     axios.get(`/api/items/${this.props.match.params.id}`)
-      .then(res => this.setState({ data: res.data }))
+      .then(res => {
+        this.setState({ data: res.data })
+      })
       .catch(err => console.error(err.message))
   }
 
   calculateAverageRating() {
+    const comment = this.state.data.comments
 
+    const total = comment.reduce((total, comment) => {
+      return total + comment.rating
+    }, 0)
+
+    return total/this.state.data.comments.length
   }
 
   render(){
@@ -25,6 +39,7 @@ class ItemsShow extends React.Component {
       description,
       comments
     } = this.state.data
+    const averageRating = this.calculateAverageRating()
     return(
       <section className="section">
         <div className="container">
@@ -41,6 +56,9 @@ class ItemsShow extends React.Component {
             <div className="column is-full-mobile">
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
+
+              <h3 className="subtitle"><strong>Rated: </strong>{averageRating}/5</h3>
+
               <p>{description}</p>
               <Link to={{
                 pathname: '/contact',

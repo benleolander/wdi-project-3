@@ -12,6 +12,10 @@ class ItemsShow extends React.Component {
       .catch(err => console.error(err.message))
   }
 
+  calculateAverageRating() {
+
+  }
+
   render(){
     if (!this.state) return null
     const {
@@ -48,6 +52,7 @@ class ItemsShow extends React.Component {
                 return(
                   <div key={comment.id}>
                     <p><strong>{comment.name}</strong></p>
+                    <p><strong>Rating: </strong>{comment.rating}/5</p>
                     <p>{comment.body}</p>
                   </div>
                 )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Switch, Route, withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
 import Login from '../auth/Login'
@@ -25,7 +25,12 @@ class Navbar extends React.Component {
     this.props.history.push('/')
   }
 
-
+  componentDidUpdate(prevProps) {
+    if(this.props.location.pathname !== prevProps.location.pathname &&
+      this.props.location.pathname !== '/login'){
+      this.setState({ navbarOpen: false, loginActive: false })
+    }
+  }
 
   render(){
     return (
@@ -58,9 +63,6 @@ class Navbar extends React.Component {
             </div>
           </div>
         </nav>
-        <Switch>
-          <Route path="/login" component={Login} />
-        </Switch>
         <Login
           displayed={`${this.state.loginActive ? 'displayed' : ''}`}
           toggle={this.toggle}

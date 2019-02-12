@@ -1,6 +1,8 @@
 const Creator = require('../models/creator')
 const jwt = require('jsonwebtoken')
 
+const { secret } = require('../config/environment')
+
 function registerRoute(req, res, next){
   Creator.create(req.body)
     .then(() => res.status(200).json( { message: 'Registration successful'}))
@@ -15,7 +17,7 @@ function loginRoute(req, res, next){
         return res.status(401).json({ message: 'unauthorized'})
       }
       const payload = {sub: creator._id}
-      const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '12h' })
+      const token = jwt.sign(payload, secret, { expiresIn: '12h' })
       res.json({
         token,
         message: `Welcome back ${creator.username}`

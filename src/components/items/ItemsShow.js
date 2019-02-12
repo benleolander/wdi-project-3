@@ -5,12 +5,6 @@ import axios from 'axios'
 import CreatorCard from '../creator/CreatorCard'
 
 class ItemsShow extends React.Component {
-  constructor() {
-    super()
-
-
-    this.calculateAverageRating = this.calculateAverageRating.bind(this)
-  }
 
   componentDidMount(){
     axios.get(`/api/items/${this.props.match.params.id}`)
@@ -20,16 +14,6 @@ class ItemsShow extends React.Component {
       .catch(err => console.error(err.message))
   }
 
-  calculateAverageRating() {
-    const comment = this.state.data.comments
-
-    const total = comment.reduce((total, comment) => {
-      return total + comment.rating
-    }, 0)
-
-    return total/this.state.data.comments.length
-  }
-
   render(){
     if (!this.state) return null
     const {
@@ -37,9 +21,9 @@ class ItemsShow extends React.Component {
       creator,
       image,
       description,
-      comments
+      comments,
+      averageRating
     } = this.state.data
-    const averageRating = this.calculateAverageRating()
     return(
       <section className="section">
         <div className="container">

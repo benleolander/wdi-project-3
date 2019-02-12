@@ -42,7 +42,7 @@ class ItemsShow extends React.Component {
                 pathname: '/contact',
                 state: { id: this.props.match.params.id}
               }}>
-                Contact {creator.username}
+                Enquiries for {name} by {creator.username}
               </Link>
               {comments.map(comment => {
                 return(
@@ -52,6 +52,12 @@ class ItemsShow extends React.Component {
                   </div>
                 )
               })}
+              <Link to={{
+                pathname: `/items/${this.props.match.params.id}/comment`,
+                state: { id: this.props.match.params.id}
+              }}>
+                New Comment
+              </Link>
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard

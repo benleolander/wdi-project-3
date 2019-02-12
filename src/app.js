@@ -11,6 +11,7 @@ import Register from './components/auth/Register'
 import ItemsShow from './components/items/ItemsShow'
 import ItemsNew from './components/items/ItemsNew'
 import ContactForm from './components/items/ContactForm'
+import CommentForm from './components/items/CommentForm'
 import CreatorShow from './components/creator/CreatorShow'
 
 class App extends React.Component {
@@ -28,6 +29,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/creators/:id" component={CreatorShow} />
             <Route path="/items/new" component={ItemsNew} />
+            <Route path="/items/:id/comment" component={CommentForm} />
             <Route path="/items/:id" component={ItemsShow} />
             <Route path="/contact" component={ContactForm} />
             <Route path="/register" component={Register} />

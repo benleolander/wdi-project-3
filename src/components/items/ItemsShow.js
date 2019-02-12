@@ -5,11 +5,29 @@ import axios from 'axios'
 import CreatorCard from '../creator/CreatorCard'
 
 class ItemsShow extends React.Component {
+  constructor() {
+    super()
+
+
+    this.calculateAverageRating = this.calculateAverageRating.bind(this)
+  }
 
   componentDidMount(){
     axios.get(`/api/items/${this.props.match.params.id}`)
-      .then(res => this.setState({ data: res.data }))
+      .then(res => {
+        this.setState({ data: res.data })
+      })
       .catch(err => console.error(err.message))
+  }
+
+  calculateAverageRating() {
+    const comment = this.state.data.comments
+
+    const total = comment.reduce((total, comment) => {
+      return total + comment.rating
+    }, 0)
+
+    return total/this.state.data.comments.length
   }
 
   render(){
@@ -18,8 +36,10 @@ class ItemsShow extends React.Component {
       name,
       creator,
       image,
-      description
+      description,
+      comments
     } = this.state.data
+    const averageRating = this.calculateAverageRating()
     return(
       <section className="section">
         <div className="container">
@@ -36,12 +56,30 @@ class ItemsShow extends React.Component {
             <div className="column is-full-mobile">
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
+
+              {!isNaN(averageRating) && <h3 className="subtitle"><strong>Rated: </strong>{averageRating}/5</h3>}
+
               <p>{description}</p>
               <Link to={{
                 pathname: '/contact',
+                state: { id: creator._id}
+              }}>
+                Enquiries for {name} by {creator.username}
+              </Link>
+              {comments.map(comment => {
+                return(
+                  <div key={comment.id}>
+                    <p><strong>{comment.name}</strong></p>
+                    <p><strong>Rating: </strong>{comment.rating}/5</p>
+                    <p>{comment.body}</p>
+                  </div>
+                )
+              })}
+              <Link to={{
+                pathname: `/items/${this.props.match.params.id}/comment`,
                 state: { id: this.props.match.params.id}
               }}>
-                Contact {creator.username}
+                New Comment
               </Link>
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">

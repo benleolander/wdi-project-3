@@ -24,6 +24,17 @@ function createRoute(req, res, next){
     .catch(next)
 }
 
+function commentCreateRoute(req, res, next){
+  Item
+    .findById(req.params.id)
+    .then(item => {
+      item.comments.unshift(req.body)
+      return item.save()
+    })
+    .then(comment => res.status(201).json(comment))
+    .catch(next)
+}
+
 function deleteRoute(req, res, next){
   Item
     .deleteOne({ _id: req.params.id })
@@ -45,5 +56,6 @@ module.exports = {
   show: showRoute,
   delete: deleteRoute,
   update: updateRoute,
-  create: createRoute
+  create: createRoute,
+  commentCreate: commentCreateRoute
 }

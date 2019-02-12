@@ -1,37 +1,63 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+
+import ItemImage from './ItemImage'
+import SearchBar from '../common/SearchBar'
 
 class ItemsIndex extends React.Component {
+  constructor(){
+    super()
+
+    this.state = {
+      search: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
 
   componentDidMount(){
     axios.get('/api')
       .then(res => this.setState({ data: res.data }))
   }
 
+  handleChange({ target: { value, name }}){
+    this.setState({ [name]: value })
+  }
+
+  uniformString(string){
+    return (
+      string
+        .toLowerCase()
+        .replace(/ /g, '')
+    )
+  }
+
+  filterResults(){
+    if(this.state.search === '') return this.state.data
+    const search = this.uniformString(this.state.search)
+    return this.state.data.filter(item =>
+      this.uniformString(item.name).includes(search) ||
+      this.uniformString(item.creator.username).includes(search) ||
+      this.uniformString(item.categories.join(',')).includes(search)
+    )
+  }
+
   render(){
     return (
-      <div className="indexDiv columns is-gapless is-mobile is-multiline">
-        {
-          !this.state ||
-          this.state.data.map(item =>
-            <Link
-              to={`/items/${item._id}`}
-              key={item._id}
-              className="itemDiv column is-one-fifth-desktop is-one-quarter-tablet is-one-third-mobile"
-            >
-              <div
-                className="image is-square"
-                style={ {backgroundImage: `url(${item.image})`} }
-              >
-                <div className="itemDescription is-square">
-                  <h3 className="title is-4">{item.name}</h3>
-                  <h3 className="subtitle is-5">by {item.creator.username}</h3>
-                </div>
-              </div>
-            </Link>
-          )
-        }
+      <div>
+        <SearchBar
+          handleChange={this.handleChange}
+          search={this.state.search}
+        />
+        <div className="indexDiv columns is-gapless is-mobile is-multiline">
+          {
+            !this.state.data ||
+            this.filterResults().map(item =>
+              <ItemImage key={item._id} item={item} />
+            )
+          }
+        </div>
       </div>
     )
   }

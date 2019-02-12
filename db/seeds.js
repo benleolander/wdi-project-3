@@ -48,7 +48,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://images.victorianplumbing.co.uk/images/SUN-TR19_p1.jpg',
         creator: data.creator,
         description: 'A quality traditional copper lacquered radiator with stylish ball joints, it\'s classic design would look great in any bathroom',
-        categories: ['metal', 'rail', 'mounted', 'bahroom']
+        categories: ['metal', 'rail', 'mounted', 'bathroom']
       }),
       Item.create({
         name: 'Wicker lights',
@@ -143,14 +143,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         categories: ['clock', 'kitchen', 'art']
       }),
       Item.create({
-        name: 'Swigning bed',
+        name: 'Swinging bed',
         image: 'https://i.pinimg.com/564x/de/05/33/de053397af31d32b2d1042079b7efa04.jpg?b=t',
         creator: data.creator,
         description: 'Perfect for swinging on a bed. This was made by me.',
-        categories: ['bed', 'bedroom', 'wood', 'hangning']
+        categories: ['bed', 'bedroom', 'wood', 'hanging']
       }),
       Item.create({
-        name: 'Haniging bed',
+        name: 'Hanging bed',
         image: 'https://i.pinimg.com/564x/17/1c/6c/171c6c57a9d3943fb6f866655255bcf3.jpg?b=t',
         creator: data.creator,
         description: 'Hanging, floating bed',

@@ -8,7 +8,6 @@ class ItemsShow extends React.Component {
   constructor() {
     super()
 
-
     this.calculateAverageRating = this.calculateAverageRating.bind(this)
   }
 

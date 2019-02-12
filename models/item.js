@@ -17,5 +17,24 @@ const itemSchema = new mongoose.Schema({
   comments: [ commentSchema ]
 })
 
+itemSchema.virtual('averageRating')
+  .get(function(){
+    const total = this.comments.reduce((total, comment) => {
+      return total + comment.rating
+    }, 0)
+    return total/this.comments.length
+  })
+
+itemSchema.virtual('averageRating', {
+  ref: 'Item',
+  localField: '_id',
+  foreignField: 'Item.averageRating'
+})
+
+itemSchema.set('toJSON', {
+  virtuals: true
+})
+
+
 
 module.exports = mongoose.model('Item', itemSchema)

@@ -29,25 +29,39 @@ class CreatorShow extends React.Component{
     const { username, image, items, bio } = this.state.creator
     return(
       <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-one-fifth">
-              <div className="profilePicDiv">
-                <div
-                  className="image is-square"
-                  style={{
-                    backgroundImage: `url(${image})`
-                  }}
-                >
+
+        <div className="container middle">
+          <div className="box set-width no-shadow">
+
+            <div className="columns">
+              <div className="column">
+                <div className="profilePicDiv">
+                  <div
+                    className="image is-square"
+                    style={{
+                      backgroundImage: `url(${image})`
+                    }}
+                  >
+                  </div>
                 </div>
               </div>
+              <div className="column bio-box">
+                <h1 className="title is-3">{username}</h1>
+
+                <p className="has-text-grey-dark">{bio}</p>
+                <a className="button is-fullwidth is-black">Contact {username}</a>
+              </div>
             </div>
-            <div className="column">
-              <h1 className="title is-3">{username}</h1>
-              <p>{bio}</p>
-            </div>
+
+          </div>
+
+        </div>
+        <div className="section">
+          <div className="container set-width">
+            <h2 className="title is-3 has-text-is-dark">My Creations</h2>
           </div>
         </div>
+
         <Link
           to={`/items/${this.state.creator.items[this.state.selected]._id}`}
           className="profileImageLarge image"
@@ -55,7 +69,7 @@ class CreatorShow extends React.Component{
             backgroundImage: `url(${items[this.state.selected].image})`
           }}>
         </Link>
-        <div className="profileImagesSmall columns">
+        <div className="profileImagesSmall columns is-mobile">
           {items.map( (item, i) =>
             <div
               className="column is-1"

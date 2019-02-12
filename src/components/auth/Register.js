@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Flash from '../../lib/Flash'
 
 
 class Register extends React.Component {
@@ -31,7 +32,10 @@ class Register extends React.Component {
     //console.log('Submission being handled')
     axios
       .post('/api/register', this.state.data)
-      .then(()=> this.props.history.push('/login'))
+      .then(()=> {
+        Flash.setMessage('success', 'Registered')
+        this.props.history.push('/login')
+      })
       .catch(err => this.setState({ errors: err.response.data}))
   }
 

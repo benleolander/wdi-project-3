@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
 import Login from '../auth/Login'
+import Flash from '../../lib/Flash'
 
 class Navbar extends React.Component {
   constructor(){
@@ -22,6 +23,7 @@ class Navbar extends React.Component {
 
   logout() {
     Auth.removeToken()
+    Flash.setMessage('danger', 'logged out')
     this.props.history.push('/')
   }
 

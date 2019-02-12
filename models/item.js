@@ -22,7 +22,9 @@ itemSchema.virtual('averageRating')
     const total = this.comments.reduce((total, comment) => {
       return total + comment.rating
     }, 0)
-    return total/this.comments.length
+    const avg = total/this.comments.length
+
+    return avg.toFixed(1)
   })
 
 itemSchema.virtual('averageRating', {

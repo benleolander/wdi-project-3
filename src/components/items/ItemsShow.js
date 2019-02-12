@@ -18,7 +18,8 @@ class ItemsShow extends React.Component {
       name,
       creator,
       image,
-      description
+      description,
+      comments
     } = this.state.data
     return(
       <section className="section">
@@ -43,6 +44,14 @@ class ItemsShow extends React.Component {
               }}>
                 Contact {creator.username}
               </Link>
+              {comments.map(comment => {
+                return(
+                  <div key={comment.id}>
+                    <p><strong>{comment.name}</strong></p>
+                    <p>{comment.body}</p>
+                  </div>
+                )
+              })}
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard

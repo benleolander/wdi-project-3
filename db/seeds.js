@@ -17,7 +17,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           password: 'password',
           passwordConfirmation: 'password',
           image: 'https://origami.me/wp-content/uploads/2016/12/origami-animals-featured.jpg',
-          bio: 'Talking bout the big Monkey man'
+          bio: 'Talking \'bout the big Monkey man... I make, I create, my aim to awake.'
         })
       })
     })
@@ -143,11 +143,11 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         categories: ['clock', 'kitchen', 'art']
       }),
       Item.create({
-        name: 'Swigning bed',
+        name: 'Swinging bed',
         image: 'https://i.pinimg.com/564x/de/05/33/de053397af31d32b2d1042079b7efa04.jpg?b=t',
         creator: data.creator,
         description: 'Perfect for swinging on a bed. This was made by me.',
-        categories: ['bed', 'bedroom', 'wood', 'hangning']
+        categories: ['bed', 'bedroom', 'wood', 'hanging']
       }),
       Item.create({
         name: 'Hanging bed',

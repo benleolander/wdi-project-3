@@ -8,6 +8,7 @@ class CommentForm extends React.Component {
     this.state = {
       data: {
         name: '',
+        rating: 0,
         body: ''
       }
     }
@@ -37,6 +38,7 @@ class CommentForm extends React.Component {
         <div className="container">
           <form onSubmit={this.handleSubmit}>
             <h2 className="title">New Comment</h2>
+
             <div className="field">
               <label className="label">Display Name</label>
               <input
@@ -47,6 +49,18 @@ class CommentForm extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
+
+            <div className="field">
+              <label className="label">Rating</label>
+              <input
+                className="input"
+                name="rating"
+                placeholder="Enter a number between 0 and 5"
+                value={this.state.rating}
+                onChange={this.handleChange}
+              />
+            </div>
+
             <div className="field">
               <label className="label">Comment</label>
               <textarea
@@ -57,6 +71,7 @@ class CommentForm extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
+
             <button className="button is-primary">Submit</button>
           </form>
         </div>

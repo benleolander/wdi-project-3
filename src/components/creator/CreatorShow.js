@@ -49,7 +49,10 @@ class CreatorShow extends React.Component{
                 <h1 className="title is-3">{username}</h1>
 
                 <p className="has-text-grey-dark">{bio}</p>
-                <a className="button is-fullwidth is-black">Contact {username}</a>
+                <Link className="button is-fullwidth is-black" to={{
+                  pathname: '/contact',
+                  state: { id: this.state.creator._id }
+                }}>Contact {username}</Link>
               </div>
             </div>
 

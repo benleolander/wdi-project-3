@@ -41,7 +41,7 @@ class ItemsShow extends React.Component {
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
 
-              <h3 className="subtitle"><strong>Rated: </strong>{averageRating}/5</h3>
+              {!isNaN(averageRating) && <h3 className="subtitle"><strong>Rated: </strong>{averageRating}/5</h3>}
 
               <p>{description}</p>
               <Link to={{

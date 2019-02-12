@@ -40,7 +40,7 @@ class ItemsShow extends React.Component {
               <p>{description}</p>
               <Link to={{
                 pathname: '/contact',
-                state: { id: this.props.match.params.id}
+                state: { id: creator._id}
               }}>
                 Enquiries for {name} by {creator.username}
               </Link>

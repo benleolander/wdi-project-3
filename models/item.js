@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const commentSchema = new mongoose.Schema({
   name: { type: String, required: 'Please enter a display name' },
+  rating: {type: Number },
   body: { type: String, required: 'Please enter a comment'}
 }, {
   timestamps: true

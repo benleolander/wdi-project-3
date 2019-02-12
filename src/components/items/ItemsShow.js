@@ -18,7 +18,8 @@ class ItemsShow extends React.Component {
       name,
       creator,
       image,
-      description
+      description,
+      comments
     } = this.state.data
     return(
       <section className="section">
@@ -41,7 +42,21 @@ class ItemsShow extends React.Component {
                 pathname: '/contact',
                 state: { id: this.props.match.params.id}
               }}>
-                Contact {creator.username}
+                Enquiries for {name} by {creator.username}
+              </Link>
+              {comments.map(comment => {
+                return(
+                  <div key={comment.id}>
+                    <p><strong>{comment.name}</strong></p>
+                    <p>{comment.body}</p>
+                  </div>
+                )
+              })}
+              <Link to={{
+                pathname: `/items/${this.props.match.params.id}/comment`,
+                state: { id: this.props.match.params.id}
+              }}>
+                New Comment
               </Link>
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">

@@ -2,6 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import makeAnimated from 'react-select/lib/animated'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
 
@@ -60,6 +61,7 @@ class ItemsNew extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleChange({ target: {name, value}}) {
@@ -78,6 +80,13 @@ class ItemsNew extends React.Component {
       )
       .then(res => console.log(res.data))
       .catch(err => alert(err.message))
+    this.props.history.push('/')
+  }
+
+  handleSelect(e){
+    const categories = (e.map(select => select.value))
+    const data = { ...this.state.data, categories }
+    this.setState({ data })
   }
 
   render() {
@@ -121,8 +130,9 @@ class ItemsNew extends React.Component {
               <Select
                 isMulti
                 clearValue
-                name="colors"
+                name="categories"
                 options={categories}
+                onChange={this.handleSelect}
                 components={makeAnimated()}
                 className="basic-multi-select"
                 classNamePrefix="select"
@@ -137,4 +147,4 @@ class ItemsNew extends React.Component {
 
 }
 
-export default ItemsNew
+export default withRouter(ItemsNew)

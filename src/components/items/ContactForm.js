@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 class ContactForm extends React.Component {
   constructor() {
@@ -27,6 +28,7 @@ class ContactForm extends React.Component {
       .post(`/api/items/${this.props.location.state.id}/contact`, this.state.data)
       .then(res => console.log(res.data))
       .catch(err => alert(err.message))
+    this.props.history.goBack()
   }
 
   render() {
@@ -74,4 +76,4 @@ class ContactForm extends React.Component {
 
 }
 
-export default ContactForm
+export default withRouter(ContactForm)

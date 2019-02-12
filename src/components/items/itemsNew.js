@@ -1,7 +1,51 @@
 import React from 'react'
+import Select from 'react-select'
+import makeAnimated from 'react-select/lib/animated'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
+
+const categories = [
+  { value: 'wood', label: 'Wood' },
+  { value: 'metal', label: 'Metal' },
+  { value: 'creative', label: 'Creative' },
+  { value: 'stairs', label: 'Stairs' },
+  { value: 'chair', label: 'Chair' },
+  { value: 'wicker', label: 'Wicker' },
+  { value: 'lights', label: 'Lights' },
+  { value: 'hanging', label: 'Hanging' },
+  { value: 'kitchen', label: 'Kitchen' },
+  { value: 'bedroom', label: 'Bedroom' },
+  { value: 'rail', label: 'Rail' },
+  { value: 'mounted', label: 'Mounted' },
+  { value: 'bathroom', label: 'Bathroom' },
+  { value: 'drawers', label: 'Drawers' },
+  { value: 'storage', label: 'Storage' },
+  { value: 'homemade', label: 'Homemade' },
+  { value: 'stand', label: 'Stand' },
+  { value: 'living', label: 'Living' },
+  { value: 'steel', label: 'Steel' },
+  { value: 'coats', label: 'Coats' },
+  { value: 'art', label: 'Art' },
+  { value: 'lamp', label: 'Lamp' },
+  { value: 'relax', label: 'Relax' },
+  { value: 'outdoors', label: 'Outdoors' },
+  { value: 'flowers', label: 'Flowers' },
+  { value: 'clock', label: 'Clock' },
+  { value: 'bed', label: 'Bed' },
+  { value: 'boxes', label: 'Boxes' },
+  { value: 'chic', label: 'Chic' },
+  { value: 'indoor', label: 'Indoor' },
+  { value: 'lighting', label: 'Lighting' },
+  { value: 'study', label: 'Study' },
+  { value: 'sofa', label: 'Sofa' },
+  { value: 'wooden', label: 'Wooden' },
+  { value: 'mirror', label: 'Mirror' },
+  { value: 'shelves', label: 'Shelves' },
+  { value: 'outdoors', label: 'Outdoors' }
+]
+
 
 class ItemsNew extends React.Component {
   constructor() {
@@ -17,6 +61,7 @@ class ItemsNew extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleChange({ target: {name, value}}) {
@@ -35,6 +80,13 @@ class ItemsNew extends React.Component {
       )
       .then(res => console.log(res.data))
       .catch(err => alert(err.message))
+    this.props.history.push('/')
+  }
+
+  handleSelect(e){
+    const categories = (e.map(select => select.value))
+    const data = { ...this.state.data, categories }
+    this.setState({ data })
   }
 
   render() {
@@ -75,12 +127,15 @@ class ItemsNew extends React.Component {
             </div>
             <div className="field">
               <label className="label">Categories</label>
-              <input
-                className="input"
+              <Select
+                isMulti
+                clearValue
                 name="categories"
-                placeholder="Categories"
-                value={this.state.categories}
-                onChange={this.handleChange}
+                options={categories}
+                onChange={this.handleSelect}
+                components={makeAnimated()}
+                className="basic-multi-select"
+                classNamePrefix="select"
               />
             </div>
             <button className="button is-primary">Submit</button>
@@ -92,4 +147,4 @@ class ItemsNew extends React.Component {
 
 }
 
-export default ItemsNew
+export default withRouter(ItemsNew)

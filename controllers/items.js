@@ -11,7 +11,7 @@ function indexRoute(req, res){
 function showRoute(req, res, next){
   Item
     .findById(req.params.id)
-    .populate('creator')
+    .populate('creator averageRating')
     .then(item => res.json(item))
     .catch(next)
 }
@@ -21,6 +21,17 @@ function createRoute(req, res, next){
   Item
     .create(req.body)
     .then(item => res.status(200).json(item))
+    .catch(next)
+}
+
+function commentCreateRoute(req, res, next){
+  Item
+    .findById(req.params.id)
+    .then(item => {
+      item.comments.unshift(req.body)
+      return item.save()
+    })
+    .then(comment => res.status(201).json(comment))
     .catch(next)
 }
 
@@ -45,5 +56,6 @@ module.exports = {
   show: showRoute,
   delete: deleteRoute,
   update: updateRoute,
-  create: createRoute
+  create: createRoute,
+  commentCreate: commentCreateRoute
 }

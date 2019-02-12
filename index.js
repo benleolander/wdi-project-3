@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.use('/api', routes)
 app.use(errorHandling)
 
-app.get('/', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
 app.listen(port, () => console.log(`Express is running on Port ${port}, in Environment ${env}`))
 

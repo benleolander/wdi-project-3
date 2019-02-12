@@ -58,7 +58,6 @@ class CreatorShow extends React.Component{
         </div>
         <div className="section">
           <div className="container set-width">
-            <h2 className="title is-3 has-text-is-dark">My Creations</h2>
           </div>
         </div>
 

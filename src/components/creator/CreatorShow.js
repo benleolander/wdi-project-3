@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
+import Auth from '../../lib/Auth'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -14,12 +15,16 @@ class CreatorShow extends React.Component{
         name: '',
         email: '',
         body: ''
-      }
+      },
+      errors: {},
+      success: '',
+      status: 'info'
     }
 
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleClick(e, i){
@@ -34,20 +39,51 @@ class CreatorShow extends React.Component{
 
   handleChange({ target: {name, value} }) {
     const data = { ...this.state.data, [name]: value }
+    //const errors = { ...this.state.errors, [name]: value}
     this.setState({ data })
   }
 
   handleSubmit(e) {
-    e.preventDefault
-    axios.post('/api/contact', this.state.data)
-      .catch(err => Flash.setMessage('danger', err.message))
-    this.props.history.push('/')
+    e.preventDefault()
+
+    // const creatorId = this.state.creator.id
+    //
+    // this.setState({ data: { creatorId }})
+    console.log('this is this.state.data', { ...this.state.data, creatorId: this.state.creator._id })
+    axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
+      .then(() => {
+        console.log('Posted')
+        this.setState({ ...this.state.data, success: 'Message sent!'})
+        console.log(this.state.success)
+      })
+      .catch(err => {
+        console.log(err.response.data)
+        this.setState({ errors: err.response.data })
+      })
+  }
+
+  handleDelete(){
+    axios.delete(`/api/creators/${this.state.creator._id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => {
+        Auth.removeToken()
+        Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
+      })
+      .then(() => this.props.history.push('/items'))
+      .catch(err => console.log(err))
   }
 
   render(){
     if (!this.state.creator) return <p>Loading...</p>
 
-    const { username, image, items, bio, creatorAverage } = this.state.creator
+    const { username, image, items, bio, creatorAverage, _id } = this.state.creator
+
+    const isAuthenticated = (() => {
+      if(Auth.getPayload().sub === _id) return true
+      else return false
+    })
+
     return(
       <section className="section">
 
@@ -76,6 +112,7 @@ class CreatorShow extends React.Component{
                   pathname: '/contact',
                   state: { id: this.state.creator._id }
                 }}>Contact {username}</Link>
+                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
               </div>
             </div>
 
@@ -114,6 +151,8 @@ class CreatorShow extends React.Component{
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           data = {this.state.data}
+          errors = {this.state.errors}
+          success = {this.state.success}
         />
       </section>
     )

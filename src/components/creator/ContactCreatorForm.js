@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContactCreatorForm = ({ handleChange, handleSubmit, data }) => {
+const ContactCreatorForm = ({ handleChange, handleSubmit, data, errors, success }) => {
   return(
     <form onSubmit={handleSubmit}>
       <h2 className="title">Contact Creator</h2>
@@ -13,6 +13,7 @@ const ContactCreatorForm = ({ handleChange, handleSubmit, data }) => {
           value={data.name}
           onChange={handleChange}
         />
+        <small>{errors.name}</small>
       </div>
       <div className="field">
         <label className="label">Email</label>
@@ -23,6 +24,7 @@ const ContactCreatorForm = ({ handleChange, handleSubmit, data }) => {
           value={data.email}
           onChange={handleChange}
         />
+        {errors.email && <small>{errors.email}</small>}
       </div>
       <div className="field">
         <label className="label">Message</label>
@@ -33,8 +35,10 @@ const ContactCreatorForm = ({ handleChange, handleSubmit, data }) => {
           value={data.body}
           onChange={handleChange}
         />
+        {errors.body && <small>{errors.body}</small>}
       </div>
       <button className="button is-black">Submit</button>
+      {success && <small>{success}</small>}
     </form>
   )
 }

@@ -1,14 +1,12 @@
 @charset "utf-8";
-@import "~bulma/bulma";
-
-// GENERAL *********************************************************************
+@import "~bulma/bulma"; // GENERAL *********************************************************************
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
 
 body {
@@ -27,10 +25,11 @@ nav {
   border-bottom: 1px solid #ccc;
 }
 
-.button{
+.button {
   opacity: 0.9;
+
   &:hover {
-  opacity: 1.0;
+    opacity: 1.0;
   }
 }
 // ITEMS INDEX *****************************************************************
@@ -90,6 +89,7 @@ nav {
       width: 100%;
       height: auto;
     }
+
     .image {
       background-size: cover;
     }
@@ -105,11 +105,13 @@ nav {
 .middle {
   display: flex;
   justify-content: center;
+
   .no-shadow {
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
+
   .button {
-    margin: 1.5rem 0 0.5rem 0;
+    margin: 1.5rem 0 0.5rem;
   }
 }
 
@@ -121,7 +123,6 @@ nav {
   width: 100%;
   height: 100%;
   padding: 1rem;
-
 
   .image {
     background-size: cover;
@@ -139,7 +140,6 @@ nav {
   align-items: center;
   justify-content: center;
 
-
   .image {
     background-size: cover;
     background-position: center;
@@ -149,6 +149,21 @@ nav {
     &:hover {
       transform: scale(1.25);
     }
+  }
+}
+// REGISTRATION FORM ******************************************************************
+
+.regButton {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  .thumbnail {
+    width: 15%;
+    height: 9rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 // LOGIN FORM ******************************************************************
@@ -177,8 +192,6 @@ nav {
     }
   }
 }
-
-
 // MEDIA QUERIES ***************************************************************
 @media only screen and (max-width: 1088px) {
   .navbar-menu {
@@ -203,8 +216,6 @@ nav {
     }
   }
 }
-
-
 @media only screen and (max-width: 1088px) {
   #loginFormSection.displayed {
     height: 20vh;

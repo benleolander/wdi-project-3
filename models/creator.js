@@ -15,15 +15,27 @@ creatorSchema.virtual('items', {
   foreignField: 'creator'
 })
 
-// creatorSchema.virtual('creatorAverage')
-//   .get(function(){
-//     const total = this.items.reduce((total, item) => {
-//       return total + item.averageRating
-//     }, 0)
-//     const avg = total/this.items.length
-//
-//     return Math.round(avg * 10) / 10 //Rounds avg to 1 decimal place while keeping it as a number
-//   })
+creatorSchema.virtual('creatorAverage')
+  .get(function(){
+    if(this.items) {
+      const validRatings = this.items.filter((item) => {
+        return item.averageRating
+      })
+
+      const total = validRatings.reduce((total, item) => {
+        return total + item.averageRating
+      }, 0)
+      const avg = total/validRatings.length
+
+      return Math.round(avg * 10) / 10 //Rounds avg to 1 decimal place while keeping it as a number
+    }
+  })
+
+creatorSchema.virtual('creatorAverage', {
+  ref: 'Creator',
+  localField: '_id',
+  foreignField: 'Creator.creatorAverage'
+})
 
 creatorSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {

@@ -1,6 +1,7 @@
 @charset "utf-8";
-@import "~bulma/bulma"; // GENERAL *********************************************************************
+@import "~bulma/bulma";
 
+// GENERAL *********************************************************************
 * {
   box-sizing: border-box;
 }
@@ -153,6 +154,7 @@ nav {
   height: 30rem;
   width: 30rem;
   margin: 0 auto 3rem;
+  transition: background-image 1s ease;
 }
 
 .profileImagesSmall {
@@ -211,6 +213,29 @@ nav {
     }
   }
 }
+
+// COMMENT FORM ****************************************************************
+
+#star-ratings{
+  font-size: 1.5em;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+
+  label:hover{
+    color: #FFD700;
+  }
+
+  input[type="radio"] {
+
+    &:checked{
+
+      & +label {
+        color: #FFD700;
+      }
+    }
+  }
+}
+
 // MEDIA QUERIES ***************************************************************
 @media only screen and (max-width: 1088px) {
   .navbar-menu {

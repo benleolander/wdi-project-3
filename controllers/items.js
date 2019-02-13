@@ -14,7 +14,10 @@ function indexRoute(req, res){
 function showRoute(req, res, next){
   Item
     .findById(req.params.id)
-    .populate('averageRating')
+    .populate([
+      { path: 'creator', select: 'username image bio'},
+      { path: 'averageRating' }
+    ])
     .then(item => res.json(item))
     .catch(next)
 }

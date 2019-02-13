@@ -17,7 +17,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           password: 'password',
           passwordConfirmation: 'password',
           image: 'https://origami.me/wp-content/uploads/2016/12/origami-animals-featured.jpg',
-          bio: 'Talking \'bout the big Monkey man... I make, I create, my aim to awake.'
+          bio: 'Talking \'bout the big Monkey man... I make, I create, my aim is to awake.'
         })
       })
     })

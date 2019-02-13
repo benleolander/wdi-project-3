@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
-import Flash from '../../lib/Flash'
+
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -14,7 +14,8 @@ class CreatorShow extends React.Component{
         name: '',
         email: '',
         body: ''
-      }
+      },
+      errors: {}
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -40,8 +41,8 @@ class CreatorShow extends React.Component{
   handleSubmit(e) {
     e.preventDefault
     axios.post('/api/contact', this.state.data)
-      .catch(err => Flash.setMessage('danger', err.message))
-    this.props.history.push('/')
+      .then(()=> this.props.history.push('/'))
+      .catch(err => this.setState({ errors: err.response.data }))
   }
 
   render(){

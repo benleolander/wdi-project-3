@@ -1,6 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+
+import ReactFileStack from 'filestack-react'
+
 import Flash from '../../lib/Flash'
+
 
 
 class Register extends React.Component {
@@ -40,7 +44,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { username, email, password, passwordConfirmation, image, bio } = this.state.data
+    const { username, email, password, passwordConfirmation, bio } = this.state.data
     const errors = this.state.errors
     return (
       <main className="section">
@@ -97,13 +101,18 @@ class Register extends React.Component {
               />
             </div>
             <div className="field">
-              <label className="label">Profile picture (public)</label>
-              <input
-                className="input"
-                name="image"
-                placeholder="Image url"
-                value={image}
-                onChange={this.handleChange}
+              <label className="label">Profile picture</label>
+              <ReactFileStack
+                apikey={process.env.FILESTACK_KEY}
+                mode={'pick'}
+                onSuccess={(res) => this.handleChange({
+                  target: {
+                    name: 'image',
+                    value: res.filesUploaded[0].url
+                  }})}
+                onError={(err) => console.log(err)}
+                buttonText={'Add Image'}
+                buttonClass={'button is-dark'}
               />
             </div>
             <div className="field">

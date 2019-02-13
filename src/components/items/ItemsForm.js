@@ -4,6 +4,7 @@ import Select from 'react-select'
 import { withRouter } from 'react-router-dom'
 import makeAnimated from 'react-select/lib/animated'
 import CategoriesData from '../common/CategoriesData'
+import ReactFileStack from 'filestack-react'
 
 const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) => {
   return(
@@ -23,13 +24,17 @@ const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) =
             {errors.name && <small className="help is-danger">A name is required</small>}
           </div>
           <div className="field">
-            <label className="label">Image</label>
-            <input
-              className="input"
-              name="image"
-              placeholder="Image URL"
-              value={data.image}
-              onChange={handleChange}
+            <ReactFileStack
+              apikey={process.env.FILESTACK_KEY}
+              mode={'pick'}
+              onSuccess={(res) => handleChange({
+                target: {
+                  name: 'image',
+                  value: res.filesUploaded[0].url
+                }})}
+              onError={(err) => console.log(err)}
+              buttonText={'Add Image'}
+              buttonClass={'button is-dark'}
             />
           </div>
           {errors.image && <small className="help is-danger">An image is required</small>}

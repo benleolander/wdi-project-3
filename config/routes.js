@@ -13,9 +13,12 @@ const messagesController = require('../controllers/messages')
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
-router.get('/', itemsController.index)
+
+router.get('/items', itemsController.index)
 router.post('/items/:id/contact', messagesController.create)
 router.post('/contact', messagesController.create)
+
+
 router.post('/items/:id/comment', itemsController.commentCreate)
 router.get('/items/:id', itemsController.show)
 router.post('/items', secureRoute, itemsController.create)

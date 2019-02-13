@@ -43,6 +43,5 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'src/assets/created-fav.png' }
     ])
-
   ]
 }

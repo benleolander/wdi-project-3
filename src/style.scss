@@ -120,6 +120,16 @@ nav {
   background: #efefef;
   box-shadow: inset 0 0 10px 3px #999;
 }
+
+.card.comments {
+  margin: 10px auto;
+
+  .card-footer {
+    a {
+      margin: 5px auto auto;
+    }
+  }
+}
 // CREATOR SHOW ****************************************************************
 
 .middle {
@@ -172,7 +182,7 @@ nav {
     }
   }
 }
-// REGISTRATION FORM ******************************************************************
+// UPLOAD IMAGE THUMBNAIL ******************************************************
 
 .regButton {
   display: flex;
@@ -182,7 +192,7 @@ nav {
   .thumbnail {
     width: 15%;
     height: 9rem;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
   }

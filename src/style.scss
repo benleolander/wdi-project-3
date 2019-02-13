@@ -151,7 +151,7 @@ nav {
     }
   }
 }
-// REGISTRATION FORM ******************************************************************
+// UPLOAD IMAGE THUMBNAIL ****************************************************** 
 
 .regButton {
   display: flex;
@@ -161,7 +161,7 @@ nav {
   .thumbnail {
     width: 15%;
     height: 9rem;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
   }

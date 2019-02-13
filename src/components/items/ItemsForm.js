@@ -24,21 +24,6 @@ const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) =
             {errors.name && <small className="help is-danger">A name is required</small>}
           </div>
           <div className="field">
-            <ReactFileStack
-              apikey={process.env.FILESTACK_KEY}
-              mode={'pick'}
-              onSuccess={(res) => handleChange({
-                target: {
-                  name: 'image',
-                  value: res.filesUploaded[0].url
-                }})}
-              onError={(err) => console.log(err)}
-              buttonText={'Add Image'}
-              buttonClass={'button is-dark'}
-            />
-          </div>
-          {errors.image && <small className="help is-danger">An image is required</small>}
-          <div className="field">
             <label className="label">Description</label>
             <textarea
               className="input"
@@ -62,7 +47,28 @@ const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) =
               classNamePrefix="select"
             />
           </div>
-          <button className="button is-primary">Submit</button>
+          <div className="field">
+            <label className="label">Image</label>
+            <ReactFileStack
+              apikey={process.env.FILESTACK_KEY}
+              mode={'pick'}
+              onSuccess={(res) => handleChange({
+                target: {
+                  name: 'image',
+                  value: res.filesUploaded[0].url
+                }})}
+              onError={(err) => console.log(err)}
+              buttonText={'Add Image'}
+              buttonClass={'button is-dark'}
+            />
+            {errors.image && <small className="help is-danger">An image is required</small>}
+          </div>
+          <div className="regButton">
+            <button className="button is-black">Submit</button>
+            <div className="thumbnail is-square" style={{
+              backgroundImage: `url(${data.image})`
+            }}></div>
+          </div>
         </form>
       </div>
     </main>

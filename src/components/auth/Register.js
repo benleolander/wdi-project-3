@@ -61,7 +61,7 @@ class Register extends React.Component {
                   value={username}
                   onChange={this.handleChange}
                 />
-                {errors.username && <small>{errors.username}</small>}
+                {errors.username && <small className="help is-danger">Please enter a username</small>}
               </div>
             </div>
             <div className="field">
@@ -74,7 +74,7 @@ class Register extends React.Component {
                   value={email}
                   onChange={this.handleChange}
                 />
-                {errors.email && <small>{errors.email}</small>}
+                {errors.email && <small className="help is-danger">Please enter an email</small>}
               </div>
             </div>
             <div className="field">
@@ -87,7 +87,7 @@ class Register extends React.Component {
                 value={password}
                 onChange={this.handleChange}
               />
-              {errors.password && <small>{errors.password}</small>}
+              {errors.password && <small className="help is-danger">{errors.password}</small>}
             </div>
             <div className="field">
               <label className="label">Password Confirmation</label>
@@ -101,7 +101,17 @@ class Register extends React.Component {
               />
             </div>
             <div className="field">
-              <label className="label">Profile picture</label>
+              <label className="label">Bio</label>
+              <textarea
+                className="textarea"
+                name="bio"
+                placeholder="Please add a bio"
+                value={bio}
+                onChange={this.handleChange}
+              />
+              {errors.bio && <small className="help is-danger">Please write a small bio about yourself</small>}
+            </div>
+            <div className="field">
               <ReactFileStack
                 apikey={process.env.FILESTACK_KEY}
                 mode={'pick'}
@@ -111,22 +121,16 @@ class Register extends React.Component {
                     value: res.filesUploaded[0].url
                   }})}
                 onError={(err) => console.log(err)}
-                buttonText={'Add Image'}
+                buttonText={'Add Profile pic'}
                 buttonClass={'button is-dark'}
               />
             </div>
-            <div className="field">
-              <label className="label">Bio</label>
-              <textarea
-                className="textarea"
-                name="bio"
-                placeholder="Please add a bio"
-                value={bio}
-                onChange={this.handleChange}
-              />
-              {errors.bio && <small>{errors.bio}</small>}
+            <div className="regButton">
+              <button className="button is-black">Submit</button>
+              <div className="thumbnail is-square" style={{
+                backgroundImage: `url(${this.state.data.image})`
+              }}></div>
             </div>
-            <button className="button is-black">Submit</button>
           </form>
         </div>
       </main>

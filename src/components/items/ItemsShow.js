@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import CreatorCard from '../creator/CreatorCard'
+import Auth from '../../lib/Auth'
 
 class ItemsShow extends React.Component {
+  constructor(){
+    super()
+
+    this.handleDelete = this.handleDelete.bind(this)
+  }
 
   componentDidMount(){
     axios.get(`/api/items/${this.props.match.params.id}`)
@@ -12,6 +18,15 @@ class ItemsShow extends React.Component {
         this.setState({ data: res.data })
       })
       .catch(err => console.error(err.message))
+  }
+
+  handleDelete(){
+    axios.delete(`/api/items/${this.props.match.params.id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(this.props.history.push('/items'))
+      .catch(err => console.log(err))
+
   }
 
   render(){
@@ -71,6 +86,7 @@ class ItemsShow extends React.Component {
                 creator={creator}
               />
             </div>
+            <button onClick={this.handleDelete} className="button is-danger">Delete</button>
           </div>
         </div>
       </section>

@@ -47,6 +47,7 @@ class ItemEdit extends React.Component {
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
+  
   render() {
     return (
       <main className="section">
@@ -57,6 +58,7 @@ class ItemEdit extends React.Component {
             errors={this.state.errors}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            handleSelect={this.handleSelect}
           />
         </div>
       </main>

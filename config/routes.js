@@ -19,7 +19,7 @@ router.post('/contact', formsController.create)
 router.post('/items/:id/comment', itemsController.commentCreate)
 router.get('/items/:id', itemsController.show)
 router.post('/items/new', secureRoute, itemsController.create)
-router.put('/items/:id', itemsController.update)
+router.put('/items/:id/edit', itemsController.update)
 router.delete('/items/:id', secureRoute, itemsController.delete)
 
 router.post('/creators', creatorsController.create)

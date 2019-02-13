@@ -72,7 +72,7 @@ class ItemsShow extends React.Component {
               }}>
                 <button className="button is-black">Contact Creator</button>
               </Link>
-              <div className="card">
+              <div className="card comments">
                 <div className="card-header">
                   <p className="card-header-title">Comments</p>
                 </div>

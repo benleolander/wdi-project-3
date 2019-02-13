@@ -74,7 +74,7 @@ class ItemsShow extends React.Component {
               </Link>
               {comments.map(comment => {
                 return(
-                  <div key={comment.id}>
+                  <div key={comment._id}>
                     <p><strong>{comment.name}</strong></p>
                     <p><strong>Rating: </strong>{comment.rating}/5</p>
                     <p>{comment.body}</p>

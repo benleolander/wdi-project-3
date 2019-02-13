@@ -33,7 +33,6 @@ class Register extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    //console.log('Submission being handled')
     axios
       .post('/api/register', this.state.data)
       .then(()=> {

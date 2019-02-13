@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
-import Flash from '../../lib/Flash'
+
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -14,7 +14,10 @@ class CreatorShow extends React.Component{
         name: '',
         email: '',
         body: ''
-      }
+      },
+      errors: {},
+      success: '',
+      status: 'info'
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -34,14 +37,27 @@ class CreatorShow extends React.Component{
 
   handleChange({ target: {name, value} }) {
     const data = { ...this.state.data, [name]: value }
+    //const errors = { ...this.state.errors, [name]: value}
     this.setState({ data })
   }
 
   handleSubmit(e) {
-    e.preventDefault
-    axios.post('/api/contact', this.state.data)
-      .catch(err => Flash.setMessage('danger', err.message))
-    this.props.history.push('/')
+    e.preventDefault()
+
+    // const creatorId = this.state.creator.id
+    //
+    // this.setState({ data: { creatorId }})
+    console.log('this is this.state.data', { ...this.state.data, creatorId: this.state.creator._id })
+    axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
+      .then(() => {
+        console.log('Posted')
+        this.setState({ ...this.state.data, success: 'Message sent!'})
+        console.log(this.state.success)
+      })
+      .catch(err => {
+        console.log(err.response.data)
+        this.setState({ errors: err.response.data })
+      })
   }
 
   render(){
@@ -114,6 +130,8 @@ class CreatorShow extends React.Component{
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           data = {this.state.data}
+          errors = {this.state.errors}
+          success = {this.state.success}
         />
       </section>
     )

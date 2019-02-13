@@ -1,7 +1,11 @@
 import React from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
+import ItemsForm from './ItemsForm'
 import Auth from '../../lib/Auth'
+
+
 
 class ItemsNew extends React.Component {
   constructor() {
@@ -13,15 +17,18 @@ class ItemsNew extends React.Component {
         image: '',
         description: '',
         categories: []
-      }
+      },
+      errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
-    this.setState({ data })
+    const errors = {...this.state.errors, [name]: null}
+    this.setState({ data, errors })
   }
 
   handleSubmit(e) {
@@ -33,58 +40,33 @@ class ItemsNew extends React.Component {
         this.state.data,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
-      .then(res => console.log(res.data))
-      .catch(err => alert(err.message))
+      .then(res => {
+        console.log(res.data)
+        this.props.history.push('/')
+      })
+      .catch(err => {
+        this.setState({ errors: err.response.data })
+        console.log('HEELLO', this.state.errors)
+      })
+  }
+
+  handleSelect(e){
+    const categories = (e.map(select => select.value))
+    const data = { ...this.state.data, categories }
+    this.setState({ data })
   }
 
   render() {
     return (
       <main className="section">
         <div className="container">
-          <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Post A New Item</h2>
-            <div className="field">
-              <label className="label">Name</label>
-              <input
-                className="input"
-                name="name"
-                placeholder="Name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="field">
-              <label className="label">Image</label>
-              <input
-                className="input"
-                name="image"
-                placeholder="Image URL"
-                value={this.state.image}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="field">
-              <label className="label">Description</label>
-              <textarea
-                className="input"
-                name="description"
-                placeholder="A detailed description of your item"
-                value={this.state.description}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="field">
-              <label className="label">Categories</label>
-              <input
-                className="input"
-                name="categories"
-                placeholder="Categories"
-                value={this.state.categories}
-                onChange={this.handleChange}
-              />
-            </div>
-            <button className="button is-primary">Submit</button>
-          </form>
+          <ItemsForm
+            data={this.state.data}
+            errors={this.state.errors}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            handleSelect={this.handleSelect}
+          />
         </div>
       </main>
     )
@@ -92,4 +74,4 @@ class ItemsNew extends React.Component {
 
 }
 
-export default ItemsNew
+export default withRouter(ItemsNew)

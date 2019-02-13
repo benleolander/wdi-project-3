@@ -17,7 +17,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           password: 'password',
           passwordConfirmation: 'password',
           image: 'https://origami.me/wp-content/uploads/2016/12/origami-animals-featured.jpg',
-          bio: 'Talking bout the big Monkey man'
+          bio: 'Talking \'bout the big Monkey man... I make, I create, my aim to awake.'
         })
       })
     })
@@ -27,7 +27,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://i.pinimg.com/564x/67/5e/12/675e1297eb9740eaec531c52db9fa3b5.jpg',
         creator: data.creator,
         description: 'A lovely little chair made by me',
-        categories: ['chair', 'paper', 'wicker']
+        categories: ['chair', 'paper', 'wicker'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          }
+        ]
       }),
       Item.create({
         name: 'Individual drawers',
@@ -48,7 +55,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://images.victorianplumbing.co.uk/images/SUN-TR19_p1.jpg',
         creator: data.creator,
         description: 'A quality traditional copper lacquered radiator with stylish ball joints, it\'s classic design would look great in any bathroom',
-        categories: ['metal', 'rail', 'mounted', 'bahroom']
+        categories: ['metal', 'rail', 'mounted', 'bathroom']
       }),
       Item.create({
         name: 'Wicker lights',
@@ -143,14 +150,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         categories: ['clock', 'kitchen', 'art']
       }),
       Item.create({
-        name: 'Swigning bed',
+        name: 'Swinging bed',
         image: 'https://i.pinimg.com/564x/de/05/33/de053397af31d32b2d1042079b7efa04.jpg?b=t',
         creator: data.creator,
         description: 'Perfect for swinging on a bed. This was made by me.',
-        categories: ['bed', 'bedroom', 'wood', 'hangning']
+        categories: ['bed', 'bedroom', 'wood', 'hanging']
       }),
       Item.create({
-        name: 'Haniging bed',
+        name: 'Hanging bed',
         image: 'https://i.pinimg.com/564x/17/1c/6c/171c6c57a9d3943fb6f866655255bcf3.jpg?b=t',
         creator: data.creator,
         description: 'Hanging, floating bed',
@@ -210,7 +217,19 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfLNUeHB_UpruAN7GHngMAl01VI2AAoKzMY-cMMCw4LYA_L42t',
         creator: data.creator,
         description: 'Homemade sofa',
-        categories: ['indoor', 'sofa', 'wooden']
+        categories: ['indoor', 'sofa', 'wooden'],
+        comments: [
+          {
+            name: 'Beth',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Dex',
+            rating: 4,
+            body: 'This is pretty cool'
+          }
+        ]
       }),
       Item.create({
         name: 'Bedroom Mirror',
@@ -224,14 +243,48 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://i.pinimg.com/564x/d9/5a/74/d95a74380ad3481cc7447054491db74a.jpg?b=t',
         creator: data.creator,
         description: 'Homemade bedstand from stone',
-        categories: ['bedroom', 'stand', 'table']
+        categories: ['bedroom', 'stand', 'table'],
+        comments: [
+          {
+            name: 'Tom',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Beth',
+            rating: 4,
+            body: 'This is pretty cool'
+          }
+        ]
       }),
       Item.create({
         name: 'Bedroom shelves',
         image: 'https://i.pinimg.com/564x/4e/14/d6/4e14d6025158d712b1045edb84b1969d.jpg',
         creator: data.creator,
         description: 'Homemade shelves',
-        categories: ['bedroom', 'shelves', 'wood']
+        categories: ['bedroom', 'shelves', 'wood'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Tom',
+            rating: 4,
+            body: 'This is pretty cool'
+          },
+          {
+            name: 'Beth',
+            rating: 3,
+            body: 'Looks ok....'
+          },
+          {
+            name: 'Dex',
+            rating: 1,
+            body: 'Dumb'
+          }
+        ]
       })
     })
     .then(() => console.log('Database Seeded'))

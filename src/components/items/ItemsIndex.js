@@ -13,18 +13,20 @@ class ItemsIndex extends React.Component {
 
     this.state = {
       search: '',
-      categories: []
+      categories: [],
+      sorting: false
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
+    this.sortIndex = this.sortIndex.bind(this)
   }
 
 
   componentDidMount(){
     console.log('mounting')
     axios.get('/api/items')
-      .then(res => this.setState({ data: res.data.reverse() }))
+      .then(res => this.setState({ data: this.sortByDate(res.data) }))
   }
 
   handleChange({ target: { value, name }}){
@@ -63,6 +65,26 @@ class ItemsIndex extends React.Component {
     )
   }
 
+  sortIndex(){
+    if(!this.state.sorting){
+      const data = this.state.data.sort((a, b) => {
+        return b.averageRating - a.averageRating
+      })
+      this.setState({ data, sorting: !this.state.sorting })
+    } else {
+      const data = this.sortByDate(this.state.data)
+      this.setState({ data, sorting: !this.state.sorting})
+    }
+  }
+
+  sortByDate(data){
+    return data.sort((a, b) => {
+      const aDate = new Date(a.createdAt)
+      const bDate = new Date(b.createdAt)
+      return bDate - aDate
+    })
+  }
+
   render(){
     return (
       <div>
@@ -70,8 +92,8 @@ class ItemsIndex extends React.Component {
           handleChange={this.handleChange}
           search={this.state.search}
         />
-        <div className="field">
-          <div className="control">
+        <div className="field has-addons">
+          <div className="control is-expanded">
             <Select
               isMulti
               clearValue
@@ -82,6 +104,20 @@ class ItemsIndex extends React.Component {
               classNamePrefix="select"
               placeholder="Filter by category..."
             />
+          </div>
+          <div
+            id="sortButton"
+            className="button"
+            onClick={this.sortIndex}
+          >
+            <span
+              id="newest"
+              className={this.state.sorting ? 'displayed' : ''}
+            >Sort by newest</span>
+            <span
+              id="rating"
+              className={this.state.sorting ? '' : 'displayed'}
+            >Sort by rating</span>
           </div>
         </div>
         <div className="indexDiv columns is-gapless is-mobile is-multiline">

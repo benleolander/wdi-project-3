@@ -34,6 +34,25 @@ nav {
 }
 // ITEMS INDEX *****************************************************************
 
+#sortButton {
+  padding-bottom: 31px;
+  display: flex;
+  align-items: baseline;
+  width: 8rem;
+
+  #newest,
+  #rating {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+
+  #newest.displayed,
+  #rating.displayed {
+    opacity: 1;
+  }
+}
+
 .itemDiv {
   border: 2px solid #fff;
   border-radius: 5px;

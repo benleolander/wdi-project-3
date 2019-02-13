@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 import ContactCreatorForm from '../creator/ContactCreatorForm'
 
@@ -49,4 +50,4 @@ class ContactForm extends React.Component {
 
 }
 
-export default ContactForm
+export default withRouter(ContactForm)

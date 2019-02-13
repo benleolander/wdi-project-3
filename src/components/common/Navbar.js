@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/Auth'
 import Login from '../auth/Login'
+import Flash from '../../lib/Flash'
 
 class Navbar extends React.Component {
   constructor(){
@@ -22,6 +23,7 @@ class Navbar extends React.Component {
 
   logout() {
     Auth.removeToken()
+    Flash.setMessage('danger', 'You have logged out')
     this.props.history.push('/')
   }
 
@@ -54,10 +56,10 @@ class Navbar extends React.Component {
                 {!Auth.isAuthenticated() && <Link to="/register" className="navbar-item" >Become a creator</Link>}
                 {Auth.isAuthenticated() && <Link className="navbar-item" to="/items/new">Add an item</Link>}
                 {!Auth.isAuthenticated() &&
-                  <Link
+                  <a
                     to="/login"
                     className="navbar-item"
-                    onClick={() => this.toggle('loginActive')}>Login</Link>}
+                    onClick={() => this.toggle('loginActive')}>Login</a>}
                 {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
               </div>
             </div>

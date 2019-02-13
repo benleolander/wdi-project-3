@@ -13,7 +13,7 @@ const formsController = require('../controllers/forms')
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
-router.get('/', itemsController.index)
+router.get('/items', itemsController.index)
 router.post('/items/:id/contact', formsController.create)
 router.post('/contact', formsController.create)
 router.post('/items/:id/comment', itemsController.commentCreate)

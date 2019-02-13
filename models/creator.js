@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const creatorSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: 'Username taken, please choose another'},
-  email: { type: String, required: true, unique: 'Email taken, please choose another'},
+  username: { type: String, required: 'Please enter a username', unique: 'Username taken, please choose another'},
+  email: { type: String, required: 'please enter a password', unique: 'Email taken, please choose another'},
   password: { type: String, required: 'Password required'},
   image: { type: String },
   bio: { type: String, required: true, maxlength: 300 }

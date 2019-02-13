@@ -1,15 +1,14 @@
 import React from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
 
-class ContactForm extends React.Component {
+class CommentForm extends React.Component {
   constructor() {
     super()
 
     this.state = {
       data: {
         name: '',
-        email: '',
+        rating: 0,
         body: ''
       }
     }
@@ -25,10 +24,12 @@ class ContactForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     axios
-      .post(`/api/items/${this.props.location.state.id}/contact`, this.state.data)
-      .then(res => console.log(res.data))
+      .post(`/api/items/${this.props.location.state.id}/comment`, this.state.data)
+      .then(res => {
+        console.log(res.data)
+        this.props.history.push(`/items/${this.props.location.state.id}`)
+      })
       .catch(err => alert(err.message))
-    this.props.history.goBack()
   }
 
   render() {
@@ -36,37 +37,41 @@ class ContactForm extends React.Component {
       <main className="section">
         <div className="container">
           <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Contact Creator</h2>
+            <h2 className="title">New Comment</h2>
+
             <div className="field">
-              <label className="label">Name</label>
+              <label className="label">Display Name</label>
               <input
                 className="input"
                 name="name"
-                placeholder="Name"
+                placeholder="This will be publically visible"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
             </div>
+
             <div className="field">
-              <label className="label">Email</label>
+              <label className="label">Rating</label>
               <input
                 className="input"
-                name="email"
-                placeholder="Email"
-                value={this.state.email}
+                name="rating"
+                placeholder="Enter a number between 0 and 5"
+                value={this.state.rating}
                 onChange={this.handleChange}
               />
             </div>
+
             <div className="field">
-              <label className="label">Message</label>
+              <label className="label">Comment</label>
               <textarea
                 className="textarea"
                 name="body"
-                placeholder="Message to the creator, e.g. 'I'm interested in purchasing this item'"
+                placeholder="Comment"
                 value={this.state.body}
                 onChange={this.handleChange}
               />
             </div>
+
             <button className="button is-primary">Submit</button>
           </form>
         </div>
@@ -76,4 +81,4 @@ class ContactForm extends React.Component {
 
 }
 
-export default withRouter(ContactForm)
+export default CommentForm

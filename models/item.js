@@ -15,6 +15,8 @@ const itemSchema = new mongoose.Schema({
   description: { type: String, required: 'Please add a description' },
   categories: { type: Array, required: 'Please select at least one catagory' },
   comments: [ commentSchema ]
+}, {
+  timestamps: true
 })
 
 itemSchema.virtual('averageRating')

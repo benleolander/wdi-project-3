@@ -70,23 +70,33 @@ class ItemsShow extends React.Component {
                 pathname: '/contact',
                 state: { id: creator._id}
               }}>
-                Enquiries for {name} by {creator.username}
+                <button className="button is-black">Contact Creator</button>
               </Link>
-              {comments.map(comment => {
-                return(
-                  <div key={comment._id}>
-                    <p><strong>{comment.name}</strong></p>
-                    <p><strong>Rating: </strong>{comment.rating}/5</p>
-                    <p>{comment.body}</p>
+              <div className="card">
+                <div className="card-header">
+                  <p className="card-header-title">Comments</p>
+                </div>
+                <div className="card-content">
+                  {comments.map(comment => {
+                    return(
+                      <div key={comment._id}>
+                        <p><strong>{comment.name}</strong></p>
+                        <p><strong>Rating: </strong>{comment.rating}/5</p>
+                        <p>{comment.body}</p>
+                        <hr />
+                      </div>
+                    )
+                  })}
+                  <div className="card-footer">
+                    <Link to={{
+                      pathname: `/items/${this.props.match.params.id}/comment`,
+                      state: { id: this.props.match.params.id}
+                    }}>
+                      <button className="button is-black">New Comment</button>
+                    </Link>
                   </div>
-                )
-              })}
-              <Link to={{
-                pathname: `/items/${this.props.match.params.id}/comment`,
-                state: { id: this.props.match.params.id}
-              }}>
-                New Comment
-              </Link>
+                </div>
+              </div>
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard

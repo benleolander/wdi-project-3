@@ -27,7 +27,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://i.pinimg.com/564x/67/5e/12/675e1297eb9740eaec531c52db9fa3b5.jpg',
         creator: data.creator,
         description: 'A lovely little chair made by me',
-        categories: ['chair', 'paper', 'wicker']
+        categories: ['chair', 'paper', 'wicker'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          }
+        ]
       }),
       Item.create({
         name: 'Individual drawers',

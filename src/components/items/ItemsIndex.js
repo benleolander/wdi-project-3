@@ -22,6 +22,7 @@ class ItemsIndex extends React.Component {
 
 
   componentDidMount(){
+    console.log('mounting')
     axios.get('/api')
       .then(res => this.setState({ data: res.data.reverse() }))
   }

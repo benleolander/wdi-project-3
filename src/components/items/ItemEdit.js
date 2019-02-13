@@ -22,6 +22,7 @@ class ItemEdit extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   componentDidMount() {
@@ -38,7 +39,7 @@ class ItemEdit extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     axios
-      .put(`api/items/${this.props.match.params.id}`, this.state.data,
+      .put(`/api/items/${this.props.match.params.id}`, this.state.data,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
       .then(() => {
@@ -47,16 +48,25 @@ class ItemEdit extends React.Component {
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
+
+
+  handleSelect(e){
+    const categories = (e.map(select => select.value))
+    const data = { ...this.state.data, categories }
+    this.setState({ data })
+  }
+
   render() {
     return (
       <main className="section">
         <div className="container">
-          <h2 className="title">Edit Cheese</h2>
+          <h2 className="title">Edit Item</h2>
           <ItemsForm
             data={this.state.data}
             errors={this.state.errors}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            handleSelect={this.handleSelect}
           />
         </div>
       </main>

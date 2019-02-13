@@ -24,7 +24,7 @@ class ItemsShow extends React.Component {
     axios.delete(`/api/items/${this.props.match.params.id}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(this.props.history.push('/items'))
+      .then(() => this.props.history.push('/items'))
       .catch(err => console.log(err))
 
   }
@@ -32,6 +32,7 @@ class ItemsShow extends React.Component {
   render(){
     if (!this.state) return null
     const {
+      _id,
       name,
       creator,
       image,
@@ -86,6 +87,7 @@ class ItemsShow extends React.Component {
                 creator={creator}
               />
             </div>
+            <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>
             <button onClick={this.handleDelete} className="button is-danger">Delete</button>
           </div>
         </div>

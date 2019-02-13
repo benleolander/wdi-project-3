@@ -1,0 +1,67 @@
+import React from 'react'
+
+import Select from 'react-select'
+import { withRouter } from 'react-router-dom'
+import makeAnimated from 'react-select/lib/animated'
+import CategoriesData from '../common/CategoriesData'
+
+const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) => {
+  return(
+    <main className="section">
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <h2 className="title">Post A New Item</h2>
+          <div className="field">
+            <label className="label">Name</label>
+            <input
+              className="input"
+              name="name"
+              placeholder="Name"
+              value={data.name}
+              onChange={handleChange}
+            />
+            {errors.name && <small className="help is-danger">A name is required</small>}
+          </div>
+          <div className="field">
+            <label className="label">Image</label>
+            <input
+              className="input"
+              name="image"
+              placeholder="Image URL"
+              value={data.image}
+              onChange={handleChange}
+            />
+          </div>
+          {errors.image && <small className="help is-danger">An image is required</small>}
+          <div className="field">
+            <label className="label">Description</label>
+            <textarea
+              className="input"
+              name="description"
+              placeholder="A detailed description of your item"
+              value={data.description}
+              onChange={handleChange}
+            />
+            {errors.description && <small className="help is-danger">A description is required</small>}
+          </div>
+          <div className="field">
+            <label className="label">Categories</label>
+            <Select
+              isMulti
+              clearValue
+              name="categories"
+              options={CategoriesData}
+              onChange={handleSelect}
+              components={makeAnimated()}
+              className="basic-multi-select"
+              classNamePrefix="select"
+            />
+          </div>
+          <button className="button is-primary">Submit</button>
+        </form>
+      </div>
+    </main>
+  )
+}
+
+export default withRouter(ItemsForm)

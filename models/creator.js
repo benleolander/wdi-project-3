@@ -15,6 +15,16 @@ creatorSchema.virtual('items', {
   foreignField: 'creator'
 })
 
+// creatorSchema.virtual('creatorAverage')
+//   .get(function(){
+//     const total = this.items.reduce((total, item) => {
+//       return total + item.averageRating
+//     }, 0)
+//     const avg = total/this.items.length
+//
+//     return Math.round(avg * 10) / 10 //Rounds avg to 1 decimal place while keeping it as a number
+//   })
+
 creatorSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation

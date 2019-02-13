@@ -40,7 +40,12 @@ class ItemsShow extends React.Component {
       comments,
       averageRating
     } = this.state.data
-    console.log(Auth.getPayload(), creator)
+
+    const isAuthenticated = (() => {
+      if(Auth.getPayload().sub === creator._id) return true
+      else return false
+    })
+
     return(
       <section className="section">
         <div className="container">
@@ -88,8 +93,8 @@ class ItemsShow extends React.Component {
                 creator={creator}
               />
             </div>
-            {Auth.getPayload().sub === creator._id && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
-            {Auth.getPayload().sub === creator._id && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
+            {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
+            {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
           </div>
         </div>
       </section>

@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+import Select from 'react-select'
+import makeAnimated from 'react-select/lib/animated'
+import CategoriesData from '../common/CategoriesData'
 
 import ItemImage from './ItemImage'
 import SearchBar from '../common/SearchBar'
@@ -9,10 +12,12 @@ class ItemsIndex extends React.Component {
     super()
 
     this.state = {
-      search: ''
+      search: '',
+      categories: []
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
 
@@ -25,6 +30,11 @@ class ItemsIndex extends React.Component {
     this.setState({ [name]: value })
   }
 
+  handleSelect(e){
+    const categories = (e.map(select => select.value))
+    this.setState({ categories })
+  }
+
   uniformString(string){
     return (
       string
@@ -33,10 +43,19 @@ class ItemsIndex extends React.Component {
     )
   }
 
+  compareCategories(){
+    if(this.state.categories.length === 0) return this.state.data
+    return this.state.data.filter(item => {
+      return this.state.categories.every(category => {
+        return item.categories.includes(category)
+      })
+    })
+  }
+
   filterResults(){
-    if(this.state.search === '') return this.state.data
+    if(this.state.search === '') return this.compareCategories()
     const search = this.uniformString(this.state.search)
-    return this.state.data.filter(item =>
+    return this.compareCategories().filter(item =>
       this.uniformString(item.name).includes(search) ||
       this.uniformString(item.creator.username).includes(search) ||
       this.uniformString(item.categories.join(',')).includes(search)
@@ -50,6 +69,20 @@ class ItemsIndex extends React.Component {
           handleChange={this.handleChange}
           search={this.state.search}
         />
+        <div className="field">
+          <div className="control">
+            <Select
+              isMulti
+              clearValue
+              options={CategoriesData}
+              components={makeAnimated()}
+              onChange={this.handleSelect}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              placeholder="Filter by category..."
+            />
+          </div>
+        </div>
         <div className="indexDiv columns is-gapless is-mobile is-multiline">
           {
             !this.state.data ||

@@ -170,7 +170,13 @@ nav {
     }
   }
 }
-// UPLOAD IMAGE THUMBNAIL ****************************************************** 
+// UPLOAD IMAGE THUMBNAIL ******************************************************
+
+div.field.filestack {
+  button.button {
+    background-color: yellow;
+  }
+}
 
 .regButton {
   display: flex;

@@ -110,7 +110,7 @@ class Register extends React.Component {
               />
               {errors.bio && <small className="help is-danger">Please write a small bio about yourself</small>}
             </div>
-            <div className="field">
+            <div className="field filestack">
               <ReactFileStack
                 apikey={process.env.FILESTACK_KEY}
                 mode={'pick'}
@@ -121,7 +121,7 @@ class Register extends React.Component {
                   }})}
                 onError={(err) => console.log(err)}
                 buttonText={'Add Profile pic'}
-                buttonClass={'button is-dark'}
+                buttonClass={'filestack-btn button is-dark'}
               />
             </div>
             <div className="regButton">

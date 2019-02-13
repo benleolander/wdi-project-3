@@ -287,6 +287,101 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         ]
       })
     })
+    .then(() => {
+      return Promise.props({
+        creator: Creator.create({
+          username: 'JimmyTwoTimes',
+          email: 'jimmy@jimmy.com',
+          password: 'password',
+          passwordConfirmation: 'password',
+          image: 'https://vignette.wikia.nocookie.net/godfather-fanon/images/f/fb/Jimmy_Two-Times.png/revision/latest?cb=20130317044438',
+          bio: 'I\'ll go get the papers, get the papers.'
+        })
+      })
+    })
+    .then(data => {
+      return Item.create({
+        name: 'Wall clock',
+        image: 'https://i.shelterness.com/2016/04/trendy-diy-cork-color-block-clock-1-750x523.jpg',
+        creator: data.creator,
+        description: 'A clock for the wall sofa',
+        categories: ['indoor', 'clock', 'wooden'],
+        comments: [
+          {
+            name: 'Frank',
+            rating: 3,
+            body: 'Its ok'
+          },
+          {
+            name: 'Dex',
+            rating: 2,
+            body: 'It is just a clock'
+          }
+        ]
+      }),
+      Item.create({
+        name: 'Coffee table',
+        image: 'https://i.etsystatic.com/14342952/r/il/89537f/1716041911/il_1140xN.1716041911_c1t5.jpg',
+        creator: data.creator,
+        description: 'This is a hand crafted wood Live Edge Modern Coffee Table with Mid-Century Hairpin Legs - made from Acacia',
+        categories: ['coffee', 'table', 'wood']
+      }),
+      Item.create({
+        name: 'Bathroom door sign',
+        image: 'https://i.etsystatic.com/10455115/r/il/5aedc0/1658232339/il_1140xN.1658232339_5uu6.jpg',
+        creator: data.creator,
+        description: 'Then this is the perfect item for you! With a Bathroom solid brass door sign visitors will be know exactly where your bathroom is and will not be wandering around your premises in a towel looking for somewhere to bathe',
+        categories: ['bathroom', 'metal', 'sign'],
+        comments: [
+          {
+            name: 'Jamie',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Beth',
+            rating: 5,
+            body: 'I want one'
+          }
+        ]
+      }),
+      Item.create({
+        name: 'Hangning Mirror',
+        image: 'https://i.etsystatic.com/19070652/r/il/b286e5/1753019928/il_1140xN.1753019928_fce8.jpg',
+        creator: data.creator,
+        description: 'Homemade mirror',
+        categories: ['hanging', 'mirror', 'bathroom'],
+        comments: [
+          {
+            name: 'Dex',
+            rating: 3,
+            body: 'Decent!'
+          },
+          {
+            name: 'Tom',
+            rating: 4,
+            body: 'This is pretty cool'
+          },
+          {
+            name: 'Sally',
+            rating: 1,
+            body: 'Do not shop here, delivery never came'
+          },
+          {
+            name: 'Mark',
+            rating: 1,
+            body: 'Never came, money was returned'
+          }
+        ]
+      }),
+      Item.create({
+        name: 'Outdoor light',
+        image: 'https://i.etsystatic.com/11315857/r/il/594126/1735466387/il_1140xN.1735466387_gbw3.jpg',
+        creator: data.creator,
+        description: 'Inspired in 1950s ship lights, the Marine Nautical Wall Light adds nautical charm and can be used as a wall or ceiling fitting both indoors or outdoors.',
+        categories: ['outdoor', 'indoor', 'lights', 'hanging']
+      })
+    })
     .then(() => console.log('Database Seeded'))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())

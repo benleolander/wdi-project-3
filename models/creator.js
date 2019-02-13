@@ -63,6 +63,13 @@ creatorSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-creatorSchema.set('toJSON', { virtuals: true })
+creatorSchema.set('toJSON', {
+  virtuals: true,
+  transform(doc, json) {
+    delete json.email
+    delete json.password
+    return json
+  }
+})
 
 module.exports = mongoose.model('Creator', creatorSchema)

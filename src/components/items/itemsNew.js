@@ -37,7 +37,7 @@ class ItemsNew extends React.Component {
     console.log(this.state.data)
     axios
       .post(
-        '/api/items/new',
+        '/api/items',
         this.state.data,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )

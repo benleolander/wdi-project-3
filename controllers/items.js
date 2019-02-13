@@ -3,7 +3,10 @@ const Item = require('../models/item')
 function indexRoute(req, res){
   Item
     .find()
-    .populate('creator')
+    .populate([
+      { path: 'creator', select: 'username image bio'},
+      { path: 'averageRating' }
+    ])
     .then(items => res.json(items))
     .catch(err => console.log(err.message))
 }
@@ -11,7 +14,10 @@ function indexRoute(req, res){
 function showRoute(req, res, next){
   Item
     .findById(req.params.id)
-    .populate('creator averageRating')
+    .populate([
+      { path: 'creator', select: 'username image bio'},
+      { path: 'averageRating' }
+    ])
     .then(item => res.json(item))
     .catch(next)
 }

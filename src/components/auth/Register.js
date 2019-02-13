@@ -1,6 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 
+import ReactFileStack from 'filestack-react'
+
+import Flash from '../../lib/Flash'
+
+
 
 class Register extends React.Component {
   constructor() {
@@ -28,15 +33,17 @@ class Register extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    //console.log('Submission being handled')
     axios
       .post('/api/register', this.state.data)
-      .then(()=> this.props.history.push('/login'))
+      .then(()=> {
+        Flash.setMessage('success', 'Successfully registered')
+        this.props.history.push('/login')
+      })
       .catch(err => this.setState({ errors: err.response.data}))
   }
 
   render() {
-    const { username, email, password, passwordConfirmation, image, bio } = this.state.data
+    const { username, email, password, passwordConfirmation, bio } = this.state.data
     const errors = this.state.errors
     return (
       <main className="section">
@@ -47,44 +54,44 @@ class Register extends React.Component {
               <label className="label">Username</label>
               <div className="control">
                 <input
-                  className="input is-warning"
+                  className="input"
                   name="username"
                   placeholder="Username"
                   value={username}
                   onChange={this.handleChange}
                 />
-                {errors.username && <small>{errors.username}</small>}
+                {errors.username && <small className="help is-danger">Please enter a username</small>}
               </div>
             </div>
             <div className="field">
               <label className="label">Email</label>
               <div className="control">
                 <input
-                  className="input is-warning"
+                  className="input"
                   name="email"
                   placeholder="email"
                   value={email}
                   onChange={this.handleChange}
                 />
-                {errors.email && <small>{errors.email}</small>}
+                {errors.email && <small className="help is-danger">Please enter an email</small>}
               </div>
             </div>
             <div className="field">
               <label className="label">Password</label>
               <input
-                className="input is-warning"
+                className="input"
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={password}
                 onChange={this.handleChange}
               />
-              {errors.password && <small>{errors.password}</small>}
+              {errors.password && <small className="help is-danger">{errors.password}</small>}
             </div>
             <div className="field">
               <label className="label">Password Confirmation</label>
               <input
-                className="input is-warning"
+                className="input"
                 type="password"
                 name="passwordConfirmation"
                 placeholder="Password Confirmation"
@@ -93,27 +100,36 @@ class Register extends React.Component {
               />
             </div>
             <div className="field">
-              <label className="label">Profile picture (public)</label>
-              <input
-                className="input is-warning"
-                name="image"
-                placeholder="Image url"
-                value={image}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="field">
               <label className="label">Bio</label>
               <textarea
-                className="textarea is-warning"
+                className="textarea"
                 name="bio"
                 placeholder="Please add a bio"
                 value={bio}
                 onChange={this.handleChange}
               />
-              {errors.bio && <small>{errors.bio}</small>}
+              {errors.bio && <small className="help is-danger">Please write a small bio about yourself</small>}
             </div>
-            <button className="button is-info">Submit</button>
+            <div className="field">
+              <ReactFileStack
+                apikey={process.env.FILESTACK_KEY}
+                mode={'pick'}
+                onSuccess={(res) => this.handleChange({
+                  target: {
+                    name: 'image',
+                    value: res.filesUploaded[0].url
+                  }})}
+                onError={(err) => console.log(err)}
+                buttonText={'Add Profile pic'}
+                buttonClass={'button is-dark'}
+              />
+            </div>
+            <div className="regButton">
+              <button className="button is-black">Submit</button>
+              <div className="thumbnail is-square" style={{
+                backgroundImage: `url(${this.state.data.image})`
+              }}></div>
+            </div>
           </form>
         </div>
       </main>

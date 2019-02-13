@@ -1,15 +1,13 @@
 import React from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
 
+import Auth from '../../lib/Auth'
+import Flash from '../../lib/Flash'
 
 import ItemsForm from './ItemsForm'
-import Auth from '../../lib/Auth'
 
-
-
-class ItemsNew extends React.Component {
-  constructor() {
+class ItemEdit extends React.Component {
+  constructor(){
     super()
 
     this.state = {
@@ -21,35 +19,36 @@ class ItemsNew extends React.Component {
       },
       errors: {}
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
   }
 
-  handleChange({ target: {name, value}}) {
-    const data = { ...this.state.data, [name]: value }
+  componentDidMount() {
+    axios.get(`/api/items/${this.props.match.params.id}`)
+      .then(res => this.setState({ data: res.data }))
+  }
+
+  handleChange({ target: { name, value }}){
+    const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: null}
     this.setState({ data, errors })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.data)
     axios
-      .post(
-        '/api/items',
-        this.state.data,
+      .put(`/api/items/${this.props.match.params.id}`, this.state.data,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
-      .then(res => {
-        console.log(res.data)
-        this.props.history.push('/')
+      .then(() => {
+        Flash.setMessage('info', 'Changes saved')
+        this.props.history.push(`/items/${this.props.match.params.id}`)
       })
-      .catch(err => {
-        this.setState({ errors: err.response.data })
-        console.log('HEELLO', this.state.errors)
-      })
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }
+
 
   handleSelect(e){
     const categories = (e.map(select => select.value))
@@ -61,6 +60,7 @@ class ItemsNew extends React.Component {
     return (
       <main className="section">
         <div className="container">
+          <h2 className="title">Edit Item</h2>
           <ItemsForm
             data={this.state.data}
             errors={this.state.errors}
@@ -72,7 +72,6 @@ class ItemsNew extends React.Component {
       </main>
     )
   }
-
 }
 
-export default withRouter(ItemsNew)
+export default ItemEdit

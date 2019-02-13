@@ -15,6 +15,8 @@ const itemSchema = new mongoose.Schema({
   description: { type: String, required: 'Please add a description' },
   categories: { type: Array, required: 'Please select at least one catagory' },
   comments: [ commentSchema ]
+}, {
+  timestamps: true
 })
 
 itemSchema.virtual('averageRating')
@@ -24,7 +26,7 @@ itemSchema.virtual('averageRating')
     }, 0)
     const avg = total/this.comments.length
 
-    return avg.toFixed(1)
+    return Math.round(avg * 10) / 10 //Rounds avg to 1 decimal place while keeping it as a number
   })
 
 itemSchema.virtual('averageRating', {

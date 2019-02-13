@@ -40,6 +40,7 @@ class ItemsShow extends React.Component {
       comments,
       averageRating
     } = this.state.data
+    console.log(Auth.getPayload(), creator)
     return(
       <section className="section">
         <div className="container">
@@ -87,8 +88,8 @@ class ItemsShow extends React.Component {
                 creator={creator}
               />
             </div>
-            <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>
-            <button onClick={this.handleDelete} className="button is-danger">Delete</button>
+            {Auth.getPayload().sub === creator._id && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
+            {Auth.getPayload().sub === creator._id && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
           </div>
         </div>
       </section>

@@ -63,7 +63,7 @@ class CreatorShow extends React.Component{
   render(){
     if (!this.state.creator) return <p>Loading...</p>
 
-    const { username, image, items, bio } = this.state.creator
+    const { username, image, items, bio, creatorAverage } = this.state.creator
     return(
       <section className="section">
 
@@ -84,6 +84,8 @@ class CreatorShow extends React.Component{
               </div>
               <div className="column bio-box">
                 <h1 className="title is-3">{username}</h1>
+
+                {creatorAverage && <h3 className="subtitle"><strong>Rated: </strong>{creatorAverage}/5</h3>}
 
                 <p className="has-text-grey-dark">{bio}</p>
                 <Link className="button is-fullwidth is-black" to={{

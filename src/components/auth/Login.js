@@ -14,7 +14,7 @@ class Login extends React.Component {
         email: '',
         password: ''
       },
-      error: null
+      errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -36,17 +36,14 @@ class Login extends React.Component {
         console.log(res.data.message)
         this.props.history.push('/')
       })
-      .catch(() => {
-        Flash.setMessage('warning', 'Incorrect username/password')
-        this.props.history.push('/register')
-      })
+      .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
     this.setState({ data: data })
     this.props.toggle('loginActive')
-
   }
 
   render() {
+    const errors = this.state.errors
     return (
       <main
         className={ `section ${this.props.displayed}` }
@@ -66,6 +63,7 @@ class Login extends React.Component {
                       value={this.state.data.email}
                       onChange={this.handleChange}
                     />
+                    {errors.email && <small>{errors.email}</small>}
                   </div>
                 </div>
                 <div className="field has-addons">
@@ -78,6 +76,7 @@ class Login extends React.Component {
                       value={this.state.data.password}
                       onChange={this.handleChange}
                     />
+                    {errors.password && <small>{errors.password}</small>}
                   </div>
                 </div>
                 <div className="control">

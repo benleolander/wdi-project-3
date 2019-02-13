@@ -52,13 +52,53 @@ class CommentForm extends React.Component {
 
             <div className="field">
               <label className="label">Rating</label>
-              <input
-                className="input"
-                name="rating"
-                placeholder="Enter a number between 0 and 5"
-                value={this.state.rating}
-                onChange={this.handleChange}
-              />
+              <div className="control">
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={1}
+                    onChange={this.handleChange}
+                  />
+                  <p>1</p>
+                </label>
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={2}
+                    onChange={this.handleChange}
+                  />
+                  <p>2</p>
+                </label>
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={3}
+                    onChange={this.handleChange}
+                  />
+                  <p>3</p>
+                </label>
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={4}
+                    onChange={this.handleChange}
+                  />
+                  <p>4</p>
+                </label>
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={5}
+                    onChange={this.handleChange}
+                  />
+                  <p>5</p>
+                </label>
+              </div>
             </div>
 
             <div className="field">

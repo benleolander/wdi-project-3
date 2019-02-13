@@ -3,7 +3,7 @@ const Creator = require('../models/creator')
 function showRoute(req, res, next){
   Creator
     .findById(req.params.id)
-    .populate('items')
+    .populate('items creatorAverage', '-email -password')
     .then(creator => res.json(creator))
     .catch(next)
 }

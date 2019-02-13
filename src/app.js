@@ -11,6 +11,7 @@ import Navbar from './components/common/Navbar'
 import Register from './components/auth/Register'
 import ItemsShow from './components/items/ItemsShow'
 import ItemsNew from './components/items/ItemsNew'
+import ItemEdit from './components/items/ItemEdit'
 import ContactForm from './components/items/ContactForm'
 import CommentForm from './components/items/CommentForm'
 import CreatorShow from './components/creator/CreatorShow'
@@ -29,6 +30,7 @@ class App extends React.Component {
 
           <Switch>
             <Route path="/creators/:id" component={CreatorShow} />
+            <Route path="/items/:id/edit" component={ItemEdit} />
             <Route path="/items/new" component={ItemsNew} />
             <Route path="/items/:id/comment" component={CommentForm} />
             <Route path="/items/:id" component={ItemsShow} />
@@ -45,7 +47,7 @@ class App extends React.Component {
 
 ReactDOM.render(
   <div>
-    <Favicon url='./assets/favicon.ico'/>
+    <Favicon url='./assets/created-fav.png'/>
     <App />
   </div>,
   document.getElementById('root')

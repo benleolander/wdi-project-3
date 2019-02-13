@@ -24,7 +24,7 @@ itemSchema.virtual('averageRating')
     }, 0)
     const avg = total/this.comments.length
 
-    return avg.toFixed(1)
+    return Math.round(avg * 10) / 10 //Rounds avg to 1 decimal place while keeping it as a number
   })
 
 itemSchema.virtual('averageRating', {

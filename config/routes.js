@@ -24,7 +24,7 @@ router.delete('/items/:id', secureRoute, itemsController.delete)
 
 router.post('/creators', creatorsController.create)
 router.get('/creators/:id', creatorsController.show)
-router.put('/creators/:id', creatorsController.edit)
+router.put('/creators/:id', secureRoute, creatorsController.edit)
 router.delete('/creators/:id', creatorsController.delete)
 
 

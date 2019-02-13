@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
+import Auth from '../../lib/Auth'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -20,6 +21,7 @@ class CreatorShow extends React.Component{
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleClick(e, i){
@@ -44,10 +46,28 @@ class CreatorShow extends React.Component{
     this.props.history.push('/')
   }
 
+  handleDelete(){
+    axios.delete(`/api/creators/${this.state.creator._id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => {
+        Auth.removeToken()
+        Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
+      })
+      .then(() => this.props.history.push('/items'))
+      .catch(err => console.log(err))
+  }
+
   render(){
     if (!this.state.creator) return <p>Loading...</p>
 
-    const { username, image, items, bio, creatorAverage } = this.state.creator
+    const { username, image, items, bio, creatorAverage, _id } = this.state.creator
+
+    const isAuthenticated = (() => {
+      if(Auth.getPayload().sub === _id) return true
+      else return false
+    })
+
     return(
       <section className="section">
 
@@ -76,6 +96,7 @@ class CreatorShow extends React.Component{
                   pathname: '/contact',
                   state: { id: this.state.creator._id }
                 }}>Contact {username}</Link>
+                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
               </div>
             </div>
 

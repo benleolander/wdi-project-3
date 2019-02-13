@@ -1,4 +1,5 @@
 const Creator = require('../models/creator')
+const Item = require('../models/item')
 
 function showRoute(req, res, next){
   Creator
@@ -25,9 +26,14 @@ function updateRoute(req, res, next) {
 }
 
 function deleteRoute(req, res, next){
-  Creator
-    .deleteOne({ _id: req.params.id })
-    .then(() => res.status(204).send())
+  Item
+    .deleteMany({ creator: { _id: req.params.id }})
+    .then(() => {
+      Creator
+        .deleteOne({ _id: req.params.id })
+
+      res.status(204).send()
+    })
     .catch(next)
 }
 

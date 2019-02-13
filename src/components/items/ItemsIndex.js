@@ -23,7 +23,7 @@ class ItemsIndex extends React.Component {
 
   componentDidMount(){
     axios.get('/api')
-      .then(res => this.setState({ data: res.data }))
+      .then(res => this.setState({ data: res.data.reverse() }))
   }
 
   handleChange({ target: { value, name }}){

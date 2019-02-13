@@ -13,8 +13,11 @@ class ContactForm extends React.Component {
         name: '',
         email: '',
         body: ''
-      }
+      },
+      errors: {},
+      success: ''
     }
+
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,11 +30,16 @@ class ContactForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    console.log('Submitting this -->', this.props.location.state.id)
     axios
       .post(`/api/items/${this.props.location.state.id}/contact`, this.state.data)
       .then(res => console.log(res.data))
-      .catch(err => alert(err.message))
-    this.props.history.goBack()
+      .then(this.setState({success: 'Message sent'}))
+      //.then(()=> this.props.history.goBack())
+
+      .catch(err => {
+        this.setState({ errors: err.response.data })
+      })
   }
 
   render() {
@@ -42,6 +50,8 @@ class ContactForm extends React.Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             data={this.state.data}
+            errors={this.state.errors}
+            success={this.state.success}
           />
         </div>
       </main>

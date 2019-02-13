@@ -1,16 +1,25 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import ContactCreatorForm from './ContactCreatorForm'
+import Flash from '../../lib/Flash'
 
 class CreatorShow extends React.Component{
   constructor(){
     super()
 
     this.state = {
-      selected: 0
+      selected: 0,
+      data: {
+        name: '',
+        email: '',
+        body: ''
+      }
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleClick(e, i){
@@ -23,9 +32,21 @@ class CreatorShow extends React.Component{
       .catch(err => console.error(err.message))
   }
 
+  handleChange({ target: {name, value} }) {
+    const data = { ...this.state.data, [name]: value }
+    this.setState({ data })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault
+    axios.post('/contact', this.state.data)
+      .catch(err => Flash.setMessage('danger', err.message))
+    this.props.history.push('/')
+  }
+
   render(){
     if (!this.state.creator) return <p>Loading...</p>
-    console.log(this.state.creator)
+
     const { username, image, items, bio } = this.state.creator
     return(
       <section className="section">
@@ -88,9 +109,15 @@ class CreatorShow extends React.Component{
             </div>
           )}
         </div>
+        <ContactCreatorForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          data = {this.state.data}
+        />
       </section>
     )
   }
 }
+
 
 export default CreatorShow

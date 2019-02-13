@@ -47,7 +47,7 @@ class Register extends React.Component {
               <label className="label">Username</label>
               <div className="control">
                 <input
-                  className="input is-warning"
+                  className="input"
                   name="username"
                   placeholder="Username"
                   value={username}
@@ -60,7 +60,7 @@ class Register extends React.Component {
               <label className="label">Email</label>
               <div className="control">
                 <input
-                  className="input is-warning"
+                  className="input"
                   name="email"
                   placeholder="email"
                   value={email}
@@ -72,7 +72,7 @@ class Register extends React.Component {
             <div className="field">
               <label className="label">Password</label>
               <input
-                className="input is-warning"
+                className="input"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -84,7 +84,7 @@ class Register extends React.Component {
             <div className="field">
               <label className="label">Password Confirmation</label>
               <input
-                className="input is-warning"
+                className="input"
                 type="password"
                 name="passwordConfirmation"
                 placeholder="Password Confirmation"
@@ -95,7 +95,7 @@ class Register extends React.Component {
             <div className="field">
               <label className="label">Profile picture (public)</label>
               <input
-                className="input is-warning"
+                className="input"
                 name="image"
                 placeholder="Image url"
                 value={image}
@@ -105,7 +105,7 @@ class Register extends React.Component {
             <div className="field">
               <label className="label">Bio</label>
               <textarea
-                className="textarea is-warning"
+                className="textarea"
                 name="bio"
                 placeholder="Please add a bio"
                 value={bio}
@@ -113,7 +113,7 @@ class Register extends React.Component {
               />
               {errors.bio && <small>{errors.bio}</small>}
             </div>
-            <button className="button is-info">Submit</button>
+            <button className="button is-black">Submit</button>
           </form>
         </div>
       </main>

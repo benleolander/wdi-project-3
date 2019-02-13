@@ -53,7 +53,7 @@ class Login extends React.Component {
         id="loginFormSection"
       >
         <div className="container">
-        
+
           <form onSubmit={this.handleSubmit}>
             <div className="field is-horizontal">
               <div className="field-body">
@@ -81,7 +81,7 @@ class Login extends React.Component {
                   </div>
                 </div>
                 <div className="control">
-                  <button className="button is-primary">Log in</button>
+                  <button className="button is-black">Log in</button>
                 </div>
               </div>
             </div>

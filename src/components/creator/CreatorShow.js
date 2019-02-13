@@ -39,7 +39,7 @@ class CreatorShow extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault
-    axios.post('/contact', this.state.data)
+    axios.post('/api/contact', this.state.data)
       .catch(err => Flash.setMessage('danger', err.message))
     this.props.history.push('/')
   }

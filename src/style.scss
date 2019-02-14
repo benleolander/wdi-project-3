@@ -2,9 +2,8 @@
 @import "~bulma/bulma";
 
 // GENERAL *********************************************************************
-//#EBD295
 
-$gold: #000;
+$stars: #000;
 
 * {
   box-sizing: border-box;
@@ -72,13 +71,13 @@ right: 0;
   color: #c5c5c5;
   font-size: 25px;
   height: 25px;
-  width: 7rem;
+  width: 6rem;
   position: relative;
   padding: 0;
   text-shadow: 0px 1px 0 #a2a2a2;
 
   &-top {
-    color: $gold;
+    color: $stars;
     padding: 0;
     position: absolute;
     z-index: 1;
@@ -138,6 +137,15 @@ right: 0;
     align-items: center;
     justify-content: center;
     background: rgba(0,0,0,0.8);
+
+    .star-ratings-css {
+      &-top {
+        color: #fff;
+      }
+      &-bottom {
+        display: none;
+      }
+    }
 
     h3 {
       color: #fff;
@@ -337,10 +345,10 @@ right: 0;
   direction: rtl;
 
     label:hover{
-      color: $gold;
+      color: $stars;
 
     & ~ label {
-        color: $gold;
+        color: $stars;
       }
     }
 
@@ -350,10 +358,10 @@ right: 0;
     &:checked{
 
       & +label {
-        color: $gold;
+        color: $stars;
 
         & ~ label {
-          color: $gold;
+          color: $stars;
         }
       }
     }

@@ -318,7 +318,8 @@ form {
 
 .profileImagesSmall {
   align-items: center;
-  justify-content: center;
+  justify-content: left;
+  overflow-x: scroll;
 
   .image {
     background-size: cover;
@@ -379,6 +380,10 @@ form {
   font-size: 1.5em;
   unicode-bidi: bidi-override;
   direction: rtl;
+
+  label {
+    color: #c5c5c5;
+  }
 
   label:hover {
     color: $stars;

@@ -40,7 +40,7 @@ class Login extends React.Component {
       .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
     this.setState({ data: data })
-
+    console.log(this.state.errors)
   }
 
   render() {
@@ -64,7 +64,7 @@ class Login extends React.Component {
                       value={this.state.data.email}
                       onChange={this.handleChange}
                     />
-                    {errors.email && <small>{errors.email}</small>}
+                    {errors.message && <small className="help is-danger">{errors.message}</small>}
                   </div>
                 </div>
                 <div className="field has-addons">
@@ -77,7 +77,7 @@ class Login extends React.Component {
                       value={this.state.data.password}
                       onChange={this.handleChange}
                     />
-                    {errors.password && <small>{errors.password}</small>}
+                    {errors.message && <small className="help is-danger">{errors.message}</small>}
                   </div>
                 </div>
                 <div className="control">

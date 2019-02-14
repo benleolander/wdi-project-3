@@ -41,7 +41,7 @@ class Navbar extends React.Component {
           <div className="container">
             <div className="navbar-brand">
               <Link to="/" className="navbar-item">
-                <h1 className="title is-2">Created.</h1>
+                <h1 className="title is-2"><span id="navbar-hero-c">C</span><span id="navbar-hero-rest">reated.</span></h1>
               </Link>
 
               <a role="button" className={`navbar-burger burger ${this.state.navbarOpen ? 'is-active': ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  onClick={() => this.toggle('navbarOpen')}>
@@ -52,8 +52,9 @@ class Navbar extends React.Component {
             </div>
 
             <div id="navbarBasicExample" className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''}`}>
-              <div className="navbar-end">
+              <div className={`navbar-end ${Auth.isAuthenticated() && 'creator'}`}>
                 {!Auth.isAuthenticated() && <Link to="/register" className="navbar-item" >Become a creator</Link>}
+                {Auth.isAuthenticated() && <Link to="/creators/:id" className="navbar-item">Profile</Link>}
                 {Auth.isAuthenticated() && <Link className="navbar-item" to="/items/new">Add an item</Link>}
                 {!Auth.isAuthenticated() &&
                   <a

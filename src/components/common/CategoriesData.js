@@ -35,7 +35,8 @@ const CategoriesData = [
   { value: 'wooden', label: 'Wooden' },
   { value: 'mirror', label: 'Mirror' },
   { value: 'shelves', label: 'Shelves' },
-  { value: 'outdoors', label: 'Outdoors' }
+  { value: 'outdoors', label: 'Outdoors' },
+  { value: 'coffee', label: 'Coffee' }
 ]
 
 export default CategoriesData

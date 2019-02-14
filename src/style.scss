@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import "~bulma/bulma";
+@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:400,900');
 
 // GENERAL *********************************************************************
 
@@ -7,6 +8,7 @@ $stars: #000;
 
 * {
   box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
 }
 
 html {
@@ -27,6 +29,16 @@ body {
 
 nav {
   border-bottom: 1px solid #ccc;
+}
+
+#navbar-hero-c {
+  font-family: 'Lobster', cursive;
+  font-size: 3.8rem;
+  margin-right: 3px;
+}
+
+#navbar-hero-rest {
+  font-weight: 900;
 }
 
 .button {
@@ -187,7 +199,7 @@ form {
     justify-content: flex-start;
 
     .editDeleteButtons {
-      margin-right: 5px;
+      margin: 15px 5px 0 0;
     }
   }
 
@@ -219,6 +231,8 @@ form {
   background: #efefef;
   box-shadow: inset 0 0 10px 3px #999;
 }
+
+// ITEM SHOW > COMMENT BOX *****************************************************
 
 .itemComment {
   .star-ratings-css {
@@ -379,6 +393,10 @@ form {
       .navbar-end {
         display: block;
         height: 5rem;
+      }
+
+      .navbar-end.creator {
+        height: 7rem;
       }
     }
   }

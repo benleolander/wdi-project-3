@@ -14,6 +14,25 @@ const ItemImage = ({ item }) => {
         <div className="itemDescription is-square">
           <h3 className="title is-4">{item.name}</h3>
           <h3 className="subtitle is-5">by {item.creator.username}</h3>
+          <div className="star-ratings-css">
+            <div
+              className="star-ratings-css-top"
+              style={{ width: `${item.averageRating * 20}%` }}
+            >
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+            </div>
+            <div className="star-ratings-css-bottom">
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+            </div>
+          </div>
         </div>
       </div>
     </Link>

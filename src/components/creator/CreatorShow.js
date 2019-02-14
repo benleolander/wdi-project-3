@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
 import Auth from '../../lib/Auth'
@@ -56,7 +57,7 @@ class CreatorShow extends React.Component{
       })
       .catch(err => {
         this.setState({ errors: err.response.data })
-        this.colourButton('warning', 'Failed')
+        this.colourButton('danger', 'Failed')
       })
   }
 
@@ -66,11 +67,6 @@ class CreatorShow extends React.Component{
       this.setState({ btnColour: 'info', btnText: 'Contact creator' })
     }, 2000)
   }
-
-  // clearForm(){
-  //   this.setState({ /data(.*)\w+/: '' })
-  // }
-
 
   handleDelete(){
     if(this.state.deleteBtn){
@@ -86,7 +82,6 @@ class CreatorShow extends React.Component{
     }
     this.setState({ deleteBtn: !this.state.deletBtn })
   }
-
 
 
   render(){
@@ -113,20 +108,28 @@ class CreatorShow extends React.Component{
               <p className="has-text-grey-dark">{bio}</p>
               {
                 isAuthenticated() &&
-                <button
-                  onClick={this.handleDelete}
-                  className={`button ${this.state.deleteBtn ?
-                    'is-danger':
-                    'is-black'}`}
-                  id="deleteProfileBtn"
-                >
-                  <span
-                    className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
-                  >Delete</span>
-                  <span
-                    className={`confirm ${this.state.deleteBtn ? 'active':''}`}
-                  >Are you sure?</span>
-                </button>
+                <div className="creator-buttons">
+                  <Link
+                    to={`/creators/${_id}/edit`}
+                    className="button is-outlined is-info"
+                  >
+                  Edit profile
+                  </Link>
+                  <button
+                    onClick={this.handleDelete}
+                    className={`button ${this.state.deleteBtn ?
+                      'is-danger':
+                      'is-black'}`}
+                    id="deleteProfileBtn"
+                  >
+                    <span
+                      className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
+                    >Delete</span>
+                    <span
+                      className={`confirm ${this.state.deleteBtn ? 'active':''}`}
+                    >Are you sure?</span>
+                  </button>
+                </div>
               }
               <ContactCreatorForm
                 handleChange={this.handleChange}

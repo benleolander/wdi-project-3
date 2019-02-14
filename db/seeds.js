@@ -186,7 +186,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           password: 'password',
           passwordConfirmation: 'password',
           image: 'https://images.unsplash.com/photo-1533318087102-b3ad366ed041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-          bio: 'I am a little teaspout short and stout he is my furniture here is my spanner'
+          bio: 'I am a little teapot short and stout here is my furniture here is my spanner'
         })
       })
     })
@@ -346,7 +346,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         ]
       }),
       Item.create({
-        name: 'Hangning Mirror',
+        name: 'Hanging Mirror',
         image: 'https://i.etsystatic.com/19070652/r/il/b286e5/1753019928/il_1140xN.1753019928_fce8.jpg',
         creator: data.creator,
         description: 'Homemade mirror',
@@ -378,11 +378,11 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         name: 'Outdoor light',
         image: 'https://i.etsystatic.com/11315857/r/il/594126/1735466387/il_1140xN.1735466387_gbw3.jpg',
         creator: data.creator,
-        description: 'Inspired in 1950s ship lights, the Marine Nautical Wall Light adds nautical charm and can be used as a wall or ceiling fitting both indoors or outdoors.',
+        description: 'Inspired by 1950s ship lights, the Marine Nautical Wall Light adds nautical charm and can be used as a wall or ceiling fitting both indoors or outdoors.',
         categories: ['outdoor', 'indoor', 'lights', 'hanging']
       })
     })
-    .then(() => console.log('Database Seeded'))
+    .then(() => console.log('Seeds sewn. 🌱'))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 })

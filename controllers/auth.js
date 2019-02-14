@@ -5,10 +5,9 @@ const { secret } = require('../config/environment')
 
 function registerRoute(req, res, next){
   Creator.create(req.body)
-    .then(() => res.status(200).json( { message: 'Registration successful'}))
+    .then(() => res.status(201).json( { message: 'Registration successful'}))
     .catch(next)
 }
-
 
 function loginRoute(req, res, next){
   Creator.findOne({ email: req.body.email })

@@ -17,7 +17,7 @@ class ContactForm extends React.Component {
       },
       errors: {},
       btnColour: 'info',
-      btnText: 'Send'
+      btnText: 'Contact creator'
     }
 
 
@@ -32,7 +32,6 @@ class ContactForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('Submitting this -->', this.props.location.state.id)
     axios
       .post(`/api/items/${this.props.location.state.id}/contact`, this.state.data)
       .then(()=> {
@@ -41,7 +40,7 @@ class ContactForm extends React.Component {
       })
 
       .catch(err => {
-        this.setState({ errors: err.response.data })
+        this.setState({ errors: err.response.data, btnColour: 'warning', btnText: 'Sending failed' })
       })
   }
 

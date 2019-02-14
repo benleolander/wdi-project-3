@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-
-import CreatorCard from '../creator/CreatorCard'
 import Auth from '../../lib/Auth'
 import StarRatings from '../common/StarRatings'
 
@@ -64,30 +62,48 @@ class ItemsShow extends React.Component {
               </div>
             </div>
             <div className="column is-full-mobile item-info">
-              <h2 className="title">{name}</h2>
-              <h3 className="subtitle">by {creator.username}</h3>
-
+              <h2 className="profile-header title">{name}</h2>
               {averageRating && <StarRatings width={averageRating} />}
-
+              <div className="columns">
+                <div className="profile-name-image column">
+                  <Link
+                    className="subtitle"
+                    to={`/creators/${creator._id}`}
+                  >
+                    <h3>by {creator.username}</h3>
+                  </Link>
+                  <div className="link-to-profile">
+                    <Link to={`/creators/${creator._id}`}>
+                      <div
+                        className="profile-link image"
+                        style={{ backgroundImage: `url(${creator.image})` }}
+                      >
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
               <div className="editDelete">
                 {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info editDeleteButtons">Edit Item</Link>}
                 {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger editDeleteButtons">Delete Item</button>}
               </div>
-
               <p className="item-description">{description}</p>
-
-              <div className="contact-container">
-                <Link to={{
-                  pathname: '/contact',
-                  state: { id: creator._id }
-                }}>
-                  <button className="button is-black">Contact Creator</button>
-                </Link>
-              </div>
+              <Link to={{
+                pathname: '/contact',
+                state: { id: creator._id }
+              }}>
+                <h3>Contact Creator</h3>
+              </Link>
 
               <div className="card comments">
                 <div className="card-header">
                   <p className="card-header-title">Comments</p>
+                  <Link to={{
+                    pathname: `/items/${this.props.match.params.id}/comment`,
+                    state: { id: this.props.match.params.id}
+                  }}>
+                    <button className="button is-inverted">New Comment</button>
+                  </Link>
                 </div>
                 <div className="card-content">
                   {comments.map(comment => {
@@ -100,21 +116,8 @@ class ItemsShow extends React.Component {
                       </div>
                     )
                   })}
-                  <div className="card-footer">
-                    <Link to={{
-                      pathname: `/items/${this.props.match.params.id}/comment`,
-                      state: { id: this.props.match.params.id}
-                    }}>
-                      <button className="button is-black">New Comment</button>
-                    </Link>
-                  </div>
                 </div>
               </div>
-            </div>
-            <div className="column is-one-fifth-desktop is-two-thirds-mobile">
-              <CreatorCard
-                creator={creator}
-              />
             </div>
           </div>
         </div>

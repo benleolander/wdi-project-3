@@ -22,7 +22,8 @@ class Login extends React.Component {
 
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
-    this.setState({ data })
+    const errors = {...this.state.errors, [name]: null}
+    this.setState({ data, errors })
   }
 
   handleSubmit(e) {
@@ -33,14 +34,12 @@ class Login extends React.Component {
       .then((res) => {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
-        console.log(res.data.message)
         this.props.history.push('/')
       })
       .then(() => this.props.toggle('loginActive'))
       .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
     this.setState({ data: data })
-
   }
 
   render() {
@@ -64,7 +63,7 @@ class Login extends React.Component {
                       value={this.state.data.email}
                       onChange={this.handleChange}
                     />
-                    {errors.email && <small>{errors.email}</small>}
+                    {errors.message && <small className="help is-danger">{errors.message}</small>}
                   </div>
                 </div>
                 <div className="field has-addons">
@@ -77,7 +76,7 @@ class Login extends React.Component {
                       value={this.state.data.password}
                       onChange={this.handleChange}
                     />
-                    {errors.password && <small>{errors.password}</small>}
+                    {errors.message && <small className="help is-danger">{errors.message}</small>}
                   </div>
                 </div>
                 <div className="control">

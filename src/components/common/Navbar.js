@@ -54,7 +54,7 @@ class Navbar extends React.Component {
             <div id="navbarBasicExample" className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''}`}>
               <div className={`navbar-end ${Auth.isAuthenticated() && 'creator'}`}>
                 {!Auth.isAuthenticated() && <Link to="/register" className="navbar-item" >Become a creator</Link>}
-                {Auth.isAuthenticated() && <Link to="/creators/:id" className="navbar-item">Profile</Link>}
+                {Auth.isAuthenticated() && <Link to={`/creators/${Auth.getPayload().sub}`} className="navbar-item">Profile</Link>}
                 {Auth.isAuthenticated() && <Link className="navbar-item" to="/items/new">Add an item</Link>}
                 {!Auth.isAuthenticated() &&
                   <a

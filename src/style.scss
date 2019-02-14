@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:400,900');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import url('https://fonts.googleapis.com/css?family=Lato');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-// BULMA VARIABLES ************************************************************
+@import url('https://fonts.googleapis.com/css?family=Open+Sans'); // BULMA VARIABLES ************************************************************
 $input-background-color: transparent;
 $input-border-color: none;
 $input-shadow: none;
@@ -14,9 +13,7 @@ $control-radius: 0;
 $danger: #802030;
 $success: #004225;
 $info: #171d22;
-@import "~bulma/bulma";
-
-// GENERAL *********************************************************************
+@import "~bulma/bulma"; // GENERAL *********************************************************************
 $stars: #000;
 
 * {
@@ -30,7 +27,7 @@ textarea {
   font-size: 3rem;
   resize: none;
 
-  &:not([id^="react-select"]){
+  &:not([id^="react-select"]) {
     border-bottom: 2px $info solid!important;
   }
 }
@@ -289,6 +286,12 @@ form {
     margin: 1rem 0;
   }
 
+  .creator-buttons {
+    width: 20rem;
+    display: flex;
+    justify-content: space-around;
+  }
+
   #deleteProfileBtn {
     span {
       opacity: 0;
@@ -332,7 +335,6 @@ form {
     }
   }
 }
-
 // REGISTRATION FORM ***********************************************************
 
 .regButton {
@@ -340,7 +342,7 @@ form {
   flex-direction: row-reverse;
   justify-content: space-between;
 
-  .filestackContainer{
+  .filestackContainer {
     display: flex;
     flex-direction: column-reverse;
 

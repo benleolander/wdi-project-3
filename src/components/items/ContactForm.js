@@ -40,7 +40,7 @@ class ContactForm extends React.Component {
       })
 
       .catch(err => {
-        this.setState({ errors: err.response.data, btnColour: 'warning', btnText: 'Sending failed' })
+        this.setState({ errors: err.response.data, btnColour: 'danger', btnText: 'Sending failed' })
       })
   }
 

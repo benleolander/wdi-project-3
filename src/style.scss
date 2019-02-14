@@ -79,7 +79,7 @@ nav {
   }
 }
 
-// CONTACT (CREATOR) FORM ******************************************************************
+// CONTACT (CREATOR) FORM ******************************************************
 
 form {
   .button span {
@@ -273,6 +273,22 @@ form {
 
   p {
     margin: 1rem 0;
+  }
+
+  #deleteProfileBtn {
+
+    span {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .deleteBtn {
+      position: absolute;
+    }
+
+    span.active{
+      opacity: 1;
+    }
   }
 
   form {

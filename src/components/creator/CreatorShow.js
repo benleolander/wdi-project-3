@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
 import Auth from '../../lib/Auth'
 import StarRatings from '../common/StarRatings'
+import CreatorItems from './CreatorItems'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -19,7 +19,8 @@ class CreatorShow extends React.Component{
       },
       errors: {},
       btnColour: 'info',
-      btnText: 'Send'
+      btnText: 'Send',
+      deletBtn: false
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -69,15 +70,18 @@ class CreatorShow extends React.Component{
 
 
   handleDelete(){
-    axios.delete(`/api/creators/${this.state.creator._id}`, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => {
-        Auth.removeToken()
-        Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
+    if(this.state.deleteBtn){
+      axios.delete(`/api/creators/${this.state.creator._id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      .then(() => this.props.history.push('/items'))
-      .catch(err => console.log(err))
+        .then(() => {
+          Auth.removeToken()
+          Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
+        })
+        .then(() => this.props.history.push('/items'))
+        .catch(err => console.log(err))
+    }
+    this.setState({ deleteBtn: !this.state.deletBtn })
   }
 
 
@@ -104,7 +108,23 @@ class CreatorShow extends React.Component{
               <h1 className="title is-4">{username}</h1>
               {creatorAverage && <StarRatings width={creatorAverage} />}
               <p className="has-text-grey-dark">{bio}</p>
-              {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
+              {
+                isAuthenticated() &&
+                <button
+                  onClick={this.handleDelete}
+                  className={`button ${this.state.deleteBtn ?
+                    'is-danger':
+                    'is-black'}`}
+                  id="deleteProfileBtn"
+                >
+                  <span
+                    className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
+                  >Delete</span>
+                  <span
+                    className={`confirm ${this.state.deleteBtn ? 'active':''}`}
+                  >Are you sure?</span>
+                </button>
+              }
               <ContactCreatorForm
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
@@ -114,31 +134,19 @@ class CreatorShow extends React.Component{
                 btnColour = {this.state.btnColour}
               />
             </div>
-            <div className="column">
-              <Link
-                to={`/items/${this.state.creator.items[this.state.selected]._id}`}
-                className="profileImageLarge image"
-                style={{
-                  backgroundImage: `url(${items[this.state.selected].image})`
-                }}>
-              </Link>
-              <div className="profileImagesSmall columns is-mobile">
-                {items.map( (item, i) =>
-                  <div
-                    className="column is-2"
-                    key={item._id}
-                  >
-                    <div
-                      onClick={(e) => this.handleClick(e, i)}
-                      className="image is-square"
-                      style={{
-                        backgroundImage: `url(${item.image})`
-                      }}
-                    ></div>
-                  </div>
-                )}
-              </div>
-            </div>
+            {
+              items.length === 0 ?
+                <div className="column">
+                  <h1 className="title">
+                    {`${this.state.creator.username} hasn't added any items yet...`}
+                  </h1>
+                </div> :
+                <CreatorItems
+                  items={items}
+                  selected={this.state.selected}
+                  handleClick={this.handleClick}
+                />
+            }
           </div>
         </div>
       </section>

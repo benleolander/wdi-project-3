@@ -22,7 +22,8 @@ class Login extends React.Component {
 
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
-    this.setState({ data })
+    const errors = {...this.state.errors, [name]: null}
+    this.setState({ data, errors })
   }
 
   handleSubmit(e) {
@@ -33,14 +34,12 @@ class Login extends React.Component {
       .then((res) => {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
-        console.log(res.data.message)
         this.props.history.push('/')
       })
       .then(() => this.props.toggle('loginActive'))
       .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
     this.setState({ data: data })
-    console.log(this.state.errors)
   }
 
   render() {

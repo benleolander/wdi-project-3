@@ -1,9 +1,6 @@
 @charset "utf-8";
 @import "~bulma/bulma";
-@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:400,900');
-
-// GENERAL *********************************************************************
-
+@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:400,900'); // GENERAL *********************************************************************
 $stars: #000;
 
 * {
@@ -50,7 +47,6 @@ nav {
   }
 }
 
-
 .star-ratings-css {
   unicode-bidi: bidi-override;
   color: #c5c5c5;
@@ -79,7 +75,7 @@ nav {
   }
 }
 
-// CONTACT (CREATOR) FORM ******************************************************************
+// CONTACT (CREATOR) FORM ******************************************************
 
 form {
   .button span {
@@ -107,7 +103,6 @@ form {
     right: 0;
   }
 }
-
 // ITEMS INDEX *****************************************************************
 
 #sortButton {
@@ -156,6 +151,7 @@ form {
       &-top {
         color: #fff;
       }
+
       &-bottom {
         display: none;
       }
@@ -172,22 +168,7 @@ form {
     }
   }
 }
-
-
 // ITEM SHOW ******************************************************************
-
-.card.creatorProfile {
-  transition: all 0.5s ease;
-  background: #fff;
-  box-shadow: inset 0 0 0 0 #fff;
-
-  .card-image {
-    margin: 5%;
-    border-radius: 100%;
-    border: 2px solid #ccc;
-    overflow: hidden;
-  }
-}
 
 .item-info {
   h3.subtitle {
@@ -214,24 +195,27 @@ form {
   }
 }
 
-.card.creatorProfile {
-  .card-image {
-    img {
-      width: 100%;
-      height: auto;
-    }
-
-    .image {
-      background-size: cover;
-    }
+.column {
+  h2.profile-header {
+    margin-bottom: 0;
   }
 }
 
-.card.creatorProfile:hover {
-  background: #efefef;
-  box-shadow: inset 0 0 10px 3px #999;
+.profile-name-image {
+  display: flex;
+  justify-content: space-between;
+
+  .subtitle {
+    margin-top: 1.5rem;
+  }
 }
 
+.profile-link {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 100%;
+  border: 3px solid #ccc;
+}
 // ITEM SHOW > COMMENT BOX *****************************************************
 
 .itemComment {
@@ -243,6 +227,10 @@ form {
 .card.comments {
   margin: 10px auto;
 
+  button {
+    margin: 0.5rem;
+  }
+
   .card-footer {
     a {
       margin: 5px auto auto;
@@ -252,6 +240,11 @@ form {
   .comment-body {
     margin-top: 10px;
   }
+}
+
+.card-content {
+  height: 15rem;
+  overflow: scroll;
 }
 // CREATOR SHOW ****************************************************************
 
@@ -263,6 +256,7 @@ form {
   .image {
     background-size: cover;
     border-radius: 100%;
+    border: 3px solid #ccc;
     width: 10rem;
     height: 10rem;
   }
@@ -273,6 +267,22 @@ form {
 
   p {
     margin: 1rem 0;
+  }
+
+  #deleteProfileBtn {
+
+    span {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .deleteBtn {
+      position: absolute;
+    }
+
+    span.active{
+      opacity: 1;
+    }
   }
 
   form {
@@ -350,14 +360,13 @@ form {
   unicode-bidi: bidi-override;
   direction: rtl;
 
-    label:hover{
-      color: $stars;
+  label:hover {
+    color: $stars;
 
     & ~ label {
-        color: $stars;
-      }
+      color: $stars;
     }
-
+  }
 
   input[type="radio"] {
     display: none;

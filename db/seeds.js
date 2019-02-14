@@ -382,7 +382,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         categories: ['outdoor', 'indoor', 'lights', 'hanging']
       })
     })
-    .then(() => console.log('Seeds sewn. 🌱'))
+    .then(() => console.log('Seeds sown. 🌱'))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 })

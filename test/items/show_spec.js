@@ -1,57 +1,59 @@
 /* global api, describe, it, expect, beforeEach */
 
-const { itemData, creatorData } = require('../mock_data.js')
+const { creatorData, itemData } = require('../mock_data.js')
 
 const Item = require('../../models/item')
 const Creator = require('../../models/creator')
-const jwt = require('jsonwebtoken')
-const { secret } = require('../../config/environment')
 
-let token
+let item
 
-describe('POST /items', () => {
+describe('GET /items', () => {
   beforeEach(done => {
     Promise.all([
-      Creator.deleteMany({}),
-      Item.deleteMany({})
+      Item.deleteMany({}),
+      Creator.deleteMany({})
     ])
       .then(() => Creator.create(creatorData))
-      .then(creator => {
-        token = jwt.sign({ sub: creator._id }, secret, { expiresIn: '6h' })
-      })
-      .then(done)
+      .then(creator => itemData.map(item => ({ ...item, creator })))
+      .then(itemData => Item.create(itemData))
+      .then(items => item = items[0])
+      .then(() => done())
   })
 
-  it('should return a 401 response', done => {
+  it('should return a 200 response', done => {
     api
-      .post('/api/items')
-      .send(itemData)
-      .expect(401, done)
+      .get(`/api/items/${item._id}`)
+      .expect(200, done)
   })
 
-  it('should return a 201 response with a token', done => {
-    api
-      .post('/api/items')
-      .set('Authorization', `Bearer ${token}`)
-      .send(itemData[0])
-      .expect(201, done)
-  })
 
-  it('should return the created item', done => {
+  it('should return the item', done => {
     api
-      .post('/api/items')
-      .set('Authorization', `Bearer ${token}`)
-      .send(itemData[0])
+      .get(`/api/items/${item._id}`)
       .end((err, res) => {
         expect(res.body).to.be.an('object')
         expect(res.body).to.include.keys([
           '_id',
           'name',
           'image',
+          'creator',
           'description',
-          'creator'
+          'categories'
         ])
         done()
       })
+  })
+
+  it('should return the correct item data', done => {
+    api
+      .get(`/api/items/${item._id}`)
+      .end((err, res) => {
+        expect(res.body.name).to.eq(itemData[0].name)
+        expect(res.body.image).to.eq(itemData[0].image)
+        expect(res.body.creator).to.eq(itemData[0].creator)
+        expect(res.body.description).to.eq(itemData[0].description)
+        expect(res.body.categories).to.eq(itemData[0].name)
+      })
+    done()
   })
 })

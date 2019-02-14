@@ -1,11 +1,27 @@
 @charset "utf-8";
-@import "~bulma/bulma";
-@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:400,900'); // GENERAL *********************************************************************
+@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:400,900'); // BULMA VARIABLES ************************************************************
+$input-background-color: transparent;
+$input-border-color: none;
+$input-shadow: none;
+$input-hover-border-color: none;
+$input-focus-border-color: none;
+$input-focus-box-shadow-size: 0;
+$control-radius: 0;
+$danger: #802030;
+$success: #004225;
+$info: #171d22;
+@import "~bulma/bulma"; // GENERAL ******************************************************************
 $stars: #000;
 
 * {
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
+}
+
+input {
+  border-bottom: 2px $info solid!important;
+  font-family: inherit;
+  font-size: 3rem;
 }
 
 html {
@@ -75,6 +91,7 @@ nav {
   }
 }
 // CONTACT (CREATOR) FORM ******************************************************
+
 form {
   .button span {
     cursor: pointer;

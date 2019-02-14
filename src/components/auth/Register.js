@@ -122,11 +122,11 @@ class Register extends React.Component {
                   }})}
                 onError={(err) => console.log(err)}
                 buttonText={'Add Profile pic'}
-                buttonClass={'filestack-btn button is-dark'}
+                buttonClass={'filestack-btn button is-info'}
               />
             </div>
             <div className="regButton">
-              <button className="button is-black">Submit</button>
+              <button className="button is-info">Submit</button>
               <div className="thumbnail is-square" style={{
                 backgroundImage: `url(${this.state.data.image})`
               }}></div>

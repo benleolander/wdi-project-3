@@ -29,7 +29,7 @@ function deleteRoute(req, res, next){
   Item
     .deleteMany({ creator: { _id: req.params.id }})
     .then((res) => {
-      console.log(res)
+      console.log('Req', req.params, 'Res', res)
       Creator
         .deleteOne({ _id: req.params.id })
 

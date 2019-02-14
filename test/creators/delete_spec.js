@@ -26,7 +26,7 @@ describe('DELETE /creator/:id', () => {
       .expect(204, done)
   })
 
-  it('should cause a login to fail', done => {
+  it('should cause a login with the same details to fail', done => {
     api
       .delete(`/api/creators/${creatorVar._id}`)
       .set('Authorization', `Bearer ${token}`)

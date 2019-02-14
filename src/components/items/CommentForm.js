@@ -49,54 +49,58 @@ class CommentForm extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-
             <div className="field">
               <label className="label">Rating</label>
-              <div className="control">
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={1}
-                    onChange={this.handleChange}
-                  />
-                  <p>1</p>
+              <div className="control" id="star-ratings">
+                <input
+                  type="radio"
+                  name="rating"
+                  value={5}
+                  id="5star"
+                  onChange={this.handleChange}
+                />
+                <label className="radio" htmlFor="5star">
+                  ★
                 </label>
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={2}
-                    onChange={this.handleChange}
-                  />
-                  <p>2</p>
+                <input
+                  type="radio"
+                  name="rating"
+                  value={4}
+                  id="4star"
+                  onChange={this.handleChange}
+                />
+                <label className="radio" htmlFor="4star">
+                  ★
                 </label>
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={3}
-                    onChange={this.handleChange}
-                  />
-                  <p>3</p>
+                <input
+                  type="radio"
+                  name="rating"
+                  value={3}
+                  id="3star"
+                  onChange={this.handleChange}
+                />
+                <label className="radio" htmlFor="3star">
+                  ★
                 </label>
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={4}
-                    onChange={this.handleChange}
-                  />
-                  <p>4</p>
+                <input
+                  type="radio"
+                  name="rating"
+                  value={2}
+                  id="2star"
+                  onChange={this.handleChange}
+                />
+                <label className="radio" htmlFor="2star">
+                  ★
                 </label>
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={5}
-                    onChange={this.handleChange}
-                  />
-                  <p>5</p>
+                <input
+                  type="radio"
+                  name="rating"
+                  value={1}
+                  id="1star"
+                  onChange={this.handleChange}
+                />
+                <label className="radio" htmlFor="1star">
+                  ★
                 </label>
               </div>
             </div>

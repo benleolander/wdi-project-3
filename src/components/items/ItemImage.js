@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import StarRatings from '../common/StarRatings'
+
 const ItemImage = ({ item }) => {
   return(
     <Link
@@ -14,6 +16,7 @@ const ItemImage = ({ item }) => {
         <div className="itemDescription is-square">
           <h3 className="title is-4">{item.name}</h3>
           <h3 className="subtitle is-5">by {item.creator.username}</h3>
+          <StarRatings width={item.averageRating} />
         </div>
       </div>
     </Link>

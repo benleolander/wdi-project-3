@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
 import Auth from '../../lib/Auth'
+import StarRatings from '../common/StarRatings'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -105,7 +106,7 @@ class CreatorShow extends React.Component{
               <div className="column bio-box">
                 <h1 className="title is-3">{username}</h1>
 
-                {creatorAverage && <h3 className="subtitle"><strong>Rated: </strong>{creatorAverage}/5</h3>}
+                {creatorAverage && <StarRatings width={creatorAverage} />}
 
                 <p className="has-text-grey-dark">{bio}</p>
                 <Link className="button is-fullwidth is-black" to={{

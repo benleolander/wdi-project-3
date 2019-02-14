@@ -47,7 +47,7 @@ class App extends React.Component {
 
 ReactDOM.render(
   <div>
-    <Favicon url='./assets/created-fav.png'/>
+    <Favicon url='assets/favicon.png'/>
     <App />
   </div>,
   document.getElementById('root')

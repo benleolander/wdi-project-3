@@ -104,17 +104,13 @@ class CreatorShow extends React.Component{
               <h1 className="title is-4">{username}</h1>
               {creatorAverage && <StarRatings width={creatorAverage} />}
               <p className="has-text-grey-dark">{bio}</p>
-              <Link className="button is-black" to={{
-                pathname: '/contact',
-                state: { id: this.state.creator._id }
-              }}>Contact {username}</Link>
               {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
               <ContactCreatorForm
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 data = {this.state.data}
                 errors = {this.state.errors}
-                success = {this.state.success}
+                success = {this.state.sucess}
               />
             </div>
             <div className="column">

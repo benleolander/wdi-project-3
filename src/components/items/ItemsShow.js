@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import CreatorCard from '../creator/CreatorCard'
 import Auth from '../../lib/Auth'
+import StarRatings from '../common/StarRatings'
 
 class ItemsShow extends React.Component {
   constructor(){
@@ -40,12 +41,6 @@ class ItemsShow extends React.Component {
       comments,
       averageRating
     } = this.state.data
-
-    const isAuthenticated = (() => {
-      if(Auth.getPayload().sub === creator._id) return true
-      else return false
-    })
-
     return(
       <section className="section">
         <div className="container">
@@ -63,48 +58,38 @@ class ItemsShow extends React.Component {
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
 
-              {averageRating && <h3 className="subtitle"><strong>Rated: </strong>{averageRating}/5</h3>}
+              {averageRating && <StarRatings width={averageRating} />}
 
               <p>{description}</p>
               <Link to={{
                 pathname: '/contact',
-                state: { id: creator._id}
+                state: { id: creator._id }
               }}>
-                <button className="button is-black">Contact Creator</button>
+                Enquiries for {name} by {creator.username}
               </Link>
-              <div className="card comments">
-                <div className="card-header">
-                  <p className="card-header-title">Comments</p>
-                </div>
-                <div className="card-content">
-                  {comments.map(comment => {
-                    return(
-                      <div key={comment._id}>
-                        <p><strong>{comment.name}</strong></p>
-                        <p><strong>Rating: </strong>{comment.rating}/5</p>
-                        <p>{comment.body}</p>
-                        <hr />
-                      </div>
-                    )
-                  })}
-                  <div className="card-footer">
-                    <Link to={{
-                      pathname: `/items/${this.props.match.params.id}/comment`,
-                      state: { id: this.props.match.params.id}
-                    }}>
-                      <button className="button is-black">New Comment</button>
-                    </Link>
+              {comments.map(comment => {
+                return(
+                  <div key={comment.id} className="itemComment">
+                    <p><strong>{comment.name}</strong></p>
+                    <StarRatings width={comment.rating} />
+                    <p>{comment.body}</p>
                   </div>
-                </div>
-              </div>
+                )
+              })}
+              <Link to={{
+                pathname: `/items/${this.props.match.params.id}/comment`,
+                state: { id: this.props.match.params.id}
+              }}>
+                New Comment
+              </Link>
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard
                 creator={creator}
               />
             </div>
-            {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
-            {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
+            <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>
+            <button onClick={this.handleDelete} className="button is-danger">Delete</button>
           </div>
         </div>
       </section>

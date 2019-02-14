@@ -60,7 +60,7 @@ class Register extends React.Component {
                   value={username}
                   onChange={this.handleChange}
                 />
-                {errors.username && <small className="help is-danger">Please enter a username</small>}
+                {errors.username && <small className="help is-danger">{errors.username}</small>}
               </div>
             </div>
             <div className="field">
@@ -73,7 +73,7 @@ class Register extends React.Component {
                   value={email}
                   onChange={this.handleChange}
                 />
-                {errors.email && <small className="help is-danger">Please enter an email</small>}
+                {errors.email && <small className="help is-danger">{errors.email}</small>}
               </div>
             </div>
             <div className="field">

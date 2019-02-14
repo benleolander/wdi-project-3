@@ -26,7 +26,7 @@ function createRoute(req, res, next){
   req.body.creator = req.currentUser
   Item
     .create(req.body)
-    .then(item => res.status(200).json(item))
+    .then(item => res.status(201).json(item))
     .catch(next)
 }
 

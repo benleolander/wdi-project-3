@@ -19,7 +19,7 @@ class CreatorShow extends React.Component{
       },
       errors: {},
       btnColour: 'info',
-      btnText: 'Send'
+      btnText: 'Contact creator'
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -63,9 +63,13 @@ class CreatorShow extends React.Component{
   colourButton(btnColour, btnText) {
     this.setState({ btnColour: btnColour, btnText: btnText })
     setTimeout(()=> {
-      this.setState({ btnColour: 'info', btnText: 'Send' })
+      this.setState({ btnColour: 'info', btnText: 'Contact creator' })
     }, 2000)
   }
+
+  // clearForm(){
+  //   this.setState({ /data(.*)\w+/: '' })
+  // }
 
 
   handleDelete(){

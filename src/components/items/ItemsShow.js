@@ -41,6 +41,12 @@ class ItemsShow extends React.Component {
       comments,
       averageRating
     } = this.state.data
+
+    const isAuthenticated = (() => {
+      if(Auth.getPayload().sub === creator._id ) return true
+      else return false
+    })
+
     return(
       <section className="section">
         <div className="container">
@@ -65,31 +71,42 @@ class ItemsShow extends React.Component {
                 pathname: '/contact',
                 state: { id: creator._id }
               }}>
-                Enquiries for {name} by {creator.username}
+                <button className="button is-black">Contact Creator</button>
               </Link>
-              {comments.map(comment => {
-                return(
-                  <div key={comment.id} className="itemComment">
-                    <p><strong>{comment.name}</strong></p>
-                    <StarRatings width={comment.rating} />
-                    <p>{comment.body}</p>
+
+              <div className="card comments">
+                <div className="card-header">
+                  <p className="card-header-title">Comments</p>
+                </div>
+                <div className="card-content">
+                  {comments.map(comment => {
+                    return(
+                      <div key={comment._id}>
+                        <p><strong>{comment.name}</strong></p>
+                        <StarRatings width={comment.rating} />
+                        <p>{comment.body}</p>
+                        <hr />
+                      </div>
+                    )
+                  })}
+                  <div className="card-footer">
+                    <Link to={{
+                      pathname: `/items/${this.props.match.params.id}/comment`,
+                      state: { id: this.props.match.params.id}
+                    }}>
+                      <button className="button is-black">New Comment</button>
+                    </Link>
                   </div>
-                )
-              })}
-              <Link to={{
-                pathname: `/items/${this.props.match.params.id}/comment`,
-                state: { id: this.props.match.params.id}
-              }}>
-                New Comment
-              </Link>
+                </div>
+              </div>
             </div>
             <div className="column is-one-fifth-desktop is-two-thirds-mobile">
               <CreatorCard
                 creator={creator}
               />
             </div>
-            <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>
-            <button onClick={this.handleDelete} className="button is-danger">Delete</button>
+            {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
+            {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
           </div>
         </div>
       </section>

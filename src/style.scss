@@ -158,6 +158,16 @@ nav {
     transform: scale(0.7);
   }
 }
+
+	.card.comments {
+	  margin: 10px auto;
+	  .card-footer {
+	    a {
+	      margin: auto;
+	      margin-top: 5px;
+	    }
+	  }
+	}
 // CREATOR SHOW ****************************************************************
 
 .middle {

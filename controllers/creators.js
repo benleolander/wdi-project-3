@@ -31,8 +31,9 @@ function deleteRoute(req, res, next){
     .then(() => {
       Creator
         .deleteOne({ _id: req.params.id })
-
-      res.status(204).send()
+        .then(() => {
+          return res.status(204).json( {message: 'Account deleted'} )
+        })
     })
     .catch(next)
 }

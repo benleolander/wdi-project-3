@@ -76,9 +76,7 @@ nav {
     z-index: 0;
   }
 }
-
 // CONTACT (CREATOR) FORM ******************************************************
-
 form {
   .button span {
     cursor: pointer;
@@ -272,7 +270,6 @@ form {
   }
 
   #deleteProfileBtn {
-
     span {
       opacity: 0;
       transition: opacity 0.5s ease;
@@ -282,7 +279,7 @@ form {
       position: absolute;
     }
 
-    span.active{
+    span.active {
       opacity: 1;
     }
   }

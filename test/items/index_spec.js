@@ -1,27 +1,31 @@
 /* global api, describe, it, expect, beforeEach */
 
 const Item = require('../../models/item')
+const Creator = require('../../models/creator')
 
-const { itemData } = require('../mock_data')
+const { itemData, creatorData } = require('../mock_data')
 
-describe('GET /', () => {
+describe('GET /items', () => {
   beforeEach(done => {
     Promise.all([
-      Item.remove({})
+      Item.deleteMany({}),
+      Creator.deleteMany({})
     ])
-      .then(() => Item.create(itemData))
+      .then(() => Creator.create(creatorData))
+      .then(creator => itemData.map(item => ({ ...item, creator })))
+      .then(itemData => Item.create(itemData))
       .then(() => done())
   })
 
   it('should return a 200 response', done => {
     api
-      .get('/api/')
-      .expect(200, done)
+      .get('/api/items')
+      .expect(200, done())
   })
 
   it('should return an array of items', done => {
     api
-      .get('/api/')
+      .get('/api/items')
       .end((err, res) => {
         expect(res.body).to.be.an('array')
         res.body.forEach(item => {

@@ -37,7 +37,7 @@ function deleteRoute(req, res, next){
     .catch(next)
 }
 
-module.exports ={
+module.exports = {
   show: showRoute,
   create: createRoute,
   edit: updateRoute,

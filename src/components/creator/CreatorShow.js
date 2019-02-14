@@ -113,7 +113,7 @@ class CreatorShow extends React.Component{
                   pathname: '/contact',
                   state: { id: this.state.creator._id }
                 }}>Contact {username}</Link>
-                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
+                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete Profile</button>}
               </div>
             </div>
 

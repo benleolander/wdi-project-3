@@ -66,7 +66,11 @@ class ItemsShow extends React.Component {
 
               {averageRating && <StarRatings width={averageRating} />}
 
+              {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info">Edit Item</Link>}
+              {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete Item</button>}
+
               <p>{description}</p>
+
               <Link to={{
                 pathname: '/contact',
                 state: { id: creator._id }
@@ -105,8 +109,6 @@ class ItemsShow extends React.Component {
                 creator={creator}
               />
             </div>
-            {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
-            {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
           </div>
         </div>
       </section>

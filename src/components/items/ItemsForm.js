@@ -64,7 +64,7 @@ const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) =
             {errors.image && <small className="help is-danger">An image is required</small>}
           </div>
           <div className="regButton">
-            <button className="button is-black">Submit</button>
+            <button className="button is-info">Submit</button>
             <div className="thumbnail is-square" style={{
               backgroundImage: `url(${data.image})`
             }}></div>

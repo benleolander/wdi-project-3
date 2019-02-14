@@ -116,7 +116,7 @@ class CommentForm extends React.Component {
               />
             </div>
 
-            <button className="button is-primary">Submit</button>
+            <button className="button is-info">Submit</button>
           </form>
         </div>
       </main>

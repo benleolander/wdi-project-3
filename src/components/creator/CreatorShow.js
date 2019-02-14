@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ContactCreatorForm from './ContactCreatorForm'
-
+import Flash from '../../lib/Flash'
+import Auth from '../../lib/Auth'
+import StarRatings from '../common/StarRatings'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -17,12 +19,14 @@ class CreatorShow extends React.Component{
       },
       errors: {},
       success: '',
-      status: 'info'
+      btnColour: 'info',
+      btnText: 'Send'
     }
 
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleClick(e, i){
@@ -35,9 +39,6 @@ class CreatorShow extends React.Component{
       .catch(err => console.error(err.message))
   }
 
-  componentDidUpdate(){
-    console.log(this.state.data)
-  }
 
   handleChange({ target: {name, value} }) {
     const data = { ...this.state.data, [name]: value }
@@ -47,12 +48,13 @@ class CreatorShow extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault()
-  
+
     axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
       .then(() => {
-        console.log('Posted')
+        this.setState({ btnColour: 'success', btnText: 'Sent' })
+
         this.setState({ ...this.state.data, success: 'Message sent!'})
-        console.log(this.state.success)
+
       })
       .catch(err => {
         console.log(err.response.data)
@@ -60,12 +62,35 @@ class CreatorShow extends React.Component{
       })
   }
 
+  btnColourButton(btnColour, btnText) {
+    this.setState({ btnColour: btnColour, btnText: btnText })
+    setTimeout(({ btnColour: 'info', btnText: 'Send' }), 1000)
+  }
+
+  handleDelete(){
+    axios.delete(`/api/creators/${this.state.creator._id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => {
+        Auth.removeToken()
+        Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
+      })
+      .then(() => this.props.history.push('/items'))
+      .catch(err => console.log(err))
+  }
+
 
 
   render(){
     if (!this.state.creator) return <p>Loading...</p>
 
-    const { username, image, items, bio, creatorAverage } = this.state.creator
+    const { username, image, items, bio, creatorAverage, _id } = this.state.creator
+
+    const isAuthenticated = (() => {
+      if(Auth.getPayload().sub === _id) return true
+      else return false
+    })
+
     return(
       <section className="section">
 
@@ -87,13 +112,14 @@ class CreatorShow extends React.Component{
               <div className="column bio-box">
                 <h1 className="title is-3">{username}</h1>
 
-                {creatorAverage && <h3 className="subtitle"><strong>Rated: </strong>{creatorAverage}/5</h3>}
+                {creatorAverage && <StarRatings width={creatorAverage} />}
 
                 <p className="has-text-grey-dark">{bio}</p>
                 <Link className="button is-fullwidth is-black" to={{
                   pathname: '/contact',
                   state: { id: this.state.creator._id }
                 }}>Contact {username}</Link>
+                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
               </div>
             </div>
 
@@ -134,6 +160,9 @@ class CreatorShow extends React.Component{
           data = {this.state.data}
           errors = {this.state.errors}
           success = {this.state.success}
+          btnText = {this.state.btnText}
+          btnColour = {this.state.btnText}
+
         />
       </section>
     )

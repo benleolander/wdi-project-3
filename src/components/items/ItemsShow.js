@@ -63,19 +63,27 @@ class ItemsShow extends React.Component {
               >
               </div>
             </div>
-            <div className="column is-full-mobile">
+            <div className="column is-full-mobile item-info">
               <h2 className="title">{name}</h2>
               <h3 className="subtitle">by {creator.username}</h3>
 
               {averageRating && <StarRatings width={averageRating} />}
 
-              <p>{description}</p>
-              <Link to={{
-                pathname: '/contact',
-                state: { id: creator._id }
-              }}>
-                <button className="button is-black">Contact Creator</button>
-              </Link>
+              <div className="editDelete">
+                {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info editDeleteButtons">Edit Item</Link>}
+                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger editDeleteButtons">Delete Item</button>}
+              </div>
+
+              <p className="item-description">{description}</p>
+
+              <div className="contact-container">
+                <Link to={{
+                  pathname: '/contact',
+                  state: { id: creator._id }
+                }}>
+                  <button className="button is-black">Contact Creator</button>
+                </Link>
+              </div>
 
               <div className="card comments">
                 <div className="card-header">
@@ -87,7 +95,7 @@ class ItemsShow extends React.Component {
                       <div key={comment._id}>
                         <p><strong>{comment.name}</strong></p>
                         <StarRatings width={comment.rating} />
-                        <p>{comment.body}</p>
+                        <p className="comment-body">{comment.body}</p>
                         <hr />
                       </div>
                     )
@@ -108,8 +116,6 @@ class ItemsShow extends React.Component {
                 creator={creator}
               />
             </div>
-            {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info">Edit</Link>}
-            {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
           </div>
         </div>
       </section>

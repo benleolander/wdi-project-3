@@ -1,5 +1,7 @@
 /* global api, describe, it, expect, beforeEach */
 
+//This should test the Item Create Route
+
 const { itemData, creatorData } = require('../mock_data.js')
 
 const Item = require('../../models/item')

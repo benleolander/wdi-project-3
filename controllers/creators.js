@@ -28,12 +28,12 @@ function updateRoute(req, res, next) {
 function deleteRoute(req, res, next){
   Item
     .deleteMany({ creator: { _id: req.params.id }})
-    .then((res) => {
-      console.log('Req', req.params, 'Res', res)
+    .then(() => {
       Creator
         .deleteOne({ _id: req.params.id })
-
-      return res.status(204).send()
+        .then(() => {
+          return res.status(204).json( {message: 'Account deleted'} )
+        })
     })
     .catch(next)
 }

@@ -38,7 +38,10 @@
     "bulma": "^0.7.3",
     "copy-webpack-plugin": "^4.6.0",
     "dotenv": "^6.2.0",
+    "dotenv-webpack": "^1.7.0",
     "express": "^4.16.4",
+    "filestack-js": "^1.14.1",
+    "filestack-react": "^2.0.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.10",
     "mongoose-unique-validator": "^2.0.2",
@@ -46,6 +49,8 @@
     "nodemailer": "^5.1.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "react-router-dom": "^4.3.1"
+    "react-favicon": "^0.0.14",
+    "react-router-dom": "^4.3.1",
+    "react-select": "^2.3.0"
   }
 }

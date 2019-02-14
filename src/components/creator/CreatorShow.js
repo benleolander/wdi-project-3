@@ -1,16 +1,31 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import ContactCreatorForm from './ContactCreatorForm'
+import Flash from '../../lib/Flash'
+import Auth from '../../lib/Auth'
+import StarRatings from '../common/StarRatings'
 
 class CreatorShow extends React.Component{
   constructor(){
     super()
 
     this.state = {
-      selected: 0
+      selected: 0,
+      data: {
+        name: '',
+        email: '',
+        body: ''
+      },
+      errors: {},
+      success: '',
+      status: 'info'
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleClick(e, i){
@@ -23,31 +38,93 @@ class CreatorShow extends React.Component{
       .catch(err => console.error(err.message))
   }
 
+  handleChange({ target: {name, value} }) {
+    const data = { ...this.state.data, [name]: value }
+    //const errors = { ...this.state.errors, [name]: value}
+    this.setState({ data })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    // const creatorId = this.state.creator.id
+    //
+    // this.setState({ data: { creatorId }})
+    console.log('this is this.state.data', { ...this.state.data, creatorId: this.state.creator._id })
+    axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
+      .then(() => {
+        console.log('Posted')
+        this.setState({ ...this.state.data, success: 'Message sent!'})
+        console.log(this.state.success)
+      })
+      .catch(err => {
+        console.log(err.response.data)
+        this.setState({ errors: err.response.data })
+      })
+  }
+
+  handleDelete(){
+    axios.delete(`/api/creators/${this.state.creator._id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => {
+        Auth.removeToken()
+        Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
+      })
+      .then(() => this.props.history.push('/items'))
+      .catch(err => console.log(err))
+  }
+
   render(){
     if (!this.state.creator) return <p>Loading...</p>
-    console.log(this.state.creator)
-    const { username, image, items, bio } = this.state.creator
+
+    const { username, image, items, bio, creatorAverage, _id } = this.state.creator
+
+    const isAuthenticated = (() => {
+      if(Auth.getPayload().sub === _id) return true
+      else return false
+    })
+
     return(
       <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-one-fifth">
-              <div className="profilePicDiv">
-                <div
-                  className="image is-square"
-                  style={{
-                    backgroundImage: `url(${image})`
-                  }}
-                >
+
+        <div className="container middle">
+          <div className="box set-width no-shadow">
+
+            <div className="columns">
+              <div className="column">
+                <div className="profilePicDiv">
+                  <div
+                    className="image is-square"
+                    style={{
+                      backgroundImage: `url(${image})`
+                    }}
+                  >
+                  </div>
                 </div>
               </div>
+              <div className="column bio-box">
+                <h1 className="title is-3">{username}</h1>
+
+                {creatorAverage && <StarRatings width={creatorAverage} />}
+
+                <p className="has-text-grey-dark">{bio}</p>
+                <Link className="button is-fullwidth is-black" to={{
+                  pathname: '/contact',
+                  state: { id: this.state.creator._id }
+                }}>Contact {username}</Link>
+                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
+              </div>
             </div>
-            <div className="column">
-              <h1 className="title is-3">{username}</h1>
-              <p>{bio}</p>
-            </div>
+
+          </div>
+
+        </div>
+        <div className="section">
+          <div className="container set-width">
           </div>
         </div>
+
         <Link
           to={`/items/${this.state.creator.items[this.state.selected]._id}`}
           className="profileImageLarge image"
@@ -55,7 +132,7 @@ class CreatorShow extends React.Component{
             backgroundImage: `url(${items[this.state.selected].image})`
           }}>
         </Link>
-        <div className="profileImagesSmall columns">
+        <div className="profileImagesSmall columns is-mobile">
           {items.map( (item, i) =>
             <div
               className="column is-1"
@@ -71,9 +148,17 @@ class CreatorShow extends React.Component{
             </div>
           )}
         </div>
+        <ContactCreatorForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          data = {this.state.data}
+          errors = {this.state.errors}
+          success = {this.state.success}
+        />
       </section>
     )
   }
 }
+
 
 export default CreatorShow

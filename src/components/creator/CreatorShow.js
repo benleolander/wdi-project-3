@@ -84,89 +84,66 @@ class CreatorShow extends React.Component{
 
   render(){
     if (!this.state.creator) return <p>Loading...</p>
-
     const { username, image, items, bio, creatorAverage, _id } = this.state.creator
-
     const isAuthenticated = (() => {
       if(Auth.getPayload().sub === _id) return true
       else return false
     })
-
     return(
       <section className="section">
-
-        <div className="container middle">
-          <div className="box set-width no-shadow">
-
-            <div className="columns">
-              <div className="column">
-                <div className="profilePicDiv">
-                  <div
-                    className="image is-square"
-                    style={{
-                      backgroundImage: `url(${image})`
-                    }}
-                  >
-                  </div>
-                </div>
-              </div>
-              <div className="column bio-box">
-                <h1 className="title is-3">{username}</h1>
-
-                {creatorAverage && <StarRatings width={creatorAverage} />}
-
-                <p className="has-text-grey-dark">{bio}</p>
-
-                <Link className="button is-fullwidth is-black" to={{
-                  pathname: '/contact',
-                  state: { id: this.state.creator._id }
-                }}>Contact {username}</Link>
-
-                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete Profile</button>}
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-        <div className="section">
-          <div className="container set-width">
-          </div>
-        </div>
-
-        <Link
-          to={`/items/${this.state.creator.items[this.state.selected]._id}`}
-          className="profileImageLarge image"
-          style={{
-            backgroundImage: `url(${items[this.state.selected].image})`
-          }}>
-        </Link>
-        <div className="profileImagesSmall columns is-mobile">
-          {items.map( (item, i) =>
-            <div
-              className="column is-1"
-              key={item._id}
-            >
+        <div className="container">
+          <div className="columns">
+            <div className="creator-profile column is-half">
               <div
-                onClick={(e) => this.handleClick(e, i)}
-                className="image is-square"
+                className="image"
                 style={{
-                  backgroundImage: `url(${item.image})`
+                  backgroundImage: `url(${image})`
                 }}
-              ></div>
+              >
+              </div>
+              <h1 className="title is-4">{username}</h1>
+              {creatorAverage && <StarRatings width={creatorAverage} />}
+              <p className="has-text-grey-dark">{bio}</p>
+              <Link className="button is-black" to={{
+                pathname: '/contact',
+                state: { id: this.state.creator._id }
+              }}>Contact {username}</Link>
+              {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete</button>}
+              <ContactCreatorForm
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                data = {this.state.data}
+                errors = {this.state.errors}
+                success = {this.state.success}
+              />
             </div>
-          )}
+            <div className="column">
+              <Link
+                to={`/items/${this.state.creator.items[this.state.selected]._id}`}
+                className="profileImageLarge image"
+                style={{
+                  backgroundImage: `url(${items[this.state.selected].image})`
+                }}>
+              </Link>
+              <div className="profileImagesSmall columns is-mobile">
+                {items.map( (item, i) =>
+                  <div
+                    className="column is-2"
+                    key={item._id}
+                  >
+                    <div
+                      onClick={(e) => this.handleClick(e, i)}
+                      className="image is-square"
+                      style={{
+                        backgroundImage: `url(${item.image})`
+                      }}
+                    ></div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <ContactCreatorForm
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          data = {this.state.data}
-          errors = {this.state.errors}
-          btnText = {this.state.btnText}
-          btnColour = {this.state.btnColour}
-
-        />
       </section>
     )
   }

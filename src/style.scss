@@ -198,7 +198,7 @@ nav {
   height: 30rem;
   width: 30rem;
   margin: 0 auto 3rem;
-  transition: background-image 1s ease;
+  transition: background-image 0.5s ease;
 }
 
 .profileImagesSmall {
@@ -313,8 +313,8 @@ nav {
     }
   }
 }
-@media only screen and (max-width: 1088px) {
+@media only screen and (max-width: 769px) {
   #loginFormSection.displayed {
-    height: 20vh;
+    height: 30vh;
   }
 }

@@ -10,6 +10,7 @@ class ItemsShow extends React.Component {
   constructor(){
     super()
 
+
     this.handleDelete = this.handleDelete.bind(this)
   }
 
@@ -20,6 +21,8 @@ class ItemsShow extends React.Component {
       })
       .catch(err => console.error(err.message))
   }
+
+
 
   handleDelete(){
     axios.delete(`/api/items/${this.props.match.params.id}`, {

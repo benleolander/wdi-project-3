@@ -55,7 +55,6 @@ class CreatorShow extends React.Component{
 
       })
       .catch(err => {
-        console.log(err.response.data)
         this.setState({ errors: err.response.data })
         this.colourButton('warning', 'Failed')
       })
@@ -83,7 +82,7 @@ class CreatorShow extends React.Component{
           Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
         })
         .then(() => this.props.history.push('/items'))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
     }
     this.setState({ deleteBtn: !this.state.deletBtn })
   }

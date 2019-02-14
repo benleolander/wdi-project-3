@@ -28,7 +28,7 @@ input,
 textarea {
   font-family: inherit;
   font-size: 3rem;
-  resize: none;
+  resize: none!important;
 
   &:not([id^="react-select"]){
     border-bottom: 2px $info solid!important;
@@ -318,8 +318,6 @@ form {
 
 .profileImagesSmall {
   align-items: center;
-  justify-content: left;
-  overflow-x: scroll;
 
   .image {
     background-size: cover;

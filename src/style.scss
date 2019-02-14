@@ -43,7 +43,6 @@ nav {
   font-size: 25px;
   height: 25px;
   width: 7rem;
-  margin: 0 auto;
   position: relative;
   padding: 0;
   text-shadow: 0px 1px 0 #a2a2a2;
@@ -135,6 +134,33 @@ nav {
   }
 }
 
+.item-info {
+
+  h3.subtitle {
+    margin-bottom: 0;
+  }
+
+  .editDelete {
+    display: flex;
+    justify-content: flex-start;
+
+
+    .editDeleteButtons {
+      margin-right: 5px;
+    }
+  }
+
+  .item-description {
+    margin: 10px 0;
+  }
+
+  .contact-container {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
 .card.creatorProfile {
   .card-image {
     img {
@@ -159,15 +185,19 @@ nav {
   }
 }
 
-	.card.comments {
-	  margin: 10px auto;
-	  .card-footer {
-	    a {
-	      margin: auto;
-	      margin-top: 5px;
-	    }
-	  }
-	}
+.card.comments {
+  margin: 10px auto;
+  .card-footer {
+    a {
+      margin: auto;
+      margin-top: 5px;
+    }
+  }
+
+  .comment-body {
+    margin-top: 10px;
+  }
+}
 // CREATOR SHOW ****************************************************************
 
 .middle {

@@ -109,11 +109,14 @@ class CreatorShow extends React.Component{
                 {creatorAverage && <StarRatings width={creatorAverage} />}
 
                 <p className="has-text-grey-dark">{bio}</p>
+
                 <Link className="button is-fullwidth is-black" to={{
                   pathname: '/contact',
                   state: { id: this.state.creator._id }
                 }}>Contact {username}</Link>
+
                 {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">Delete Profile</button>}
+
               </div>
             </div>
 

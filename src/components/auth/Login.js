@@ -34,9 +34,11 @@ class Login extends React.Component {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
         console.log(res.data.message)
+      })
+      .then(() => {
+        this.props.toggle('loginActive')
         this.props.history.push('/')
       })
-      .then(() => this.props.toggle('loginActive'))
       .catch(err => this.setState({ errors: err.response.data}))
     const data = { email: '', password: '' }
     this.setState({ data: data })

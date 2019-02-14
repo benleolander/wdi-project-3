@@ -7,7 +7,7 @@ const Creator = require('../../models/creator')
 
 let item
 
-describe('GET /items', () => {
+describe('GET /items/:id', () => {
   beforeEach(done => {
     Promise.all([
       Item.deleteMany({}),

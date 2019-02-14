@@ -7,4 +7,36 @@ const Creator = require('../../models/creator')
 
 let creator
 
-describe('GET /creators/:id', )
+describe('GET /creators/:id', () => {
+  beforeEach(done => {
+    Promise.all([
+      Creator.deleteMany({}),
+      Item.deleteMany({})
+    ])
+      .then(()=> Creator.create(creatorData))
+      .then(res => creator = res)
+      .then(creator => itemData.map(item => ({ ...item, creator })))
+      .then(itemData => Item.create(itemData))
+      .then(() => done())
+
+  })
+  it('should return a 200 response', done => {
+    api
+      .get(`/api/creators/${creator._id}`)
+      .expect(200, done)
+  })
+
+  it('should return a creator with items', done => {
+    api
+      .get(`/api/creators/${creator._id}`)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object')
+        expect(res.body).to.include.keys([
+          '_id',
+          'items'
+        ])
+        done()
+      })
+  })
+  
+})

@@ -35,6 +35,10 @@ class CreatorShow extends React.Component{
       .catch(err => console.error(err.message))
   }
 
+  componentDidUpdate(){
+    console.log(this.state.data)
+  }
+
   handleChange({ target: {name, value} }) {
     const data = { ...this.state.data, [name]: value }
     //const errors = { ...this.state.errors, [name]: value}
@@ -43,11 +47,7 @@ class CreatorShow extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault()
-
-    // const creatorId = this.state.creator.id
-    //
-    // this.setState({ data: { creatorId }})
-    console.log('this is this.state.data', { ...this.state.data, creatorId: this.state.creator._id })
+  
     axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
       .then(() => {
         console.log('Posted')
@@ -59,6 +59,8 @@ class CreatorShow extends React.Component{
         this.setState({ errors: err.response.data })
       })
   }
+
+
 
   render(){
     if (!this.state.creator) return <p>Loading...</p>

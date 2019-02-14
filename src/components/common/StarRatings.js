@@ -7,18 +7,18 @@ const StarRatings = ({ width }) => {
         className="star-ratings-css-top"
         style={{ width: `${width * 20}%` }}
       >
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
+        <span>⭑</span>
+        <span>⭑</span>
+        <span>⭑</span>
+        <span>⭑</span>
+        <span>⭑</span>
       </div>
       <div className="star-ratings-css-bottom">
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
-        <span>★</span>
+        <span>⭑</span>
+        <span>⭑</span>
+        <span>⭑</span>
+        <span>⭑</span>
+        <span>⭑</span>
       </div>
     </div>
   )

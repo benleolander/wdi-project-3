@@ -18,7 +18,6 @@ class CreatorShow extends React.Component{
         body: ''
       },
       errors: {},
-      success: '',
       btnColour: 'info',
       btnText: 'Send'
     }
@@ -51,21 +50,23 @@ class CreatorShow extends React.Component{
 
     axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
       .then(() => {
-        this.setState({ btnColour: 'success', btnText: 'Sent' })
-
-        this.setState({ ...this.state.data, success: 'Message sent!'})
+        this.colourButton('success', 'Sent')
 
       })
       .catch(err => {
         console.log(err.response.data)
         this.setState({ errors: err.response.data })
+        this.colourButton('warning', 'Failed')
       })
   }
 
-  btnColourButton(btnColour, btnText) {
+  colourButton(btnColour, btnText) {
     this.setState({ btnColour: btnColour, btnText: btnText })
-    setTimeout(({ btnColour: 'info', btnText: 'Send' }), 1000)
+    setTimeout(()=> {
+      this.setState({ btnColour: 'info', btnText: 'Send' })
+    }, 2000)
   }
+
 
   handleDelete(){
     axios.delete(`/api/creators/${this.state.creator._id}`, {
@@ -159,9 +160,8 @@ class CreatorShow extends React.Component{
           handleSubmit={this.handleSubmit}
           data = {this.state.data}
           errors = {this.state.errors}
-          success = {this.state.success}
           btnText = {this.state.btnText}
-          btnColour = {this.state.btnText}
+          btnColour = {this.state.btnColour}
 
         />
       </section>

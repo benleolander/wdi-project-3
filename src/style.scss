@@ -340,12 +340,16 @@ form {
   flex-direction: row-reverse;
   justify-content: space-between;
 
-  .thumbnail {
-    width: 15%;
-    height: 9rem;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  .filestackContainer{
+    display: flex;
+    flex-direction: column-reverse;
+
+    .thumbnail {
+      height: 9rem;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 }
 // LOGIN FORM ******************************************************************

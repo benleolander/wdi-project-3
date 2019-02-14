@@ -1,11 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
-import ReactFileStack from 'filestack-react'
-
 import Flash from '../../lib/Flash'
-
-
+import RegisterForm from './RegisterForm'
 
 class Register extends React.Component {
   constructor() {
@@ -44,94 +41,16 @@ class Register extends React.Component {
   }
 
   render() {
-    const { username, email, password, passwordConfirmation, bio } = this.state.data
     const errors = this.state.errors
     return (
       <main className="section">
         <div className="container">
-          <form onSubmit={this.handleSubmit}>
-            <h2 className="title">Register</h2>
-            <div className="field">
-              <label className="label">Username</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="username"
-                  placeholder="Username"
-                  value={username}
-                  onChange={this.handleChange}
-                />
-                {errors.username && <small className="help is-danger">{errors.username}</small>}
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Email</label>
-              <div className="control">
-                <input
-                  className="input"
-                  name="email"
-                  placeholder="email"
-                  value={email}
-                  onChange={this.handleChange}
-                />
-                {errors.email && <small className="help is-danger">{errors.email}</small>}
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Password</label>
-              <input
-                className="input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.handleChange}
-              />
-              {errors.password && <small className="help is-danger">{errors.password}</small>}
-            </div>
-            <div className="field">
-              <label className="label">Password Confirmation</label>
-              <input
-                className="input"
-                type="password"
-                name="passwordConfirmation"
-                placeholder="Password Confirmation"
-                value={passwordConfirmation}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="field">
-              <label className="label">Bio</label>
-              <textarea
-                className="textarea"
-                name="bio"
-                placeholder="Please add a bio"
-                value={bio}
-                onChange={this.handleChange}
-              />
-              {errors.bio && <small className="help is-danger">Please write a small bio about yourself</small>}
-            </div>
-            <div className="field filestack">
-              <ReactFileStack
-                apikey={process.env.FILESTACK_KEY}
-                mode={'pick'}
-                onSuccess={(res) => this.handleChange({
-                  target: {
-                    name: 'image',
-                    value: res.filesUploaded[0].url
-                  }})}
-                onError={(err) => console.log(err)}
-                buttonText={'Add Profile pic'}
-                buttonClass={'filestack-btn button is-info'}
-              />
-            </div>
-            <div className="regButton">
-              <button className="button is-info">Submit</button>
-              <div className="thumbnail is-square" style={{
-                backgroundImage: `url(${this.state.data.image})`
-              }}></div>
-            </div>
-          </form>
+          <RegisterForm
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            data={this.state.data}
+            errors={errors}
+          />
         </div>
       </main>
     )

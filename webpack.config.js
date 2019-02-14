@@ -41,7 +41,7 @@ module.exports = {
     }),
     new Dotenv(),
     new CopyWebpackPlugin([
-      { from: 'src/assets/created-fav.png' }
+      { from: 'src/assets', to: 'assets' }
     ])
   ]
 }

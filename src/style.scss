@@ -446,6 +446,42 @@ form {
     }
   }
 }
+
+// LOADING *********************************************************************
+
+#loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+
+  h1 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 8rem;
+    white-space: nowrap;
+    overflow: hidden;
+
+    span {
+      margin: 1rem;
+      opacity: 0;
+      transition: opacity 0.07s ease;
+
+      &.displayed {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@keyframes type {
+  from{}
+}
+
 // MEDIA QUERIES ***************************************************************
 @media only screen and (max-width: 1088px) {
   .navbar-menu {

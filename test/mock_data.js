@@ -19,4 +19,10 @@ const itemData = [
   }
 ]
 
-module.exports = itemData
+const creatorData = {
+  username: 'test',
+  email: 'test@test.com',
+  password: 'test',
+  passwordConfirmation: 'test'
+}
+module.exports = { itemData, creatorData }

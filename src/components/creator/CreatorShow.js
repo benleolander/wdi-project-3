@@ -19,8 +19,8 @@ class CreatorShow extends React.Component{
       },
       errors: {},
       btnColour: 'info',
-      btnText: 'Contact creator'
-      deletBtn: false
+      btnText: 'Contact creator',
+      deleteBtn: false
     }
 
     this.handleClick = this.handleClick.bind(this)

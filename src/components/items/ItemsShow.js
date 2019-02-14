@@ -105,18 +105,27 @@ class ItemsShow extends React.Component {
                     <button className="button is-inverted">New Comment</button>
                   </Link>
                 </div>
-                <div className="card-content">
-                  {comments.map(comment => {
-                    return(
-                      <div key={comment._id}>
-                        <p><strong>{comment.name}</strong></p>
-                        <StarRatings width={comment.rating} />
-                        <p className="comment-body">{comment.body}</p>
-                        <hr />
-                      </div>
-                    )
-                  })}
-                </div>
+                {
+                  comments.length === 0 ?
+                    <div className="card-content">
+                      <h1 className="subtitle is-6">
+                      These item has no comments yet...
+                      </h1>
+                    </div>
+                    :
+                    <div className="card-content">
+                      {comments.map(comment => {
+                        return(
+                          <div key={comment._id}>
+                            <p><strong>{comment.name}</strong></p>
+                            <StarRatings width={comment.rating} />
+                            <p className="comment-body">{comment.body}</p>
+                            <hr />
+                          </div>
+                        )
+                      })}
+                    </div>
+                }
               </div>
             </div>
           </div>

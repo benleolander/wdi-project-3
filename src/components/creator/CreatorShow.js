@@ -110,7 +110,8 @@ class CreatorShow extends React.Component{
                 handleSubmit={this.handleSubmit}
                 data = {this.state.data}
                 errors = {this.state.errors}
-                success = {this.state.sucess}
+                btnText = {this.state.btnText}
+                btnColour = {this.state.btnColour}
               />
             </div>
             <div className="column">

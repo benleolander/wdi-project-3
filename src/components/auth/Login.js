@@ -22,7 +22,8 @@ class Login extends React.Component {
 
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
-    const errors = {...this.state.errors, [name]: null}
+    const errors = {...this.state.errors, message: null}
+    console.log(this.state.errors)
     this.setState({ data, errors })
   }
 
@@ -65,7 +66,6 @@ class Login extends React.Component {
                       value={this.state.data.email}
                       onChange={this.handleChange}
                     />
-                    {errors.message && <small className="help is-danger">{errors.message}</small>}
                   </div>
                 </div>
                 <div className="field has-addons">

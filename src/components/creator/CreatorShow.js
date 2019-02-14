@@ -18,8 +18,8 @@ class CreatorShow extends React.Component{
         body: ''
       },
       errors: {},
-      success: '',
-      status: 'info'
+      btnColour: 'info',
+      btnText: 'Send'
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -38,6 +38,7 @@ class CreatorShow extends React.Component{
       .catch(err => console.error(err.message))
   }
 
+
   handleChange({ target: {name, value} }) {
     const data = { ...this.state.data, [name]: value }
     //const errors = { ...this.state.errors, [name]: value}
@@ -47,21 +48,25 @@ class CreatorShow extends React.Component{
   handleSubmit(e) {
     e.preventDefault()
 
-    // const creatorId = this.state.creator.id
-    //
-    // this.setState({ data: { creatorId }})
-    console.log('this is this.state.data', { ...this.state.data, creatorId: this.state.creator._id })
     axios.post('/api/contact', { ...this.state.data, creatorId: this.state.creator._id })
       .then(() => {
-        console.log('Posted')
-        this.setState({ ...this.state.data, success: 'Message sent!'})
-        console.log(this.state.success)
+        this.colourButton('success', 'Sent')
+
       })
       .catch(err => {
         console.log(err.response.data)
         this.setState({ errors: err.response.data })
+        this.colourButton('warning', 'Failed')
       })
   }
+
+  colourButton(btnColour, btnText) {
+    this.setState({ btnColour: btnColour, btnText: btnText })
+    setTimeout(()=> {
+      this.setState({ btnColour: 'info', btnText: 'Send' })
+    }, 2000)
+  }
+
 
   handleDelete(){
     axios.delete(`/api/creators/${this.state.creator._id}`, {
@@ -74,6 +79,8 @@ class CreatorShow extends React.Component{
       .then(() => this.props.history.push('/items'))
       .catch(err => console.log(err))
   }
+
+
 
   render(){
     if (!this.state.creator) return <p>Loading...</p>

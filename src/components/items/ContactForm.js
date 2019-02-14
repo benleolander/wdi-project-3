@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
+import Flash from '../../lib/Flash'
 
 import ContactCreatorForm from '../creator/ContactCreatorForm'
 
@@ -15,7 +16,8 @@ class ContactForm extends React.Component {
         body: ''
       },
       errors: {},
-      success: ''
+      btnColour: 'info',
+      btnText: 'Send'
     }
 
 
@@ -33,9 +35,10 @@ class ContactForm extends React.Component {
     console.log('Submitting this -->', this.props.location.state.id)
     axios
       .post(`/api/items/${this.props.location.state.id}/contact`, this.state.data)
-      .then(res => console.log(res.data))
-      .then(this.setState({success: 'Message sent'}))
-      //.then(()=> this.props.history.goBack())
+      .then(()=> {
+        this.props.history.goBack()
+        Flash.setMessage('success','Message sent')
+      })
 
       .catch(err => {
         this.setState({ errors: err.response.data })
@@ -51,7 +54,8 @@ class ContactForm extends React.Component {
             handleSubmit={this.handleSubmit}
             data={this.state.data}
             errors={this.state.errors}
-            success={this.state.success}
+            btnColour={this.state.btnColour}
+            btnText={this.state.btnText}
           />
         </div>
       </main>

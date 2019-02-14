@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContactCreatorForm = ({ handleChange, handleSubmit, data, errors, success }) => {
+const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, data, errors }) => {
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
@@ -36,8 +36,7 @@ const ContactCreatorForm = ({ handleChange, handleSubmit, data, errors, success 
         />
         {errors.body && <small>{errors.body}</small>}
       </div>
-      <button className="button is-black">Submit</button>
-      {success && <small>{success}</small>}
+      <button className={`button is-${btnColour}`}><span>{btnText} </span></button>
     </form>
   )
 }

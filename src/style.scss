@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "~bulma/bulma"; // GENERAL *********************************************************************
-$gold: #FFD700;
+//#EBD295
+$gold: #000;
 
 * {
   box-sizing: border-box;
@@ -27,11 +28,39 @@ nav {
 }
 
 .button {
-  opacity: 0.9;
+  opacity: 0.8;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 
   &:hover {
     opacity: 1.0;
   }
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 .star-ratings-css {
@@ -40,7 +69,6 @@ nav {
   font-size: 25px;
   height: 25px;
   width: 7rem;
-  margin: 0 auto;
   position: relative;
   padding: 0;
   text-shadow: 0 1px 0 #a2a2a2;
@@ -132,6 +160,31 @@ nav {
   }
 }
 
+.item-info {
+  h3.subtitle {
+    margin-bottom: 0;
+  }
+
+  .editDelete {
+    display: flex;
+    justify-content: flex-start;
+
+    .editDeleteButtons {
+      margin-right: 5px;
+    }
+  }
+
+  .item-description {
+    margin: 10px 0;
+  }
+
+  .contact-container {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
 .card.creatorProfile {
   .card-image {
     img {
@@ -155,6 +208,20 @@ nav {
     transform: scale(0.7);
   }
 }
+
+.card.comments {
+  margin: 10px auto;
+
+  .card-footer {
+    a {
+      margin: 5px auto auto;
+    }
+  }
+
+  .comment-body {
+    margin-top: 10px;
+  }
+}
 // CREATOR SHOW ****************************************************************
 
 .creator-profile {
@@ -165,8 +232,8 @@ nav {
   .image {
     background-size: cover;
     border-radius: 100%;
-    width: 12rem;
-    height: 12rem;
+    width: 10rem;
+    height: 10rem;
   }
 
   h1.title {

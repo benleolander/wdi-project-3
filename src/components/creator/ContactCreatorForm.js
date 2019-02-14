@@ -12,7 +12,7 @@ const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, da
           value={data.name}
           onChange={handleChange}
         />
-        <small>{errors.name}</small>
+        <small className="help is-danger">{errors.name}</small>
       </div>
       <div className="field">
         <label className="label">Email</label>
@@ -23,7 +23,7 @@ const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, da
           value={data.email}
           onChange={handleChange}
         />
-        {errors.email && <small>{errors.email}</small>}
+        {errors.email && <small className="help is-danger">{errors.email}</small>}
       </div>
       <div className="field">
         <label className="label">Message</label>
@@ -34,7 +34,7 @@ const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, da
           value={data.body}
           onChange={handleChange}
         />
-        {errors.body && <small>{errors.body}</small>}
+        {errors.body && <small className="help is-danger">{errors.body}</small>}
       </div>
       <button className={`button is-${btnColour}`}><span>{btnText} </span></button>
     </form>

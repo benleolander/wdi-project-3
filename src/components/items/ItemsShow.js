@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
 import StarRatings from '../common/StarRatings'
+import Loading from '../common/Loading'
 
 class ItemsShow extends React.Component {
   constructor(){
@@ -32,7 +33,7 @@ class ItemsShow extends React.Component {
   }
 
   render(){
-    if (!this.state) return null
+    if (!this.state) return <Loading />
     const {
       _id,
       name,

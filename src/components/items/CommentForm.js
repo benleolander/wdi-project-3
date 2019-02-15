@@ -25,8 +25,7 @@ class CommentForm extends React.Component {
     e.preventDefault()
     axios
       .post(`/api/items/${this.props.location.state.id}/comment`, this.state.data)
-      .then(res => {
-        console.log(res.data)
+      .then(() => {
         this.props.history.push(`/items/${this.props.location.state.id}`)
       })
       .catch(err => alert(err.message))

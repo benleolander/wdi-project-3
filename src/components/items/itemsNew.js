@@ -34,20 +34,17 @@ class ItemsNew extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.data)
     axios
       .post(
         '/api/items',
         this.state.data,
         { headers: { Authorization: `Bearer ${Auth.getToken()}` } }
       )
-      .then(res => {
-        console.log(res.data)
+      .then(() => {
         this.props.history.push('/')
       })
       .catch(err => {
         this.setState({ errors: err.response.data })
-        console.log('HEELLO', this.state.errors)
       })
   }
 
@@ -61,6 +58,7 @@ class ItemsNew extends React.Component {
     return (
       <main className="section">
         <div className="container">
+          <h2 className="title">Post A New Item</h2>
           <ItemsForm
             data={this.state.data}
             errors={this.state.errors}

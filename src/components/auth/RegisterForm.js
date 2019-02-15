@@ -86,7 +86,7 @@ const RegisterForm = ({
                   name: 'image',
                   value: res.filesUploaded[0].url
                 }})}
-              onError={(err) => console.log(err)}
+              onError={(err) => console.error(err)}
               buttonText={'Add Profile pic'}
               buttonClass={'filestack-btn button is-info'}
             />

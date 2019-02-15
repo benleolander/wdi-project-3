@@ -23,13 +23,11 @@ class Login extends React.Component {
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
     const errors = {...this.state.errors, message: null}
-    console.log(this.state.errors)
     this.setState({ data, errors })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.data)
     axios
       .post('/api/login', this.state.data)
       .then((res) => {

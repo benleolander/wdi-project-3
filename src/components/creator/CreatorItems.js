@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import StarRatings from '../common/StarRatings'
 
 const CreatorItems = ({ items, selected, handleClick }) => {
   const sortedItems = items.sort((a, b) => {
@@ -15,6 +16,10 @@ const CreatorItems = ({ items, selected, handleClick }) => {
         style={{
           backgroundImage: `url(${items[selected].image})`
         }}>
+        <div id="creatorItemDescription">
+          <h3 className="title">{items[selected].name}</h3>
+          <StarRatings width={items[selected].averageRating} />
+        </div>
       </Link>
       <div className="profileImagesSmall columns is-mobile">
         {

@@ -115,7 +115,7 @@ class CreatorShow extends React.Component{
                     to={`/creators/${_id}/edit`}
                     className="button is-outlined is-info"
                   >
-                  Edit profile
+                  Edit Profile
                   </Link>
                   <button
                     onClick={this.handleDelete}
@@ -126,7 +126,7 @@ class CreatorShow extends React.Component{
                   >
                     <span
                       className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
-                    >Delete</span>
+                    >Delete Profile</span>
                     <span
                       className={`confirm ${this.state.deleteBtn ? 'active':''}`}
                     >Are you sure?</span>
@@ -145,7 +145,7 @@ class CreatorShow extends React.Component{
             {
               items.length === 0 ?
                 <div className="column">
-                  <h1 className="title">
+                  <h1 className="title is-5">
                     {`${this.state.creator.username} hasn't added any items yet...`}
                   </h1>
                 </div> :

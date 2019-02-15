@@ -233,6 +233,12 @@ form {
   width: 5rem;
   border-radius: 100%;
   border: 3px solid #ccc;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    border: 3px solid $info;
+  }
 }
 // ITEM SHOW > COMMENT BOX *****************************************************
 
@@ -478,10 +484,6 @@ form {
   }
 }
 
-@keyframes type {
-  from{}
-}
-
 // MEDIA QUERIES ***************************************************************
 @media only screen and (max-width: 1088px) {
   .navbar-menu {
@@ -513,5 +515,20 @@ form {
 @media only screen and (max-width: 769px) {
   #loginFormSection.displayed {
     height: 30vh;
+  }
+
+  .profileImageLarge.image {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .profileImagesSmall {
+    div.column {
+      width: 25%!important;
+
+      div.image {
+        width: 100%;
+      }
+    }
   }
 }

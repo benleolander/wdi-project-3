@@ -3,8 +3,9 @@ import React from 'react'
 const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, data, errors }) => {
   return(
     <form onSubmit={handleSubmit}>
+      <label className="label">Contact me</label>
       <div className="field">
-        <label className="label">Name</label>
+        <label className="label">Your name</label>
         <input
           className="input"
           name="name"
@@ -15,7 +16,7 @@ const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, da
         <small className="help is-danger">{errors.name}</small>
       </div>
       <div className="field">
-        <label className="label">Email</label>
+        <label className="label">Your email</label>
         <input
           className="input"
           type="email"
@@ -27,7 +28,7 @@ const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, da
         {errors.email && <small className="help is-danger">{errors.email}</small>}
       </div>
       <div className="field">
-        <label className="label">Message</label>
+        <label className="label">Your message</label>
         <textarea
           className="textarea"
           name="body"

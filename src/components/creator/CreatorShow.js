@@ -118,7 +118,7 @@ class CreatorShow extends React.Component{
                     to={`/creators/${_id}/edit`}
                     className="button is-outlined is-info"
                   >
-                  Edit profile
+                  Edit Profile
                   </Link>
                   <button
                     onClick={this.handleDelete}
@@ -129,7 +129,7 @@ class CreatorShow extends React.Component{
                   >
                     <span
                       className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
-                    >Delete</span>
+                    >Delete Profile</span>
                     <span
                       className={`confirm ${this.state.deleteBtn ? 'active':''}`}
                     >Confirm Delete</span>
@@ -147,7 +147,10 @@ class CreatorShow extends React.Component{
                     btnColour = {this.state.btnColour}
                   />
                   :
-                  <h1 className="title is-3"> Welcome to your profile</h1>
+                  <Link
+                    className="button is-info"
+                    to="/items/new"
+                  >Add an item</Link>
               }
             </div>
             {

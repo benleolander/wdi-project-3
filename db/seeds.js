@@ -51,6 +51,13 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         categories: ['wood', 'table', 'creative', 'stairs']
       }),
       Item.create({
+        name: 'Harambe Memorial Clock',
+        image: 'https://ih0.redbubble.net/image.387217919.9149/clkf,bamboo,white,x330-pad,315x294,ffffff.u1.jpg',
+        creator: data.creator,
+        description: 'Never forget',
+        categories: ['art', 'clock', 'creative']
+      }),
+      Item.create({
         name: 'Copper Rail',
         image: 'https://images.victorianplumbing.co.uk/images/SUN-TR19_p1.jpg',
         creator: data.creator,
@@ -147,7 +154,29 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         image: 'https://i.etsystatic.com/8729771/r/il/718f10/1822045331/il_1140xN.1822045331_h18k.jpg',
         creator: data.creator,
         description: 'Vintage Style Alice In Wonderland Wall Clock: The Mad Hatters Tea Party',
-        categories: ['clock', 'kitchen', 'art']
+        categories: ['clock', 'kitchen', 'art'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Tom',
+            rating: 4,
+            body: 'This is pretty cool'
+          },
+          {
+            name: 'Beth',
+            rating: 3,
+            body: 'Looks ok....'
+          },
+          {
+            name: 'Crazy Jerry',
+            rating: 1,
+            body: 'Ordered and the seller was very rude you can\'t imagine'
+          }
+        ]
       }),
       Item.create({
         name: 'Swinging bed',
@@ -162,6 +191,35 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         creator: data.creator,
         description: 'Hanging, floating bed',
         categories: ['bed', 'bedroom', 'hanging', 'art']
+      }),
+      Item.create({
+        name: 'Wooden Clock',
+        image: 'https://i.etsystatic.com/14721647/r/il/430090/1223932435/il_1140xN.1223932435_s7dw.jpg',
+        creator: data.creator,
+        description: 'A wizard is never late, Frodo Baggins. Nor is he early. He arrives precisely when he means to.',
+        categories: ['clock', 'wood', 'hanging', 'art'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Tom',
+            rating: 4,
+            body: 'This is pretty cool'
+          },
+          {
+            name: 'Beth',
+            rating: 3,
+            body: 'Looks ok....'
+          },
+          {
+            name: 'Dex',
+            rating: 5,
+            body: 'Yes!'
+          }
+        ]
       }),
       Item.create({
         name: 'Storage boxes',
@@ -197,6 +255,42 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         creator: data.creator,
         description: 'Diy lamp.',
         categories: ['table', 'lighting', 'lamp', 'bedroom', 'study']
+      }),
+      Item.create({
+        name: 'Rainbow Arch Bridge',
+        image: 'https://i.etsystatic.com/16755122/r/il/b082a8/1494423958/il_1140xN.1494423958_pno1.jpg',
+        creator: data.creator,
+        description: 'Yeah, the billy goat made a bridge. Not that original.',
+        categories: ['art', 'bedroom', 'study']
+      }),
+      Item.create({
+        name: 'Glass Teardrop Planter',
+        image: 'https://i.etsystatic.com/15168113/r/il/f953d8/1484773486/il_1140xN.1484773486_12d2.jpg',
+        creator: data.creator,
+        description: 'Introduce some plant life into your home or office with our DIY Terrarium Kit with optional plants. It\'s perfect to fill with your choice of beautiful plants to refresh any room that needs a little brightening up with minimal maintenance.',
+        categories: ['art', 'bedroom', 'hanging'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Tom',
+            rating: 4,
+            body: 'This is pretty cool'
+          },
+          {
+            name: 'Beth',
+            rating: 3,
+            body: 'Looks ok....'
+          },
+          {
+            name: 'Dex',
+            rating: 1,
+            body: 'Dumb'
+          }
+        ]
       })
     })
     .then(() => {
@@ -258,6 +352,44 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         ]
       }),
       Item.create({
+        name: 'Walnut Cable Organiser',
+        image: 'https://i.etsystatic.com/13994914/r/il/3e855f/1474588053/il_1140xN.1474588053_mkid.jpg',
+        creator: data.creator,
+        description: 'Is the situation when dozens of cords and cables hang near your laptop and you do not know where to put them familiar to you? Or maybe you get confused with them or even worse - lose, and then you look for them half an hour. Then we offer you a useful, small and convenient cable manager that will help you to organize a comfortable workplace and order on your writing table near a laptop or computer.',
+        categories: ['bedroom', 'stand', 'wood'],
+        comments: [
+          {
+            name: 'Tom',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Beth',
+            rating: 4,
+            body: 'This is pretty cool'
+          }
+        ]
+      }),
+      Item.create({
+        name: 'Terrarium Kit',
+        image: 'https://i.etsystatic.com/15168113/r/il/37c27f/1785786815/il_1140xN.1785786815_o5mk.jpg',
+        creator: data.creator,
+        description: 'Bring contemporary style into your home or office with our DIY Terrarium Kit. It\'s perfect to fill with your choice of beautiful plants to refresh any room that needs a little brightening up with minimal maintenance . The kit contains a wide selection of materials that allow you to be creative and build your own mini garden either by yourself, friends and/or family with the STEP BY STEP GUIDE provided.',
+        categories: ['bedroom', 'wood'],
+        comments: [
+          {
+            name: 'Tom',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Beth',
+            rating: 4,
+            body: 'This is pretty cool'
+          }
+        ]
+      }),
+      Item.create({
         name: 'Bedroom shelves',
         image: 'https://i.pinimg.com/564x/4e/14/d6/4e14d6025158d712b1045edb84b1969d.jpg',
         creator: data.creator,
@@ -301,6 +433,42 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
     })
     .then(data => {
       return Item.create({
+        name: 'Hammock Chair',
+        image: 'https://i.etsystatic.com/14310081/r/il/a0b9a2/1602735747/il_1140xN.1602735747_n63q.jpg',
+        creator: data.creator,
+        description: 'Our largest, most Comfortable hammock chair. We carry matching pillows for your hammock chair. Woven into the body is an extra long extendable footrest that enables the user to really stretch out. The wood Spreader bar has multiple coats of marine varnish to protect it from the elements. These are probably the most luxurious and comfortable hammock chairs on the market today!',
+        categories: ['art', 'bedroom', 'study', 'wood'],
+        comments: [
+          {
+            name: 'Ben',
+            rating: 5,
+            body: 'I love this!'
+          },
+          {
+            name: 'Tom',
+            rating: 4,
+            body: 'This is pretty cool'
+          },
+          {
+            name: 'Larry',
+            rating: 1,
+            body: 'I sat in this and now everyone hates me'
+          },
+          {
+            name: 'Dex',
+            rating: 5,
+            body: 'Yes!'
+          }
+        ]
+      }),
+      Item.create({
+        name: 'Macrame Plant Hanging Table',
+        image: 'https://i.etsystatic.com/6937589/r/il/647f75/1613150578/il_1140xN.1613150578_3grl.jpg',
+        creator: data.creator,
+        description: 'Macrame shelf for hanging plants',
+        categories: ['hanging', 'wood', 'chic']
+      }),
+      Item.create({
         name: 'Wall clock',
         image: 'https://i.shelterness.com/2016/04/trendy-diy-cork-color-block-clock-1-750x523.jpg',
         creator: data.creator,

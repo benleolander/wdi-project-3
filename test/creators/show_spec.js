@@ -10,8 +10,8 @@ let creator
 describe('GET /creators/:id', () => {
   beforeEach(done => {
     Promise.all([
-      Creator.deleteMany({}),
-      Item.deleteMany({})
+      Item.deleteMany({}),
+      Creator.deleteMany({})
     ])
       .then(()=> Creator.create(creatorData))
       .then(res => creator = res)
@@ -33,10 +33,24 @@ describe('GET /creators/:id', () => {
         expect(res.body).to.be.an('object')
         expect(res.body).to.include.keys([
           '_id',
+          'username',
+          'bio',
           'items'
         ])
         done()
       })
   })
-  
+  it('should return the correct creator data with correct items data', done => {
+
+    api
+      .get(`/api/creators/${creator._id}`)
+      .end((err, res) => {
+        expect(res.body.username).to.eq(creatorData.username)
+        expect(res.body.bio).to.eq(creatorData.bio)
+        console.log('ITEMS', res.body.items)
+        expect(res.body.items[0].name).to.eq(itemData[0].name)
+        done()
+      })
+  })
+
 })

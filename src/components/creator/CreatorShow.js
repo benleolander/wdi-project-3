@@ -115,7 +115,7 @@ class CreatorShow extends React.Component{
                     to={`/creators/${_id}/edit`}
                     className="button is-outlined is-info"
                   >
-                  Edit profile
+                  Edit Profile
                   </Link>
                   <button
                     onClick={this.handleDelete}
@@ -126,21 +126,29 @@ class CreatorShow extends React.Component{
                   >
                     <span
                       className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
-                    >Delete</span>
+                    >Delete Profile</span>
                     <span
                       className={`confirm ${this.state.deleteBtn ? 'active':''}`}
                     >Are you sure?</span>
                   </button>
                 </div>
               }
-              <ContactCreatorForm
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                data = {this.state.data}
-                errors = {this.state.errors}
-                btnText = {this.state.btnText}
-                btnColour = {this.state.btnColour}
-              />
+              {
+                Auth.getPayload().sub !== _id ?
+                  <ContactCreatorForm
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    data = {this.state.data}
+                    errors = {this.state.errors}
+                    btnText = {this.state.btnText}
+                    btnColour = {this.state.btnColour}
+                  />
+                  :
+                  <Link
+                    className="button is-info"
+                    to="/items/new"
+                  >Add an item</Link>
+              }
             </div>
             {
               items.length === 0 ?

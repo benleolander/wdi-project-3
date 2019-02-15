@@ -9,10 +9,10 @@ const commentSchema = new mongoose.Schema({
 })
 
 const itemSchema = new mongoose.Schema({
-  name: { type: String, required: 'Please add a title' },
+  name: { type: String, maxlength: 50, required: 'Please add a title' },
   image: { type: String, required: 'Please add an image' },
   creator: { type: mongoose.Schema.ObjectId, ref: 'Creator', required: true },
-  description: { type: String, required: 'Please add a description' },
+  description: { type: String, maxlength: 350, required: 'Please add a description' },
   categories: { type: Array, required: 'Please select at least one catagory' },
   comments: [ commentSchema ]
 }, {

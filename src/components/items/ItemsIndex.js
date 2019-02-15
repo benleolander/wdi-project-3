@@ -7,6 +7,7 @@ import CategoriesData from '../common/CategoriesData'
 import ItemImage from './ItemImage'
 import SearchBar from '../common/SearchBar'
 import selectStyles from '../common/SelectStyles'
+import Loading from '../common/Loading'
 
 class ItemsIndex extends React.Component {
   constructor(){
@@ -86,6 +87,7 @@ class ItemsIndex extends React.Component {
   }
 
   render(){
+    if(!this.state.data) return <Loading />
     return (
       <div>
         <SearchBar

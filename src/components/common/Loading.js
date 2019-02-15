@@ -4,6 +4,12 @@ class Loading extends React.Component {
   constructor(){
     super()
 
+    this.animation = setInterval(() => {
+      let count = this.state.count + 1
+      if(count > 2) count = -1
+      this.setState({ count })
+    }, 500)
+
     this.state = {
       chars: ['.', '.', '.'],
       count: -1
@@ -11,11 +17,11 @@ class Loading extends React.Component {
   }
 
   componentDidMount(){
-    setInterval(() => {
-      let count = this.state.count + 1
-      if(count > 2) count = -1
-      this.setState({ count })
-    }, 500)
+    this.animation
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.animation)
   }
 
   render(){

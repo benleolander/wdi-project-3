@@ -144,7 +144,10 @@ class CreatorShow extends React.Component{
                     btnColour = {this.state.btnColour}
                   />
                   :
-                  <h1 className="title is-3"> Welcome to your profile</h1>
+                  <Link
+                    className="button is-info"
+                    to="/items/new"
+                  >Add an item</Link>
               }
             </div>
             {

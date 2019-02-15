@@ -1,11 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
 import Auth from '../../lib/Auth'
 import StarRatings from '../common/StarRatings'
 import CreatorItems from './CreatorItems'
+import Loading from '../common/Loading'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -85,7 +87,7 @@ class CreatorShow extends React.Component{
 
 
   render(){
-    if (!this.state.creator) return <p>Loading...</p>
+    if (!this.state.creator) return <Loading />
     const { username, image, items, bio, creatorAverage, _id } = this.state.creator
     const isAuthenticated = (() => {
       if(Auth.getPayload().sub === _id) return true

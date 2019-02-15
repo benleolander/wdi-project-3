@@ -101,6 +101,27 @@ nav {
     z-index: 0;
   }
 }
+
+#deleteProfileBtn,
+#deleteItemBtn {
+  span {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .deleteBtn {
+    position: absolute;
+  }
+
+  span.active {
+    opacity: 1;
+  }
+}
+
+#deleteItemBtn {
+  margin: 15px 5px 0 0;
+}
+
 // CONTACT (CREATOR) FORM ******************************************************
 
 form {
@@ -132,6 +153,7 @@ form {
 // ITEMS INDEX *****************************************************************
 
 #sortButton {
+  margin-left: 10px;
   padding-bottom: 31px;
   display: flex;
   align-items: baseline;
@@ -564,6 +586,15 @@ form {
       h3 {
         font-size: 0.8em;
       }
+    }
+  }
+
+  div#sortButton {
+    width: 5rem;
+    font-size: 0.7em;
+
+    span {
+      padding-top: 0.34rem;
     }
   }
 

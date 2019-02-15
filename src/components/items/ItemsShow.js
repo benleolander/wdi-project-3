@@ -9,6 +9,9 @@ class ItemsShow extends React.Component {
   constructor(){
     super()
 
+    this.state = {
+      deleteBtn: false
+    }
 
     this.handleDelete = this.handleDelete.bind(this)
   }
@@ -24,16 +27,22 @@ class ItemsShow extends React.Component {
 
 
   handleDelete(){
-    axios.delete(`/api/items/${this.props.match.params.id}`, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => this.props.history.push('/items'))
-      .catch(err => console.error(err))
+    if(this.state.deleteBtn){
+      axios.delete(`/api/items/${this.props.match.params.id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+        .then(() => this.props.history.push('/items'))
+        .catch(err => console.error(err))
+    }
+    this.setState({ deleteBtn: !this.state.deleteBtn })
+    setTimeout(() => {
+      this.setState({ deleteBtn: !this.state.deleteBtn })
+    }, 3000)
 
   }
 
   render(){
-    if (!this.state) return <Loading />
+    if (!this.state.data) return <Loading />
     const {
       _id,
       name,
@@ -86,7 +95,20 @@ class ItemsShow extends React.Component {
               </div>
               <div className="editDelete">
                 {isAuthenticated() && <Link to={`/items/${_id}/edit`} className="button is-info editDeleteButtons">Edit Item</Link>}
-                {isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger editDeleteButtons">Delete Item</button>}
+                {isAuthenticated() && <button
+                  onClick={this.handleDelete}
+                  className={`button ${this.state.deleteBtn ?
+                    'is-danger':
+                    'is-black'}`}
+                  id="deleteItemBtn"
+                >
+                  <span
+                    className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
+                  >Delete Item</span>
+                  <span
+                    className={`confirm ${this.state.deleteBtn ? 'active':''}`}
+                  >Confirm Delete</span>
+                </button>}
               </div>
               <p className="item-description">{description}</p>
               <Link to={{

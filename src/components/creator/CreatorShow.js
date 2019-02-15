@@ -82,7 +82,10 @@ class CreatorShow extends React.Component{
         .then(() => this.props.history.push('/items'))
         .catch(err => console.error(err))
     }
-    this.setState({ deleteBtn: !this.state.deletBtn })
+    this.setState({ deleteBtn: !this.state.deleteBtn })
+    setTimeout(() => {
+      this.setState({ deleteBtn: !this.state.deleteBtn })
+    }, 3000)
   }
 
 
@@ -129,7 +132,7 @@ class CreatorShow extends React.Component{
                     >Delete Profile</span>
                     <span
                       className={`confirm ${this.state.deleteBtn ? 'active':''}`}
-                    >Are you sure?</span>
+                    >Confirm Delete</span>
                   </button>
                 </div>
               }

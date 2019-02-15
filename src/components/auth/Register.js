@@ -24,6 +24,7 @@ class Register extends React.Component {
   }
 
   handleChange({target: { name, value }}) {
+    if ((name === 'email' || name === 'username') && value.includes(' ')) return
     const data = { ...this.state.data, [name]: value }
     const errors = {...this.state.errors, [name]: null}
     this.setState({ data, errors })

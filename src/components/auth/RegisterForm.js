@@ -30,7 +30,8 @@ const RegisterForm = ({
           <input
             className="input"
             name="email"
-            placeholder="email"
+            type="email"
+            placeholder="Email"
             value={email}
             onChange={handleChange}
           />

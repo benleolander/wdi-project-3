@@ -233,6 +233,12 @@ form {
   width: 5rem;
   border-radius: 100%;
   border: 3px solid #ccc;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    border: 3px solid $info;
+  }
 }
 // ITEM SHOW > COMMENT BOX *****************************************************
 
@@ -476,10 +482,6 @@ form {
       }
     }
   }
-}
-
-@keyframes type {
-  from{}
 }
 
 // MEDIA QUERIES ***************************************************************

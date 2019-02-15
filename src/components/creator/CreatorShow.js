@@ -1,10 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 import ContactCreatorForm from './ContactCreatorForm'
 import Flash from '../../lib/Flash'
 import Auth from '../../lib/Auth'
 import StarRatings from '../common/StarRatings'
 import CreatorItems from './CreatorItems'
+import Loading from '../common/Loading'
 
 class CreatorShow extends React.Component{
   constructor(){
@@ -55,9 +58,8 @@ class CreatorShow extends React.Component{
 
       })
       .catch(err => {
-        console.log(err.response.data)
         this.setState({ errors: err.response.data })
-        this.colourButton('warning', 'Failed')
+        this.colourButton('danger', 'Failed')
       })
   }
 
@@ -67,11 +69,6 @@ class CreatorShow extends React.Component{
       this.setState({ btnColour: 'info', btnText: 'Contact creator' })
     }, 2000)
   }
-
-  // clearForm(){
-  //   this.setState({ /data(.*)\w+/: '' })
-  // }
-
 
   handleDelete(){
     if(this.state.deleteBtn){
@@ -83,15 +80,14 @@ class CreatorShow extends React.Component{
           Flash.setMessage('danger', 'You have deleted your account. Sorry to see you go!')
         })
         .then(() => this.props.history.push('/items'))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
     }
     this.setState({ deleteBtn: !this.state.deletBtn })
   }
 
 
-
   render(){
-    if (!this.state.creator) return <p>Loading...</p>
+    if (!this.state.creator) return <Loading />
     const { username, image, items, bio, creatorAverage, _id } = this.state.creator
     const isAuthenticated = (() => {
       if(Auth.getPayload().sub === _id) return true
@@ -114,20 +110,28 @@ class CreatorShow extends React.Component{
               <p className="has-text-grey-dark">{bio}</p>
               {
                 isAuthenticated() &&
-                <button
-                  onClick={this.handleDelete}
-                  className={`button ${this.state.deleteBtn ?
-                    'is-danger':
-                    'is-black'}`}
-                  id="deleteProfileBtn"
-                >
-                  <span
-                    className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
-                  >Delete</span>
-                  <span
-                    className={`confirm ${this.state.deleteBtn ? 'active':''}`}
-                  >Are you sure?</span>
-                </button>
+                <div className="creator-buttons">
+                  <Link
+                    to={`/creators/${_id}/edit`}
+                    className="button is-outlined is-info"
+                  >
+                  Edit profile
+                  </Link>
+                  <button
+                    onClick={this.handleDelete}
+                    className={`button ${this.state.deleteBtn ?
+                      'is-danger':
+                      'is-black'}`}
+                    id="deleteProfileBtn"
+                  >
+                    <span
+                      className={`deleteBtn ${this.state.deleteBtn ? '':'active'}`}
+                    >Delete</span>
+                    <span
+                      className={`confirm ${this.state.deleteBtn ? 'active':''}`}
+                    >Are you sure?</span>
+                  </button>
+                </div>
               }
               <ContactCreatorForm
                 handleChange={this.handleChange}

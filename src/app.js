@@ -14,6 +14,7 @@ import ItemsNew from './components/items/ItemsNew'
 import ItemEdit from './components/items/ItemEdit'
 import ContactForm from './components/items/ContactForm'
 import CommentForm from './components/items/CommentForm'
+import CreatorEdit from './components/creator/CreatorEdit'
 import CreatorShow from './components/creator/CreatorShow'
 
 class App extends React.Component {
@@ -29,6 +30,7 @@ class App extends React.Component {
           <FlashMessages />
 
           <Switch>
+            <Route path="/creators/:id/edit" component={CreatorEdit} />
             <Route path="/creators/:id" component={CreatorShow} />
             <Route path="/items/:id/edit" component={ItemEdit} />
             <Route path="/items/new" component={ItemsNew} />

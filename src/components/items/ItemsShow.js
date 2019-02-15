@@ -27,7 +27,7 @@ class ItemsShow extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/items'))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
   }
 

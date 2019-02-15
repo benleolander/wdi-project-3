@@ -145,7 +145,7 @@ class CreatorShow extends React.Component{
             {
               items.length === 0 ?
                 <div className="column">
-                  <h1 className="title">
+                  <h1 className="title is-5">
                     {`${this.state.creator.username} hasn't added any items yet...`}
                   </h1>
                 </div> :

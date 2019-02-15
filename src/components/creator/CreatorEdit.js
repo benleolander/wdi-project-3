@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import Auth from '../../lib/Auth'
 import Flash from '../../lib/Flash'
+import Loading from '../common/Loading'
 
 import CreatorEditForm from './CreatorEditForm'
 
@@ -46,8 +47,8 @@ class CreatorEdit extends React.Component {
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
-
   render() {
+    if (this.state.data.length === 0) return <Loading />
     return (
       <main className="section">
         <div className="container">

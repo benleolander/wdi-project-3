@@ -133,14 +133,19 @@ class CreatorShow extends React.Component{
                   </button>
                 </div>
               }
-              <ContactCreatorForm
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                data = {this.state.data}
-                errors = {this.state.errors}
-                btnText = {this.state.btnText}
-                btnColour = {this.state.btnColour}
-              />
+              {
+                Auth.getPayload().sub !== _id ?
+                  <ContactCreatorForm
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    data = {this.state.data}
+                    errors = {this.state.errors}
+                    btnText = {this.state.btnText}
+                    btnColour = {this.state.btnColour}
+                  />
+                  :
+                  <h1 className="title is-3"> Welcome to your profile</h1>
+              }
             </div>
             {
               items.length === 0 ?

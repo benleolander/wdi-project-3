@@ -21,7 +21,7 @@ const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) =
               value={data.name}
               onChange={handleChange}
             />
-            {errors.name && <small className="help is-danger">A name is required</small>}
+            {errors.name && <small className="help is-danger">{errors.name}</small>}
           </div>
           <div className="field">
             <label className="label">Description</label>

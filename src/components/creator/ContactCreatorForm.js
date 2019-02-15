@@ -18,6 +18,7 @@ const ContactCreatorForm = ({ btnColour, btnText, handleChange, handleSubmit, da
         <label className="label">Email</label>
         <input
           className="input"
+          type="email"
           name="email"
           placeholder="Email"
           value={data.email}

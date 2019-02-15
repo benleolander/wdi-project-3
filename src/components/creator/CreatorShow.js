@@ -82,7 +82,10 @@ class CreatorShow extends React.Component{
         .then(() => this.props.history.push('/items'))
         .catch(err => console.error(err))
     }
-    this.setState({ deleteBtn: !this.state.deletBtn })
+    this.setState({ deleteBtn: !this.state.deleteBtn })
+    setTimeout(() => {
+      this.setState({ deleteBtn: !this.state.deleteBtn })
+    }, 3000)
   }
 
 
@@ -129,25 +132,39 @@ class CreatorShow extends React.Component{
                     >Delete Profile</span>
                     <span
                       className={`confirm ${this.state.deleteBtn ? 'active':''}`}
-                    >Are you sure?</span>
+                    >Confirm Delete</span>
                   </button>
                 </div>
               }
-              <ContactCreatorForm
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                data = {this.state.data}
-                errors = {this.state.errors}
-                btnText = {this.state.btnText}
-                btnColour = {this.state.btnColour}
-              />
+              {
+                Auth.getPayload().sub !== _id ?
+                  <ContactCreatorForm
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    data = {this.state.data}
+                    errors = {this.state.errors}
+                    btnText = {this.state.btnText}
+                    btnColour = {this.state.btnColour}
+                  />
+                  :
+                  <Link
+                    className="new-item-btn button is-info"
+                    to="/items/new"
+                  >Add an item</Link>
+              }
             </div>
             {
               items.length === 0 ?
                 <div className="column">
-                  <h1 className="title is-5">
-                    {`${this.state.creator.username} hasn't added any items yet...`}
-                  </h1>
+                  <h3 className="subtitle is-5">{username} has not uploaded any items yet...</h3>
+                  <div
+                    className="placeholder-img image is-sqaure"
+                    style={{
+                      backgroundImage: 'url(../../assets/create.png)'
+                    }}
+                  >
+                    <div id="placeholder-overlay"></div>
+                  </div>
                 </div> :
                 <CreatorItems
                   items={items}

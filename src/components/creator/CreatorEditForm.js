@@ -9,7 +9,7 @@ const CreatorEditForm = ({
 }) => {
   const { bio } = data
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id="creatorEditForm">
       <div className="field">
         <label className="label">Bio</label>
         <textarea

@@ -22,6 +22,24 @@ $stars: #000;
   outline: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.subtitle,
+.title,
+p {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 input,
 textarea {
   font-family: inherit;
@@ -31,16 +49,6 @@ textarea {
   &:not([id^="react-select"]) {
     border-bottom: 2px $info solid!important;
   }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background-color: #f9fafc;
-  min-height: 100vh;
 }
 
 .image {
@@ -93,6 +101,27 @@ nav {
     z-index: 0;
   }
 }
+
+#deleteProfileBtn,
+#deleteItemBtn {
+  span {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .deleteBtn {
+    position: absolute;
+  }
+
+  span.active {
+    opacity: 1;
+  }
+}
+
+#deleteItemBtn {
+  margin: 15px 5px 0 0;
+}
+
 // CONTACT (CREATOR) FORM ******************************************************
 
 form {
@@ -124,6 +153,7 @@ form {
 // ITEMS INDEX *****************************************************************
 
 #sortButton {
+  margin-left: 10px;
   padding-bottom: 31px;
   display: flex;
   align-items: baseline;
@@ -164,6 +194,7 @@ form {
     align-items: center;
     justify-content: center;
     background: rgba(0,0,0,0.8);
+    overflow: hidden;
 
     .star-ratings-css {
       &-top {
@@ -268,6 +299,7 @@ form {
 
 .card-content {
   height: 15rem;
+  max-width: 34rem;
   overflow: scroll;
 }
 // CREATOR SHOW ****************************************************************
@@ -336,6 +368,7 @@ form {
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: opacity 0.4s ease;
+  overflow: hidden;
 
   &:hover {
     opacity: 1;
@@ -346,7 +379,7 @@ form {
   }
 
   .star-ratings-css {
-    transform: scale(2)
+    transform: scale(2);
   }
 
   .star-ratings-css-top {
@@ -374,6 +407,22 @@ form {
     }
   }
 }
+
+.new-item-btn {
+  margin: 3rem;
+}
+
+.placeholder-img {
+  height: 30rem;
+  width: 25rem;
+  background-size: contain;
+
+  #placeholder-overlay {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(transparent 50%, #f9fafc 75%);
+  }
+}
 // REGISTRATION FORM ***********************************************************
 
 .regButton {
@@ -392,6 +441,11 @@ form {
       background-repeat: no-repeat;
     }
   }
+}
+// EDIT PROFILE FORM ***********************************************************
+
+#creatorEditForm {
+  margin-top: 7rem;
 }
 // LOGIN FORM ******************************************************************
 
@@ -452,15 +506,14 @@ form {
     }
   }
 }
-
 // LOADING *********************************************************************
 
 #loading {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -483,9 +536,12 @@ form {
     }
   }
 }
-
 // MEDIA QUERIES ***************************************************************
 @media only screen and (max-width: 1088px) {
+  a.navbar-burger.burger {
+    margin-top: 1rem;
+  }
+
   .navbar-menu {
     display: block;
     box-shadow: 0 0 0 #fff;
@@ -511,10 +567,35 @@ form {
       }
     }
   }
+
+  .itemDiv {
+    .itemDescription {
+      h3 {
+        font-size: 1.5em;
+      }
+    }
+  }
 }
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 767px) {
   #loginFormSection.displayed {
     height: 30vh;
+  }
+
+  .itemDiv {
+    .itemDescription {
+      h3 {
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  div#sortButton {
+    width: 5rem;
+    font-size: 0.7em;
+
+    span {
+      padding-top: 0.34rem;
+    }
   }
 
   .profileImageLarge.image {

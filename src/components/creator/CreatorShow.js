@@ -145,7 +145,7 @@ class CreatorShow extends React.Component{
                   />
                   :
                   <Link
-                    className="button is-info"
+                    className="new-item-btn button is-info"
                     to="/items/new"
                   >Add an item</Link>
               }
@@ -153,9 +153,15 @@ class CreatorShow extends React.Component{
             {
               items.length === 0 ?
                 <div className="column">
-                  <h1 className="title is-5">
-                    {`${this.state.creator.username} hasn't added any items yet...`}
-                  </h1>
+                  <h3 className="subtitle is-5">{username} has not uploaded any items yet...</h3>
+                  <div
+                    className="placeholder-img image is-sqaure"
+                    style={{
+                      backgroundImage: 'url(../../assets/create.png)'
+                    }}
+                  >
+                    <div id="placeholder-overlay"></div>
+                  </div>
                 </div> :
                 <CreatorItems
                   items={items}

@@ -10,7 +10,8 @@ class CommentForm extends React.Component {
         name: '',
         rating: 0,
         body: ''
-      }
+      },
+      errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -18,7 +19,8 @@ class CommentForm extends React.Component {
 
   handleChange({ target: {name, value}}) {
     const data = { ...this.state.data, [name]: value }
-    this.setState({ data })
+    const errors = {...this.state.errors, [name]: null}
+    this.setState({ data, errors })
   }
 
   handleSubmit(e) {
@@ -28,16 +30,18 @@ class CommentForm extends React.Component {
       .then(() => {
         this.props.history.push(`/items/${this.props.location.state.id}`)
       })
-      .catch(err => alert(err.message))
+      .catch(err => {
+        this.setState({ errors: err.response.data})
+      })
   }
 
   render() {
+    const { errors } = this.state
     return (
       <main className="section">
         <div className="container">
           <form onSubmit={this.handleSubmit}>
             <h2 className="title">New Comment</h2>
-
             <div className="field">
               <label className="label">Display Name</label>
               <input
@@ -47,6 +51,7 @@ class CommentForm extends React.Component {
                 value={this.state.name}
                 onChange={this.handleChange}
               />
+              {errors.name && <small className="help is-danger">{errors.name}</small>}
             </div>
             <div className="field">
               <label className="label">Rating</label>
@@ -102,8 +107,8 @@ class CommentForm extends React.Component {
                   ★
                 </label>
               </div>
+              {errors.rating && <small className="help is-danger">{errors.rating}</small>}
             </div>
-
             <div className="field">
               <label className="label">Comment</label>
               <textarea
@@ -113,6 +118,7 @@ class CommentForm extends React.Component {
                 value={this.state.body}
                 onChange={this.handleChange}
               />
+              {errors.body && <small className="help is-danger">{errors.body}</small>}
             </div>
 
             <button className="button is-info">Submit</button>

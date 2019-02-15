@@ -281,6 +281,7 @@ form {
 
 .card-content {
   height: 15rem;
+  max-width: 34rem;
   overflow: scroll;
 }
 // CREATOR SHOW ****************************************************************
@@ -360,7 +361,7 @@ form {
   }
 
   .star-ratings-css {
-    transform: scale(2)
+    transform: scale(2);
   }
 
   .star-ratings-css-top {
@@ -473,7 +474,6 @@ form {
     }
   }
 }
-
 // LOADING *********************************************************************
 
 #loading {
@@ -504,7 +504,6 @@ form {
     }
   }
 }
-
 // MEDIA QUERIES ***************************************************************
 @media only screen and (max-width: 1088px) {
 

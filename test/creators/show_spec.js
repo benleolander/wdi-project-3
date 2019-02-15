@@ -5,55 +5,52 @@ const { creatorData, itemData } = require('../mock_data.js')
 const Item = require('../../models/item')
 const Creator = require('../../models/creator')
 
-let item
+let creator
 
-describe('GET /items/:id', () => {
+describe('GET /creators/:id', () => {
   beforeEach(done => {
     Promise.all([
       Item.deleteMany({}),
       Creator.deleteMany({})
     ])
-      .then(() => Creator.create(creatorData))
+      .then(()=> Creator.create(creatorData))
+      .then(res => creator = res)
       .then(creator => itemData.map(item => ({ ...item, creator })))
       .then(itemData => Item.create(itemData))
-      .then(items => item = items[0])
       .then(() => done())
-  })
 
+  })
   it('should return a 200 response', done => {
     api
-      .get(`/api/items/${item._id}`)
+      .get(`/api/creators/${creator._id}`)
       .expect(200, done)
   })
 
-
-  it('should return the item', done => {
+  it('should return a creator with items', done => {
     api
-      .get(`/api/items/${item._id}`)
+      .get(`/api/creators/${creator._id}`)
       .end((err, res) => {
         expect(res.body).to.be.an('object')
         expect(res.body).to.include.keys([
           '_id',
-          'name',
-          'image',
-          'creator',
-          'description',
-          'categories'
+          'username',
+          'bio',
+          'items'
         ])
         done()
       })
   })
+  it('should return the correct creator data with correct items data', done => {
 
-  it('should return the correct item data', done => {
     api
-      .get(`/api/items/${item._id}`)
+      .get(`/api/creators/${creator._id}`)
       .end((err, res) => {
-        expect(res.body.name).to.eq(itemData[0].name)
-        expect(res.body.image).to.eq(itemData[0].image)
-        expect(res.body.creator).to.eq(itemData[0].creator)
-        expect(res.body.description).to.eq(itemData[0].description)
-        expect(res.body.categories).to.eq(itemData[0].name)
+        expect(res.body.username).to.eq(creatorData.username)
+        expect(res.body.bio).to.eq(creatorData.bio)
+        console.log('ITEMS', res.body.items)
+        expect(res.body.items[0].name).to.eq(itemData[0].name)
+        done()
       })
-    done()
   })
+
 })

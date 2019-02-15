@@ -105,6 +105,27 @@ nav {
     z-index: 0;
   }
 }
+
+#deleteProfileBtn,
+#deleteItemBtn {
+  span {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .deleteBtn {
+    position: absolute;
+  }
+
+  span.active {
+    opacity: 1;
+  }
+}
+
+#deleteItemBtn {
+  margin: 15px 5px 0 0;
+}
+
 // CONTACT (CREATOR) FORM ******************************************************
 
 form {

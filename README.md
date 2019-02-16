@@ -92,7 +92,34 @@ We used Mocha, Chai, Supertest and NYC and aimed to write tests to cover at leas
 
 ### Challenges
 
-- One of the hardest things...
+- One of the hardest features to implement in our app was the ability to filter the item index on the homepage by both category selection and search terms.
+![screenshot 2019-02-16 at 11 38 33](https://user-images.githubusercontent.com/44480965/52899219-8c21bc80-31df-11e9-9fe9-216710afb121.png)
+We managed to accomplish this by utilising two functions in the Items Index component, one to compare the array of category filters with each item's own category array, and another to filter the items by matching terms in item name, creator username and categories.
+```
+  compareCategories(){
+    if(this.state.categories.length === 0) return this.state.data
+    return this.state.data.filter(item => {
+      return this.state.categories.every(category => {
+        return item.categories.includes(category)
+      })
+    })
+  }
+```
+This `compareCategories` function will either return all of the items if there have been no category filters selected, or it filters the items array, returning only the items whose categories array includes every category currently in the filter selection input.  
+The array returned from `compareCategories` is then passed on to the main `filterResults` function:
+```
+  filterResults(){
+    if(this.state.search === '') return this.compareCategories()
+    const search = this.uniformString(this.state.search)
+    return this.compareCategories().filter(item =>
+      this.uniformString(item.name).includes(search) ||
+      this.uniformString(item.creator.username).includes(search) ||
+      this.uniformString(item.categories.join(',')).includes(search)
+    )
+  }
+```
+The `filterResults` function will return the items array filtered by `compareCategories` if there is no search term present. Therefore, if there aren't any search terms or category filters applied, the entire Items Index is returned. Should a search term be present, the `filterResults` function will further filter the array returned by `compareCategories` and return only items whose name, creator or categories includes the string in the search input.  
+Since the inputs' values are stored in state and the `filterResults` function is called in the `render` function of the component. These functions will run on every change in either input and will reactively render the index displayed with only the items meeting the conditions of both filter functions.
 
 ### Wins
 

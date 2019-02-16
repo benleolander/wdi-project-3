@@ -40,6 +40,10 @@ textarea {
   font-size: 3rem;
   resize: none!important;
 
+  &::placeholder{
+    color: #848484!important;
+  }
+
   &:not([id^="react-select"]) {
     border-bottom: 2px $info solid!important;
   }

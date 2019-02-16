@@ -4,10 +4,10 @@ const selectStyles = {
     borderRadius: '0',
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
+    borderBottom: '2px solid #171d22',
     '&:hover': {
       borderBottom: '2px solid #171d22'
-    },
-    borderBottom: '2px solid #171d22'
+    }
   })
 }
 

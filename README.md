@@ -93,7 +93,7 @@ We used Mocha, Chai, Supertest and NYC and aimed to write tests to cover at leas
 ### Challenges
 
 - One of the hardest features to implement in our app was the ability to filter the item index on the homepage by both category selection and search terms.
-![screenshot 2019-02-16 at 11 38 33](https://user-images.githubusercontent.com/44480965/52899219-8c21bc80-31df-11e9-9fe9-216710afb121.png)
+![screenshot Homepage Search Bar and Select Filter](https://user-images.githubusercontent.com/44480965/52899219-8c21bc80-31df-11e9-9fe9-216710afb121.png)
 We managed to accomplish this by utilising two functions in the Items Index component, one to compare the array of category filters with each item's own category array, and another to filter the items by matching terms in item name, creator username and categories.
 ```
   compareCategories(){

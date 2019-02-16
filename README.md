@@ -1,6 +1,9 @@
-# General Assembly Project 3 : Full-stack React App
+# General Assembly Project 3 : Full-Stack React App
 
-Ben Lander | Beth Swingler | Dexter DeLeon | Tom Abbott
+Ben Lander | Beth Swingler | Dexter De Leon | Tom Abbott
+
+### Project Brief
+A group project to design a full-stack React app with a NoSQL database.
 
 ### Timeframe
 7 days
@@ -16,7 +19,8 @@ Ben Lander | Beth Swingler | Dexter DeLeon | Tom Abbott
 * Supertest/NYC
 * Bulma
 * Nodemailer
-* HTML5
+* React Filestack
+* HTML 5
 * SASS/SCSS/CSS Animation
 * Git/GitHub
 
@@ -24,6 +28,8 @@ Ben Lander | Beth Swingler | Dexter DeLeon | Tom Abbott
 - https://created-wdi.herokuapp.com/
 
 ## Code Installation
+
+- https://github.com/benleolander/wdi-project-3
 
 1. Clone or download the repo
 2. Install ```yarn``` in Terminal
@@ -34,7 +40,7 @@ Ben Lander | Beth Swingler | Dexter DeLeon | Tom Abbott
 
 
 ## Created App: An Overview
-Created joins creators with collectors. It is a space for independent carpenters, inventors and domestic creatives to showcase their creations. Appreciators and potential collectors can view and comment on items, and even contact the creators if they'd like to buy or learn more about a particular item.
+Created joins creators with collectors. It is a space for independent carpenters, inventors and domestic creatives to showcase their creations. Appreciators and potential collectors can view and comment on items, and even contact the creators if they'd like to buy or learn more about a particular item. The app is fully responsive, displaying correctly on desktop, tablet & mobile.
 
 ## User Journey
 Land on the homepage
@@ -58,10 +64,12 @@ Search for items using either a search bar or pre-selected categories
 
 First we agreed clear endpoints and routes together on a whiteboard.
 
-To allow front-end and back-end processes to run simultaneously we created a set of 'dummy data' that both front-end and back-end development groups used as a central source of truth.
+To allow front-end and back-end processes to run simultaneously we created a set of 'dummy data' that both front-end and back-end development groups used as a central source of truth. By effectively planning out with wireframes each API end point and what data it should return, we were able to begin working on the front & back ends simultaneously, using Trello to collaborate.
 
 ### Back End
-- Using the dummy data, the two of us initially working on back end..... //did something//
+- We started back end development by creating the Mongoose models for Creators and Items. Based on our planning sessions, we had a clear idea of what these should contain. We then created a small batch of seed data to begin the database.
+
+With the seed data in place, we created Index & Show routes for the Items. This allowed us to quickly get up and running with a homepage to display the items. As Items could not be added without a Creator model to be attached to, we then moved to the Registration & Login routes for the Creator.  
 
 ### Front End
 Using the dummy data we created a React front end starting with the Items Index and navbar, which we agreed would form the homepage.
@@ -80,11 +88,38 @@ The first round of features we added:
 
 
 ### Testing
-We used Mocha, Chai, Supertest and NYC and aimed to write tests to cover at least 80% of our code.
+We used Mocha, Chai, Supertest and NYC and aimed to write tests to cover at least 80% of our code. We decided to use Error Driven Development for this project, so the test suite was written after the majority of the app. The tests highlighted a few issues with our code which we were then able to fix. This included a Create route returning a status code of 200, rather than 201.
 
 ### Challenges
 
-- One of the hardest things...
+- One of the hardest features to implement in our app was the ability to filter the item index on the homepage by both category selection and search terms.
+![screenshot Homepage Search Bar and Select Filter](https://user-images.githubusercontent.com/44480965/52899219-8c21bc80-31df-11e9-9fe9-216710afb121.png)
+We managed to accomplish this by utilising two functions in the Items Index component, one to compare the array of category filters with each item's own category array, and another to filter the items by matching terms in item name, creator username and categories.
+```
+  compareCategories(){
+    if(this.state.categories.length === 0) return this.state.data
+    return this.state.data.filter(item => {
+      return this.state.categories.every(category => {
+        return item.categories.includes(category)
+      })
+    })
+  }
+```
+This `compareCategories` function will either return all of the items if there have been no category filters selected, or it filters the items array, returning only the items whose categories array includes every category currently in the filter selection input.  
+The array returned from `compareCategories` is then passed on to the main `filterResults` function:
+```
+  filterResults(){
+    if(this.state.search === '') return this.compareCategories()
+    const search = this.uniformString(this.state.search)
+    return this.compareCategories().filter(item =>
+      this.uniformString(item.name).includes(search) ||
+      this.uniformString(item.creator.username).includes(search) ||
+      this.uniformString(item.categories.join(',')).includes(search)
+    )
+  }
+```
+The `filterResults` function will return the items array filtered by `compareCategories` if there is no search term present. Therefore, if there aren't any search terms or category filters applied, the entire Items Index is returned. Should a search term be present, the `filterResults` function will further filter the array returned by `compareCategories` and return only items whose name, creator or categories includes the string in the search input.  
+Since the inputs' values are stored in state and the `filterResults` function is called in the `render` function of the component. These functions will run on every change in either input and will reactively render the index displayed with only the items meeting the conditions of both filter functions.
 
 ### Wins
 
@@ -99,13 +134,12 @@ We used Mocha, Chai, Supertest and NYC and aimed to write tests to cover at leas
 
 - Contact: We successfully used Nodemailer to send emails to creators from forms
 
-
 - Achieved test coverage of 83% lines of our code
 
-## Future features
+## Future Features
 
 Things we'd like to add:
 
 - AI image recognition for automatically populating relevant categories when a user uploads a photo of their item
-- SMS Verification
+- SMS/Email Verification for the Register route
 - Two tiers of account holder - creators and ordinary users.

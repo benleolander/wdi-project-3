@@ -40,6 +40,10 @@ const ItemsForm = ({ data, errors, handleChange, handleSubmit, handleSelect }) =
               isMulti
               clearValue
               styles={selectStyles}
+              value={ data.categories.map(category => {
+                return {value: category, label: category.charAt(0).toUpperCase() + category.slice(1) }
+              }
+              ) }
               name="categories"
               options={CategoriesData}
               onChange={handleSelect}

@@ -132,7 +132,7 @@ class ItemsShow extends React.Component {
                   comments.length === 0 ?
                     <div className="card-content">
                       <h1 className="subtitle is-6">
-                      These item has no comments yet...
+                      This item has no comments yet...
                       </h1>
                     </div>
                     :
